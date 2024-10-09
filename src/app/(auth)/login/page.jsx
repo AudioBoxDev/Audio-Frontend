@@ -10,11 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-import Slider from "react-slick";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Link from 'next/link';
 import src from "/public/images/container.png";
 import { ConnectBtn } from "@/components/ConnectBtn";
 const images = [
@@ -42,23 +40,41 @@ function LoginScreen() {
 
   useEffect(() => {
     if (account.isConnected) {
-      router.push("/dashboard/album");
+      router.push("/dashboard");
     }
   }, [account.isConnected]);
 
   return (
-    <div className="grid grid-cols-3 gap-4 min-h-screen">
+    <div className="grid grid-cols-3  md:gap-4 gap-0 min-h-screen">
       {/* Left section - Form */}
-      <div className="p-20 col-span-1 flex flex-col">
-        <Tabs defaultValue="account" className="w-[400px]">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="account" className="text-white">
-              Socials
-            </TabsTrigger>
-            <TabsTrigger value="wallet" className="text-white">
+      <div className="p-20 md:col-span-1 col-span-3 flex flex-col">
+        <Tabs defaultValue="wallet" className="w-[400px]">
+          <TabsList className="grid w-1/2 bg-transparent grid-cols-2 mb-6">
+             <TabsTrigger value="wallet" className="text-white font-bold text-md aria-selected:bg-transparent rounded-none aria-selected:border-b-2 aria-selected:border-pink-600">
               Wallet
             </TabsTrigger>
+            <TabsTrigger value="account" className="text-white font-bold text-md aria-selected:bg-transparent rounded-none aria-selected:border-b-2 aria-selected:border-pink-600" >
+              Socials
+            </TabsTrigger>
+           
           </TabsList>
+
+            <TabsContent className="border-none" value="wallet">
+            <Card className="bg-transparent border-none text-white rounded-lg">
+              <CardHeader>
+                <CardTitle>
+                  <span className="text-4xl">Sign in</span>
+                </CardTitle>
+                <CardDescription>
+                  Please login to continue to your account.
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="w-full">
+
+                <ConnectBtn className="w-full" />
+              </CardFooter>
+            </Card>
+          </TabsContent>
 
           <TabsContent className="border-none outline-none" value="account">
             <Card className="bg-transparent border-none text-white">
@@ -74,7 +90,7 @@ function LoginScreen() {
                 <div className="space-y-1">
                   <Input
                     type="email"
-                    className="rounded-full p"
+                    className="rounded-full h-12"
                     placeholder="Provide email"
                   />
                 </div>
@@ -86,48 +102,30 @@ function LoginScreen() {
                   />
                 </div>
               </CardContent>
-              <CardFooter className="flex flex-col space-y-2">
-                <Button className="w-full bg-pink-600 text-white rounded-full">
+              <CardFooter className="flex flex-col space-y-5">
+                <Button className="w-full bg-pink-600 h-12 text-white rounded-full">
                   Create Account
                 </Button>
                 <Button
                   variant="outline"
-                  className="w-full text-white rounded-full"
+                  className="w-full text-black h-12 rounded-full"
                 >
                   Sign up with Google
                 </Button>
               </CardFooter>
               <div className="flex justify-center mt-4 text-xs">
                 <p className="text-white">Already have an account?</p>
-                <a href="" className="text-pink-600 ml-1">
+                <Link href="" className="text-pink-600 ml-1">
                   Sign In
-                </a>
+                </Link>
               </div>
-            </Card>
-          </TabsContent>
-
-          {/* Wallet Tab */}
-          <TabsContent className="border-none" value="wallet">
-            <Card className="bg-transparent border-none text-white p-6 rounded-lg">
-              <CardHeader>
-                <CardTitle>Sign in</CardTitle>
-                <CardDescription>
-                  Please connect your wallet to create your account.
-                </CardDescription>
-              </CardHeader>
-              <CardFooter className="flex flex-col space-y-2">
-                {/* You can add your wallet connect button here */}
-                {/* <Button className="w-full bg-pink-600 text-white rounded-lg"><ConnectButton className="bg-transparent"/> Connect Wallet</Button> */}
-
-                <ConnectBtn />
-              </CardFooter>
             </Card>
           </TabsContent>
         </Tabs>
       </div>
 
       {/* Right section - Image slider */}
-      <div className="relative col-span-2 h-screen">
+      <div className="relative md:block hidden md:col-span-2 h-screen">
         {/* <Slider {...sliderSettings} className="h-full">
           {images.map((src, index) => (
             <div key={index} className="h-full"> */}
