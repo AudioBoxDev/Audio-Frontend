@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,6 +22,8 @@ const images = [
   "/image2.jpg",
   "/image3.jpg",
 ];
+import { useAccount } from "wagmi";
+import { useRouter } from "next/navigation";
 
 function LoginScreen() {
   const sliderSettings = {
@@ -33,6 +35,16 @@ function LoginScreen() {
     autoplay: true,
     autoplaySpeed: 3000,
   };
+
+  const router = useRouter();
+
+  const account = useAccount();
+
+  useEffect(() => {
+    if (account.isConnected) {
+      router.push("/dashboard/album");
+    }
+  }, [account.isConnected]);
 
   return (
     <div className="grid grid-cols-3 gap-4 min-h-screen">
