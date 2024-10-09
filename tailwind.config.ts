@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-			customDark: '#0A0507',
+  			customDark: '#0A0507',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -56,14 +56,36 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}, 
-		backgroundImage: {
-		'custom-gradient': 'linear-gradient(180deg, rgba(40, 10, 34, 0.36) 0%, rgba(33, 21, 36, 0.36) 100%)',
-		'custom-box-gradient': 'linear-gradient(99.57deg, #4B0B3E 0%, #274749 98.82%)'
-		},
-		fontFamily: {
-		roboto: ['Roboto', 'sans-serif'],
-		}
+  		},
+  		backgroundImage: {
+  			'custom-gradient': 'linear-gradient(180deg, rgba(40, 10, 34, 0.36) 0%, rgba(33, 21, 36, 0.36) 100%)',
+  			'custom-box-gradient': 'linear-gradient(99.57deg, #4B0B3E 0%, #274749 98.82%)'
+  		},
+  		fontFamily: {
+  			roboto: ['Roboto', 'sans-serif']
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
