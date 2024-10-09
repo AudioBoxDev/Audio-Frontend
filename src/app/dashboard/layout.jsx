@@ -1,24 +1,27 @@
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+import "react-toastify/dist/ReactToastify.css";
+import React from "react";
+import { ToastContainer } from "react-toastify";
 
-import Navbar from '@/components/Navbar'
-import Sidebar from '@/components/Sidebar'
-import React from 'react'
 
-const Dashboardlayout = ({children,}) => {
+const Dashboardlayout = ({ children }) => {
   return (
     <>
-    <div>
+      <div>
 
-    <Sidebar/>
+        <Sidebar />
 
-    <div className="ml-52 font-roboto flex flex-col justify-center items-center">
-      <Navbar />
+        <div className="ml-52 font-roboto flex flex-col justify-center items-center">
+          <Navbar />
 
-      <div className='text-white '>{children}</div>
+          <div className="text-white ">{children}</div>
+        </div>
       </div>
-    </div>
-    
-    </>
-  )
-}
+      <ToastContainer />
 
-export default Dashboardlayout
+    </>
+  );
+};
+
+export default Dashboardlayout;
