@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import React from 'react'
+import { useAccount } from 'wagmi'
 
 const Navbar2 = () => {
+    const account = useAccount()
   return (
     <>
     
@@ -22,8 +24,10 @@ const Navbar2 = () => {
         <ul className="flex items-center gap-5">
             <Link href="/">Support</Link>
             <Link href="/">Download</Link>
+            {account.address ? <div className='text-ellipsis font-roboto font-bold border p-2 rounded-2xl overflow-hidden w-32'>{account.address}</div> : 
             <Link href="/login"  className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-4 py-2 rounded-full">Sign up</Link>
-        </ul>
+        }
+            </ul>
         </div>
         
     </nav>
