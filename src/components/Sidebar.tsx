@@ -25,7 +25,7 @@ const Sidebar = () => {
           <SidebarItems icon={Wallet} label="Wallet" to="/dashboard" />
           <SidebarItems icon={Music} label="Playlist" to="/dashboard" />
           <SidebarItems icon={FileMusic} label="Album" to="/dashboard/album" />
-          <SidebarItems icon={MicVocal} label="Singer" to="/dashboard"  />
+          <SidebarItems icon={MicVocal} label="Artist" to="/dashboard"  />
         </div>
 
         

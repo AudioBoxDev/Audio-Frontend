@@ -12,8 +12,8 @@ const CollectionModal = () => {
             <div className="relative">
               <label className="text-white text-sm mb-2 block">Album Title *</label>
               <Input
-                type="text"
                 className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
+                type="text"
                 placeholder="Song Title"
                 required
               />

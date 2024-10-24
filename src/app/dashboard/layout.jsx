@@ -3,25 +3,32 @@ import Sidebar from "@/components/Sidebar";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { ToastContainer } from "react-toastify";
-
+import MusicPlayer from "@/components/MusicPlayer";
+import LeftBar from "@/components/LeftBar";
 
 const Dashboardlayout = ({ children }) => {
-  return (
-    <>
-      <div>
+	return (
+		<>
+			<div>
+				<Sidebar />
 
-        <Sidebar />
+				<div className="md:ml-52 px-4 font-roboto grid grid-cols-12 gap-1">
+					<div className="flex flex-col col-span-9  justify-center items-center">
+						<Navbar />
 
-        <div className="ml-52 font-roboto flex flex-col justify-center items-center">
-          <Navbar />
+						<div className="text-white ">{children}</div>
 
-          <div className="text-white ">{children}</div>
-        </div>
-      </div>
-      <ToastContainer />
+						<MusicPlayer />
+					</div>
+          <div className="col-span-3">
 
-    </>
-  );
+					<LeftBar  />
+          </div>
+				</div>
+			</div>
+			<ToastContainer />
+		</>
+	);
 };
 
 export default Dashboardlayout;
