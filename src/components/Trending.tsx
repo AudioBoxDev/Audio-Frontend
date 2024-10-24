@@ -48,20 +48,23 @@ const Trending = () => {
   ];
 
   return (
-    <div className="text-white font-roboto pt-6">
+    <div className="text-white border-b border-[#151515] font-roboto pt-6">
       <h2 className="text-base font-bold mb-4">Trending</h2>
       <Slider {...settings}>
         {recentlyPlayedData.map((item, index) => (
           <div key={index} className="p-2">
-            <div className="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+            <div className=" rounded-lg shadow-lg overflow-hidden">
+              <div className='rounded-full'> 
+
               <Image
                 src={item.imageUrl}
                 alt={item.title}
                 width={180}
                 height={200}
-                className="w-full h-40 object-cover"
+                className="w-40 rounded-full h-40 object-cover"
               />
-              <div className="p-4">
+              </div>
+              <div className="p-4 text-center">
                 <h3 className="text-lg font-semibold">{item.title}</h3>
                 <p className="text-sm text-gray-400">{item.artist}</p>
                 <p className="text-sm text-gray-400">{item.year}</p>

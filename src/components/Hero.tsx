@@ -1,33 +1,55 @@
-import React from 'react'
-import Group2 from '/public/images/Group2.png'
-import Image from 'next/image'
-import Link from 'next/link'
+import React from "react";
+import bottom from "/public/images/bottoms.svg";
+import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
-  return (
-    <>
-        <div  className='bg-gradient-to-r py-32 -mt-24 from-[#5519188A] to-[#37072E8A] h-screen' >
-            <div className='grid w-11/12 m-auto items-center grid-cols-2 gap-10'>
-            <div className="col-span-1 space-y-5">
-              <h1 className="text-7xl md:text-5xl text-white font-bold leading-tight">
-              Stream Music, Own the Experience!
-              </h1>
-              <p className="text-lg md:text-xl text-white">
-              Share your favorite tunes. No middlemen, no hassle—just pure blockchain magic!
-              </p>
-              <div>
+	return (
+		<>
+			<div className=" bg-gradient-to-br flex flex-col pt-36 font-roboto  -mt-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
+				<div className="text-center w-11/12 m-auto">
+					<h1
+						className="text-7xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
+						style={{
+							WebkitBackgroundClip: "text",
+							WebkitTextFillColor: "transparent",
+						}}
+					>
+						Stream Music <br /> Own the Experience
+					</h1>
+					<p className="text-lg md:text-xl text-white mt-5">
+						Own the music, support the artists, revolutionize the industry
+					</p>
+					<div className=" flex  justify-center items-center  gap-5">
+					<div className="mt-10">
+							<Link
+								href="/dashboard"
+								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 py-4 rounded-3xl"
+							>
+								Start Listening
+							</Link>
+						</div>
+						
+						<div className="flex items-center border-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
+							<input
+								type="email"
+								placeholder="name@domain.com"
+								className="text-white bg-transparent px-4 py-1 focus:outline-none placeholder-gray-400"
+							/>
 
-              <Link href="/dashboard" className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-5 py-4 rounded-3xl">Start Listening</Link>
-              </div>
-            </div>
-            <div className='col-span-1'>
-              <Image src={Group2} alt='' className='h-[400px] w-[500px]'/>
-            </div>
-            </div>
-        </div>
-    
-    </>
-  )
-}
+							<button className="bg-pink-600 text-white font-semibold px-6 py-2 rounded-full focus:outline-none hover:bg-pink-700 transition">
+								Join the Waitlist
+							</button>
+						</div>
+						
+					</div>
+					<div>
+						<Image src={bottom} alt="" className="mt-5" />
+					</div>
+				</div>
+			</div>
+		</>
+	);
+};
 
-export default Hero
+export default Hero;

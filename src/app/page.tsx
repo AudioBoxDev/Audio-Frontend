@@ -8,6 +8,8 @@ import Image from "next/image";
 import headset from "/public/images/img.png";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
+import Faq from "@/components/Faq";
+import MusicScene from "@/components/MusicScene";
 
 export default function Home() {
   return (
@@ -15,20 +17,23 @@ export default function Home() {
     <Navbar2/>
       <Hero/>
     <AudioBoxFeatures/>
+    <MusicScene/>
     <AudioCardItem/>
+
+    <Faq/>
     
-    <div className="bg-gradient-to-r from-[#991E7035] to-[#333A5670] text-white py-6">
-      <div className="grid w-11/12 m-auto items-center grid-cols-5 gap-6">
-      <div className="col-span-2 pl-16 space-y-5">
-        <h1 className="text-7xl md:text-5xl font-bold leading-tight">
-          Stream,Support, and Own it!
+    <div className="border-[#0E070C] border font-roboto w-11/12 mx-auto rounded-xl text-white py-16 my-16 px-4">
+      <div className="grid items-center grid-cols-5 gap-6">
+      <div className="col-span-2 pl-16 space-y-9">
+        <h1 className="text-7xl md:text-8xl text-[#68BDE4] font-bold leading-tight">
+        Stream Support Own
         </h1>
         <p className="text-lg md:text-xl text-white">
-          Join a community where your support makes a real difference, and every play, tip, or purchase helps artists thrive.
+        Join our community where your support makes a real difference, and every play, tip, or purchase helps artists thrive.
         </p>
         <div>
 
-        <Link href="/login" className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-4 py-2 rounded-full">Get Started</Link>
+        <Link href="/login" className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-6 py-3 rounded-full">Start Listening</Link>
         </div>
       </div>
       <div className="col-span-3">
