@@ -5,25 +5,22 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-custom-gradient text-gray-400 py-12 px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-custom-gradient font-roboto text-gray-400 py-12">
+      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
         
-        <div>
+        <div className="col-span-1 md:col-span-1 text-base">
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-10 h-10 rounded-full bg-pink-500"></div>
             <h2 className="text-white font-semibold text-xl">AudioBox</h2>
           </div>
           <p className="text-sm">
-            AudioBox is a decentralized music platform that empowers artists to
-            retain ownership of their music and earn fair revenue. Fans can
-            discover, stream, and support artists directly, reshaping the future
-            of music through blockchain technology.
+          AudioBox is a music platform that empowers artists to retain ownership of their music and earn fair revenue. Fans can discover, stream, and support artists directly
           </p>
         </div>
 
         
-        <div>
-          <h3 className="text-white font-semibold text-lg mb-4">Navigation</h3>
+        <div className="col-span-1 md:col-span-1 text-base">
+          <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Navigation</h3>
           <ul className="space-y-2">
             <li>
               <Link href="/dashboard" className="hover:text-white">
@@ -44,8 +41,8 @@ const Footer = () => {
         </div>
 
         
-        <div>
-          <h3 className="text-white font-semibold text-lg mb-4">Support</h3>
+        <div className="col-span-1 md:col-span-1 text-base">
+          <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Support</h3>
           <ul className="space-y-2">
             <li>
               <Link href="/" className="hover:text-white">
@@ -71,9 +68,9 @@ const Footer = () => {
         </div>
 
         
-        <div>
-          <h3 className="text-white font-semibold text-lg mb-4">Social Media</h3>
-          <p className="mb-4">For recent updates and news, follow our social media feeds</p>
+        <div className="col-span-1 md:col-span-1 text-base">
+          <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Social Media</h3>
+          <p className="mb-4">For recent updates and news follow our social media feeds</p>
           <div className="flex space-x-4">
             <Link href="/" className="hover:text-white">
               <i className="fab fa-youtube"></i>
