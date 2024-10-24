@@ -9,6 +9,7 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		
   		colors: {
   			customDark: '#0A0507',
   			background: 'hsl(var(--background))',
@@ -80,12 +81,19 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+			  'moveLeftToRight': {
+				'0%': { transform: 'translateX(-100%)' },
+				'100%': { transform: 'translateX(100%)' },
+			  },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+			'left-to-right': 'moveLeftToRight 5s linear infinite',
+  		}, 
+		
+	
   	}
   },
   plugins: [require("tailwindcss-animate")],
