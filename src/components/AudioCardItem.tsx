@@ -37,8 +37,8 @@ export default function Home() {
 	return (
 		<div className="min-h-screen bg-[#0E070C] font-roboto w-11/12 mx-auto rounded-xl text-white p-16 my-7">
 			<div className="container mx-auto">
-				<div className="flex justify-between">
-					<div className="flex  flex-col text-left">
+				<div className="md:flex md:justify-between">
+					<div className="flex-col md:text-left">
 						<h1 className="text-4xl font-bold mb-8">Music Marketplace</h1>
 						<p className="text-base w-3/5">
 							Explore a vast collection of exclusive NFTs minted by artists
@@ -54,7 +54,7 @@ export default function Home() {
             <ArrowRight className="h-4 w-7"/>
 					</Link>
 				</div>
-				<div className="grid grid-cols-4 gap-3">
+				<div className="grid grid-cols-1 md:grid-cols-4 gap-3">
 					{items.map((item, index) => (
 						<AudioCard
 							key={index}

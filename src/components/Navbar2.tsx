@@ -10,10 +10,10 @@ const Navbar2 = () => {
 				<div className="col-span-1 space-x-10 flex items-center">
 					<Link href="/" className="flex space-x-3 items-center">
 						<div className="bg-pink-500 rounded-full h-10 w-10"></div>
-						<h1 className="text-2xl font-semibold text-pink-400">AudioBox</h1>
+						<h1 className="text-xl md:text-2xl font-semibold text-pink-400">AudioBox</h1>
 					</Link>
 					<div>
-						<ul className="flex gap-9 font-semibold text-gray-400">
+						<ul className="md:flex gap-9 font-semibold text-gray-400 hidden">
 							<Link href="/" className="hover:text-white">
 								<li>Streams</li>
 							</Link>
@@ -28,8 +28,10 @@ const Navbar2 = () => {
 				</div>
 				<div className="col-span-1 ">
 					<ul className="flex items-center font-semibold text-gray-400 gap-5">
+						<div className='hidden md:flex'>
 						<Link href="/" className="hover:text-white">Support</Link>
 						<Link href="/" className="hover:text-white">Download</Link>
+						</div>
 						{account.address ? (
 							<div className="text-ellipsis font-roboto font-bold border p-2 rounded-2xl overflow-hidden w-32">
 								{account.address}
