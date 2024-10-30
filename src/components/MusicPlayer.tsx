@@ -35,7 +35,7 @@ const MusicPlayer: React.FC = () => {
 		{
 			title: "Song 3",
 			artist: "Artist 3",
-			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
 			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+3",
 		},
 	];
