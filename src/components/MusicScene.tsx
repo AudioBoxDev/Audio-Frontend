@@ -20,7 +20,7 @@ const MusicScene = () => {
       </div>
 
       {/* Artist Profile Section */}
-      <div className="grid grid-cols-4 justify-center gap-8">
+      <div className="grid grid-cols-1 md:grid md:grid-cols-4 justify-center gap-8">
         {artists.map((artist, index) => (
           <div key={index} className="flex flex-col items-center">
             {/* Circular Image with Border */}
