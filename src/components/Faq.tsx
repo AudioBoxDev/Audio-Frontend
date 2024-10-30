@@ -33,14 +33,14 @@ import {
             prefer.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-3">
+        <AccordionItem value="item-4">
           <AccordionTrigger className="text-lg font-bold">What is the NFT Marketplace?</AccordionTrigger>
           <AccordionContent className="text-base">
             Yes. It&apos;s animated by default, but you can disable it if you
             prefer.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-3">
+        <AccordionItem value="item-5">
           <AccordionTrigger className="text-lg font-bold">How do I create an account on AudioBox?</AccordionTrigger>
           <AccordionContent className="text-base">
             Yes. It&apos;s animated by default, but you can disable it if you
