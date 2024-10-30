@@ -63,11 +63,11 @@ const Hero = () => {
 					<p className="text-lg md:text-xl text-white mt-5">
 						Own the music, support the artists, revolutionize the industry
 					</p>
-					<div className=" flex  justify-center items-center  gap-5">
-						<div className="mt-10">
+					<div className=" md:flex  md:justify-center items-center  gap-5">
+					<div className="mt-10 flex justify-center md:justify-start">
 							<Link
 								href="/dashboard"
-								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 py-4 rounded-3xl"
+								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 py-4 rounded-3xl w-full text-center md:w-[196px] h-[65px] md:h-[50px]"
 							>
 								Start Listening
 							</Link>
