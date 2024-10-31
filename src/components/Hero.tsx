@@ -2,32 +2,28 @@ import React, { useState } from "react";
 import bottom from "/public/images/bottoms.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import axios from "axios";
 import EmailVerificationModal from "./VerificationModal";
+import { toast } from "react-toastify";
 
 const Hero = () => {
 	const [email, setEmail] = useState("");
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [verificationCode, setVerificationCode] = useState("");
-	const [message, setMessage] = useState("");
 	const [loading, setLoading] = useState(false);
 	const url = "https://theaudiobox-backend.onrender.com";
 
-	const JoinWaitlist = async () => {
+	const JoinWaitlist = () => {
+		setIsModalOpen(true);
+	};
+
+	const verifyEmail = async () => {
 		setLoading(true);
 		try {
 			const response = await axios.post(`${url}/waitlist/join`, { email });
-
-			setIsModalOpen(true);
-			setMessage(
-				response.data.message ||
-					"A verification code has been sent to your email.",
-			);
+			toast.success(response.data.message || "Your email has been Added!");
 		} catch (error) {
-			setIsModalOpen(true);
-			setMessage(
-				error?.response?.data.message ||
+			toast.error(
+				error?.response.data.message ||
 					"There was an error joining the waitlist. Please try again.",
 			);
 		} finally {
@@ -35,24 +31,12 @@ const Hero = () => {
 		}
 	};
 
-	// const verifyEmail = async () => {
-	// 	try {
-	// 		const response = await axios.post(`${url}/waitlist/verify`, {
-	// 			email,
-	// 			code: verificationCode,
-	// 		});
-	// 		setMessage(response.data.message || "Your email has been verified!");
-	// 	} catch (error) {
-	// 		setMessage("Invalid code. Please try again.");
-	// 	}
-	// };
-
 	return (
 		<>
-			<div className=" bg-gradient-to-br flex flex-col pt-36 font-roboto  -mt-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
+			<div className=" bg-gradient-to-br flex flex-col md:pt-36 font-roboto -mt-24 md:mb-0 -mb-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
 				<div className="text-center w-11/12 m-auto">
 					<h1
-						className="text-7xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
+						className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
 						style={{
 							WebkitBackgroundClip: "text",
 							WebkitTextFillColor: "transparent",
@@ -63,11 +47,11 @@ const Hero = () => {
 					<p className="text-lg md:text-xl text-white mt-5">
 						Own the music, support the artists, revolutionize the industry
 					</p>
-					<div className=" md:flex  md:justify-center items-center  gap-5">
-					<div className="mt-10 flex justify-center md:justify-start">
+					<div className=" md:flex  md:justify-center items-center  md:gap-5 gap-0">
+						<div className="mt-10 flex justify-center md:justify-start">
 							<Link
 								href="/dashboard"
-								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 py-4 rounded-3xl w-full text-center md:w-[196px] h-[65px] md:h-[50px]"
+								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full text-center md:w-[196px] h-[50px] md:h-[50px]"
 							>
 								Start Listening
 							</Link>
@@ -85,16 +69,14 @@ const Hero = () => {
 							<button
 								onClick={JoinWaitlist}
 								disabled={loading}
-								className={`bg-pink-600 text-white font-semibold px-6 py-2 rounded-full focus:outline-none hover:bg-pink-700 transition ${
-									loading ? "opacity-50 cursor-not-allowed" : ""
-								}`}
+								className="bg-pink-600 md:text-base text-sm text-white font-semibold px-6  py-2 rounded-full focus:outline-none hover:bg-pink-700 transition"
 							>
-								{loading ? "Loading..." : "Join the Waitlist"}
+								Join the Waitlist
 							</button>
 						</div>
 					</div>
-					<div>
-						<Image src={bottom} alt="" className="mt-5" />
+					<div className="md:h-32 h-44 my-7">
+						<Image src={bottom} alt="" className="md:h-32 h-44 rounded-full object-cover" />
 					</div>
 				</div>
 			</div>
@@ -102,10 +84,10 @@ const Hero = () => {
 			<EmailVerificationModal
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
-				// onVerify={verifyEmail}
-				// verificationCode={verificationCode}
-				// setVerificationCode={setVerificationCode}
-				message={message}
+				onVerify={verifyEmail}
+				loading={loading}
+				setEmail={setEmail}
+				email={email}
 			/>
 		</>
 	);
