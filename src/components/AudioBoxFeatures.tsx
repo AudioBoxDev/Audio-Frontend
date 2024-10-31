@@ -9,7 +9,7 @@ import React from "react";
 
 const AudioBoxFeatures = () => {
 	return (
-		<div className="bg-[#0E070C] font-roboto w-11/12 mx-auto rounded-xl text-white py-16 my-7 px-8">
+		<div className="bg-[#0E070C] font-roboto w-11/12 mx-auto rounded-xl text-white py-16 md:my-7 px-8">
 			<div className="text-center mb-12">
 				<h1 className="text-4xl font-bold mb-2">A New Way to Listen</h1>
 				<p className="text-gray-400">

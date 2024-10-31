@@ -22,13 +22,13 @@ export default function Home() {
 
     <Faq/>
     
-    <div className="border-[#0E070C] border font-roboto w-11/12 mx-auto rounded-xl text-white py-16 my-16 px-4">
-      <div className="md:grid items-center md:grid-cols-5 gap-6">
-      <div className="md:col-span-2 pl-16 space-y-9">
-        <h1 className="text-7xl md:text-8xl text-[#68BDE4] font-bold leading-tight">
+    <div className="border-[#CC76FF0F] border font-roboto w-11/12 mx-auto rounded-3xl text-white py-16 my-16 px-4">
+      <div className="md:grid items-center md:grid-cols-5 md:gap-6 gap-0">
+      <div className="md:col-span-2 md:pl-16 space-y-9">
+        <h1 className="text-6xl md:text-8xl text-center md:text-left text-[#68BDE4] font-bold leading-tight">
         Stream Support Own
         </h1>
-        <p className="text-lg md:text-xl text-white">
+        <p className="text-lg md:text-xl text-center md:text-left text-white">
         Join our community where your support makes a real difference, and every play, tip, or purchase helps artists thrive.
         </p>
         <div className='flex justify-center md:justify-start'>
