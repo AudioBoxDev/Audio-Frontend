@@ -33,7 +33,7 @@ const Hero = () => {
 
 	return (
 		<>
-			<div className=" bg-gradient-to-br flex flex-col md:pt-36 font-roboto -mt-24 md:mb-0 -mb-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
+			<div className=" bg-gradient-to-br flex flex-col md:pt-36 font-roboto md:-mt-24 md:mb-0 -mb-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
 				<div className="text-center w-11/12 m-auto">
 					<h1
 						className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
@@ -57,7 +57,7 @@ const Hero = () => {
 							</Link>
 						</div>
 
-						<div className="flex items-center border-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
+						<div className="flex justify-between items-center border-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
 							<input
 								type="email"
 								value={email}
@@ -69,7 +69,7 @@ const Hero = () => {
 							<button
 								onClick={JoinWaitlist}
 								disabled={loading}
-								className="bg-pink-600 md:text-base text-sm text-white font-semibold px-6  py-2 rounded-full focus:outline-none hover:bg-pink-700 transition"
+								className="bg-pink-600 md:text-base text-xs text-white font-semibold md:px-6 px-4 py-2 rounded-full focus:outline-none hover:bg-pink-700 transition"
 							>
 								Join the Waitlist
 							</button>
