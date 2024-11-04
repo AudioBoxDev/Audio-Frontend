@@ -35,7 +35,7 @@ export default function Home() {
 	];
 
 	return (
-		<div className="min-h-screen bg-[#0E070C] font-roboto w-11/12 mx-auto rounded-xl text-white md:p-16 p-6 my-7">
+		<div className="min-h-screen bg-[#0E070C] font-roboto w-11/12 mx-auto rounded-xl text-white lg:p-16 md:p-10  p-6 my-7">
 			<div className="container mx-auto">
 				<div className="md:flex md:justify-between">
 					<div className="flex-col md:text-left text-center">
@@ -55,7 +55,7 @@ export default function Home() {
             <ArrowRight className="h-4 w-7"/>
 					</Link>
 				</div>
-				<div className="grid grid-cols-1 md:grid-cols-4  md:gap-3 gap-0 ">
+				<div className="grid lg:grid-cols-4 md:grid-cols-2  grid-cols-1  md:gap-3 gap-0 ">
 					{items.map((item, index) => (
 						<AudioCard
 							key={index}
