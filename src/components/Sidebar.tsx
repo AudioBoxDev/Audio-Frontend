@@ -2,7 +2,7 @@ import React from 'react'
 import SidebarItems from './SidebarItems';
 import { Upload, TrendingUp,Bolt,Settings, Star, CirclePlus, MicVocal, Music, FileMusic, Wallet } from 'lucide-react';
 import Link from 'next/link';
-import UploadModal from './UploadModal';
+// import UploadModal from './UploadModal';
 
 
 const Sidebar = () => {
@@ -34,7 +34,7 @@ const Sidebar = () => {
           <div className="space-y-6">
             <SidebarItems icon={TrendingUp} label="Trending" to="/dashboard" />
             <SidebarItems icon={Star} label="Popular" to="/dashboard" />
-            <UploadModal/>
+            {/* <UploadModal/> */}
           </div>
         </div>
 

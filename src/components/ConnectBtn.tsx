@@ -34,12 +34,12 @@ export const ConnectBtn = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <Button
+                  <button
                     onClick={openConnectModal}
                     className="w-full bg-pink-600 text-white rounded-lg"
                   >
                     Connect Wallet
-                  </Button>
+                  </button>
                 );
               }
               if (chain.unsupported) {
