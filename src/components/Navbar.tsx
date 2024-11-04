@@ -29,7 +29,7 @@ const Navbar = () => {
         <div>
         <div className="col-span-9 flex items-center space-x-2 rounded-full  bg-[#1D1F1F] h-[50px] px-3">
         <SearchIcon className="h-4 w-4" />
-        <Input type="search"  placeholder="Search by artists, songs or albums"  className="w-full rounded-full border-none focus:outline-none  bg-[#1D1F1F] text-white placeholder-gray-400" />
+        <input type="search"  placeholder="Search by artists, songs or albums"  className="w-full rounded-full border-none focus:outline-none  bg-[#1D1F1F] text-white placeholder-gray-400" />
       </div>
         
         </div>

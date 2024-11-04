@@ -47,7 +47,8 @@ export default function Home() {
 						</p>
 					</div>
 					<Link
-						href="/dashboard/marketplace"
+						// href="/dashboard/marketplace"
+						href="/"
 						className="md:border-none border rounded-full border-[#B81A3C52] px-3 py-1 w-52 m-auto md:my-0 my-5 flex text-white text-sm"
 					>
 						Go to Marketplace 

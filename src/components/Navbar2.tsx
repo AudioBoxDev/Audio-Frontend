@@ -20,7 +20,10 @@ const Navbar2 = () => {
 							<Link href="/" className="hover:text-white">
 								<li>Artist hub</li>
 							</Link>
-							<Link href="/dashboard/marketplace" className="hover:text-white">
+							<Link 
+							// href="/dashboard/marketplace" 
+							href="/"
+							className="hover:text-white">
 								<li>Marketplace</li>
 							</Link>
 						</ul>
@@ -38,7 +41,8 @@ const Navbar2 = () => {
 							</div>
 						) : (
 							<Link
-								href="/login"
+								// href="/login"
+								href="/"
 								className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-7 py-3 rounded-full"
 							>
 								Sign up
