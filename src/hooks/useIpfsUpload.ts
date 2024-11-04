@@ -24,7 +24,7 @@ export const useIpfsUpload = () => {
     try {
       setLoading(true);
       const response = await axios.post(url, formData, {
-        maxContentLength: 'Infinity', // Prevents larger file restrictions
+        // maxContentLength: 'Infinity', // Prevents larger file restrictions
         headers: {
           'Content-Type': `multipart/form-data;`,
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_PINATA_JWT}`,
@@ -42,7 +42,7 @@ export const useIpfsUpload = () => {
     }
   };
 
-  const pinJsonToIpfs = async (json: object): Promise<string> => {
+  const pinJsonToIpfs = async (json: any): Promise<string> => {
     console.log("Original JSON:", json);
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
