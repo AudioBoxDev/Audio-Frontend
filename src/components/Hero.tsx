@@ -21,7 +21,7 @@ const Hero = () => {
 		try {
 			const response = await axios.post(`${url}/waitlist/join`, { email });
 			toast.success(response.data.message || "Your email has been Added!");
-		} catch (error) {
+		} catch (error:any) {
 			toast.error(
 				error?.response.data.message ||
 					"There was an error joining the waitlist. Please try again.",
