@@ -21,7 +21,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "AudioBlocks - Decentralized Music",
-  description: "AudioBlocks empowers musicians by providing a decentralized platform for music streaming",
+  description: "Own the music, support the artist, revolutionize the industry",
 };
 
 export default function RootLayout({
