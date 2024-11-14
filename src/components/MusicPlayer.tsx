@@ -21,6 +21,12 @@ interface Song {
 const MusicPlayer: React.FC = () => {
 	const songs: Song[] = [
 		{
+			title: "Story",
+			artist: "Wiffi Drips ft. Greatman Takit AceSoundz",
+			src: "https://soundcloud.com/wilfred-wiffi-adzer/story-ft-ace-greatman-takiti?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+1",
+		},
+		{
 			title: "Song 1",
 			artist: "Artist 1",
 			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
@@ -38,6 +44,12 @@ const MusicPlayer: React.FC = () => {
 			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
 			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+3",
 		},
+		{
+			title: "Strong City",
+			artist: "Wiffi Drips ft. Bethel & Eclipse Nkasi",
+			src: "https://soundcloud.com/wilfred-wiffi-adzer/02-strong-city-ft-bethel?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+			albumCover: "https://i.scdn.co/image/ab67616d00001e02e3c4f2b3e2b4b4e2b4b4b4b4",
+		}
 	];
 
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
