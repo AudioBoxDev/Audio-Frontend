@@ -10,10 +10,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import Faq from "@/components/Faq";
 import MusicScene from "@/components/MusicScene";
+import { WIPBanner } from "@/components/Wim";
 
 export default function Home() {
   return (
   <>
+  <WIPBanner/>
     <Navbar2/>
       <Hero/>
     <AudioBoxFeatures/>
