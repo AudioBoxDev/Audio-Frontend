@@ -31,7 +31,7 @@ const Navbar2 = () => {
 
 		try {
 			const signature = await signMessageAsync({ message: messageToSign });
-			authenticateUser(address, signature, messageToSign, "artist");
+			authenticateUser(address, signature, messageToSign, "user");
 		} catch (error) {
 			console.error("Message signing failed:", error);
 			toast.error("Message signing failed");
