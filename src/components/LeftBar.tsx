@@ -1,11 +1,12 @@
 import React from "react";
-import { CirclePlay, Gem, Headset, Music, Play } from "lucide-react";
+import { ArrowRightToLine, CirclePlay, Gem, Headset, Music, Play } from "lucide-react";
 import Link from "next/link";
 
-const LeftBar = () => {
+const LeftBar = ({ close, open}:any) => {
 	return (
 		<>
-			<div className="bg-custom-gradient space-y-2 mt-2 p-6 rounded-3xl">
+			<div className={`bg-[#0E070C] z-[500px] space-y-2 mt-2 p-6 rounded-3xl`}>
+			<ArrowRightToLine  className="md:hidden block text-white" onClick={close} size={16}/>
 				<h2 className="text-base">Welcome Back</h2>
 				<h1 className="text-white font-bold text-5xl">Wini</h1>
 				<div className="text-gray-400">

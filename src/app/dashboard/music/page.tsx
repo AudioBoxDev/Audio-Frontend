@@ -8,7 +8,7 @@ import Rectangle1 from "/public/images/Rectangle1.png";
 import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 
-const AlbumArt = () => {
+const AlbumArt2 = () => {
 	const { playSong, setSongs } = useMusicPlayer();
 
 	useEffect(() => {
@@ -125,12 +125,12 @@ const AlbumArt = () => {
 					<table className="min-w-full text-[#666C6C] border-separate border-spacing-y-2">
 						<thead>
 							<tr className="text-sm font-medium">
-								<th className="p-3 text-left"></th>
-								<th className="p-3 text-left"></th>
-								<th className="p-3 text-center"></th>
-								<th className="p-3 text-center"></th>
-								<th className="p-3 text-center"></th>
-								<th className="p-3 text-center"></th>
+								<th className="p-3 text-left">#</th>
+								<th className="p-3 text-left">Songs</th>
+								<th className="p-3 text-center">Streams</th>
+								<th className="p-3 text-center">Listeners</th>
+								<th className="p-3 text-center">Saves</th>
+								<th className="p-3 text-center">Released</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -198,4 +198,4 @@ const AlbumArt = () => {
 	);
 };
 
-export default AlbumArt;
+export default AlbumArt2;

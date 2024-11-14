@@ -1,30 +1,23 @@
 "use client"
 import {useState} from 'react'
 import Image from 'next/image';
-import { X} from 'lucide-react';
+import { Music, X} from 'lucide-react';
 import image from "/public/images/Group1.png"
 import RecentlyPlayed from '@/components/RecentPlayed';
 import Trending from '@/components/Trending';
+import MusicPlayer from '@/components/MusicPlayer';
+import GlobalMusicPlayer from '@/components/GlobalMusicPlayer';
 
  const Dashboard = () => {
-  const [close, setClose] = useState(true);
-
-	const Close = () => {
-		setClose(false);
-	};
+ 
   return (
     <>
-    <div className="w-11/12 m-auto text-white">
+    <div className="w-11/12 m-auto mt-4 text-white">
       <div className="grid grid-cols-12">
         <div className="col-span-12">
-          {close && (
-            <div className="relative bg-gradient-to-r gap-x-9 items-center flex justify-between from-[#4B0B3E] to-[#274749] text-white p-8 h-[280px] rounded-lg mb-8">
-              <span
-                className="absolute top-3 right-4 cursor-pointer border rounded-full p-1 text-white hover:text-gray-300"
-                onClick={Close}
-              >
-                <X className="h-4 w-4" />
-              </span>
+         
+            <div className="relative bg-gradient-to-r gap-x-9 items-center flex md:flex-row flex-col justify-between from-[#4B0B3E] to-[#274749] text-white p-8 md:h-[280px] h-auto rounded-lg mb-8">
+              
               <div className="w-[288px]">
                 <h1 className="text-2xl font-bold text-white mb-2">
                   Unlock Exclusive Music NFTs
@@ -39,11 +32,11 @@ import Trending from '@/components/Trending';
                 <Image src={image} alt="Music" width={260} height={228} />
               </div>
             </div>
-          )}
+         
 
           <div className="text-white">
             <h2 className="text-base font-bold mb-4">Category</h2>
-            <div className="flex justify-between text-sm flex-wrap">
+            <div className="flex gap-4 text-sm flex-wrap">
               <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
                 All
               </button>
@@ -76,6 +69,7 @@ import Trending from '@/components/Trending';
         </div>
       </div>
     </div>
+    <GlobalMusicPlayer />
   </>
   )
 }

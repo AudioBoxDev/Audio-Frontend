@@ -33,7 +33,7 @@ const MarketPlaceCard = () => {
 			{
 				breakpoint: 480,
 				settings: {
-					slidesToShow: 1,
+					slidesToShow: 2,
 					slidesToScroll: 1,
 				},
 			},
@@ -69,7 +69,7 @@ const MarketPlaceCard = () => {
 
 	return (
 		<div className="text-white pb-8  mb-60 border-b border-[#151515] font-roboto pt-6">
-			<h2 className="text-base font-bold mb-4">Trending</h2>
+			{/* <h2 className="text-base font-bold mb-4">Trending</h2> */}
 			<Slider {...settings}>
 				{recentlyPlayedData.map((item, index) => (
 					<div key={index} className="p-2">
