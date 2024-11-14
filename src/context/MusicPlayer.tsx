@@ -5,7 +5,7 @@ interface MusicPlayerContextType {
   songs: Song[];
   currentSongIndex: number;
   isPlaying: boolean;
-  setSongs: (songs: Song[]) => void;
+  setSongs: (songs:any) => void;
   playSong: (index: number) => void;
   playNextSong: () => void;
   playPreviousSong: () => void;
