@@ -1,11 +1,12 @@
 import React from "react";
-import { CirclePlay, Gem, Headset, Music, Play } from "lucide-react";
+import { ArrowRightToLine, CirclePlay, Gem, Headset, Music, Play } from "lucide-react";
 import Link from "next/link";
 
-const LeftBar = () => {
+const LeftBar = ({ close, open}:any) => {
 	return (
 		<>
-			<div className="bg-custom-gradient space-y-2 mt-2 h-[400px] p-6 rounded-3xl">
+			<div className="bg-[#0E070C] z-30 space-y-2 mt-2 p-6 rounded-3xl">
+			<ArrowRightToLine  className="md:hidden block text-white" onClick={close} size={16}/>
 				<h2 className="text-base">Welcome Back</h2>
 				<h1 className="text-white font-bold text-5xl">Wini</h1>
 				<div className="text-gray-400">
@@ -20,7 +21,7 @@ const LeftBar = () => {
 								<span className="text-[#666C6C]">56 hours</span>{" "}
 							</div>
 						</li>
-						<li className="text-gray-500 space-x-3 flex items-center">
+						{/* <li className="text-gray-500 space-x-3 flex items-center">
 							<Music className="w-4 h-4" />
 							<div className="text-white flex flex-col">Songs Bought: </div> 12
 						</li>
@@ -30,7 +31,7 @@ const LeftBar = () => {
 								<span>Albums Bought:</span>{" "}
 								<span className="text-[#666C6C]">3</span>
 							</div>
-						</li>
+						</li> */}
 						<li className="text-gray-500 space-x-3 flex items-center">
 							<Headset className="w-4 h-4" />{" "}
 							<div className="text-white flex flex-col">

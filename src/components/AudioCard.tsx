@@ -3,13 +3,13 @@ import Image from 'next/image';
 
 const AudioCard = ({ imageSrc, title, artist, price }:any) => {
   return (
-    <div className="bg-gradient-to-b font-roboto rounded-xl w-11/12 from-[#FFFFFF1A] to-[#FFFFFF0D] my-5 text-white p-5">
+    <div className="bg-gradient-to-b font-roboto rounded-xl w-11/12 m-auto from-[#FFFFFF1A] to-[#FFFFFF0D] my-5 text-white p-5">
       <div className="relative">
         <Image
           src={imageSrc}
           alt={title}
           objectFit="cover"
-          className="w-full h-[200px] rounded-xl"
+          className="w-full h-[200px] object-cover rounded-xl"
         />
         <div className="absolute top-0 bg-gradient-to-r rounded-tr-xl rounded-bl-xl from-[#FFFFFF1A] to-[#FFFFFF0D] right-0 p-2 text-white">
           <span className="flex items-center space-x-2">

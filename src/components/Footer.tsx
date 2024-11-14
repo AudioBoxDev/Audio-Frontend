@@ -19,7 +19,7 @@ const Footer = () => {
         </div>
 
         
-        <div className="col-span-1 md:col-span-1 text-base">
+        <div className="col-span-1 md:col-span-1 text-base md:py-0 py-4">
           <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Navigation</h3>
           <ul className="space-y-2">
             <li>
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
 
         
-        <div className="col-span-1 md:col-span-1 text-base">
+        <div className="col-span-1 md:col-span-1 text-base md:py-0 py-4">
           <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Support</h3>
           <ul className="space-y-2">
             <li>
@@ -68,7 +68,7 @@ const Footer = () => {
         </div>
 
         
-        <div className="col-span-1 md:col-span-1 text-base">
+        <div className="col-span-1 md:col-span-1 text-base md:py-0 py-4">
           <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Social Media</h3>
           <p className="mb-4">For recent updates and news follow our social media feeds</p>
           <div className="flex space-x-4">

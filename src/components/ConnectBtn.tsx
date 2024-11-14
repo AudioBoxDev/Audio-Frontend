@@ -1,8 +1,8 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Button } from "@/components/ui/button";
+
 export const ConnectBtn = () => {
   return (
-    <ConnectButton.Custom>
+    <ConnectButton.Custom >
       {({
         account,
         chain,
@@ -34,12 +34,12 @@ export const ConnectBtn = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <Button
+                  <button
                     onClick={openConnectModal}
-                    className="w-full bg-pink-600 text-white rounded-lg"
+                    className="w-full bg-gradient-to-r from-[#B51960] to-[#B81A3F] text-white  py-2 px-7 text-sm rounded-full"
                   >
                     Connect Wallet
-                  </Button>
+                  </button>
                 );
               }
               if (chain.unsupported) {
@@ -80,9 +80,9 @@ export const ConnectBtn = () => {
                   </button>
                   <button onClick={openAccountModal} type="button">
                     {account.displayName}
-                    {account.displayBalance
+                    {/* {account.displayBalance
                       ? ` (${account.displayBalance})`
-                      : ""}
+                      : ""} */}
                   </button>
                 </div>
               );
