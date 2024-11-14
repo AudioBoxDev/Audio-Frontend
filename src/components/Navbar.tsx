@@ -43,7 +43,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 							<Link href="/" className="hover:text-white">
 								<li>Streams</li>
 							</Link>
-							<Link href="/" className="hover:text-white">
+							<Link href="/" className="hover:text-white md:block hidden">
 								<li>Artist hub</li>
 							</Link>
 							<Link href="/dashboard/marketplace" className="hover:text-white">
