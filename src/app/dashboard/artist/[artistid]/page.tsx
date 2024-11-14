@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import {EllipsisVertical, Heart, MessageCircle, Users } from "lucide-react";
+import { EllipsisVertical, Heart, MessageCircle, Users } from "lucide-react";
 import image from "/public/images/Ellipse.png";
 import { Album, Play } from "lucide-react";
 import Rectangle1 from "/public/images/Rectangle1.png";
@@ -86,8 +86,8 @@ const ArtistId = () => {
 		<>
 			<div className="w-11/12 m-auto text-white">
 				<div className="bg-gradient-to-r from-[#4B0B3E] to-[#274749] p-8 rounded-lg text-white flex items-center justify-between">
-					<div className="flex-1">
-						<h1 className="text-6xl font-bold">Artist Name</h1>
+					<div className="flex-1 gap-2">
+						<h1 className="md:text-6xl text-3xl font-bold">Artist Name</h1>
 
 						<div className=" grid grid-flow-col gap-2 w-2/5 mt-3">
 							<span className="flex gap-2 text-xs">
@@ -105,7 +105,7 @@ const ArtistId = () => {
 						<Image
 							src={image}
 							alt="Artist"
-							className="w-32 h-32 rounded-full border border-white object-cover"
+							className="md:w-32 md:h-32 w-20 h-20 rounded-full border border-white object-cover"
 						/>
 					</div>
 				</div>
@@ -134,20 +134,20 @@ const ArtistId = () => {
 						<div className="overflow-x-auto mb-40">
 							<table className="min-w-full text-[#666C6C] border-separate border-spacing-y-2">
 								<thead>
-									<tr className="text-sm  font-medium">
+									<tr className="text-sm hidden font-medium">
 										<th className="p-3 text-left"></th>
 										<th className="p-3 text-left"></th>
 										<th className="p-3 text-left"></th>
 										<th className="p-3 text-left"></th>
-                                        <th className="p-3 text-left"></th>
-                                        <th className="p-3 text-left"></th>
+										<th className="p-3 text-left"></th>
+										<th className="p-3 text-left"></th>
 									</tr>
 								</thead>
 								<tbody>
 									{songs.map((song, index) => (
 										<tr
 											key={song.id}
-											className={`hover:bg-[#0E0B0E] cursor-pointer transition-colors ${
+											className={`hover:bg-[#0E0B0E] text-sm cursor-pointer transition-colors ${
 												currentSongIndex === index
 													? "bg-[#0E0B0E] bg-opacity-50"
 													: ""
@@ -161,7 +161,7 @@ const ArtistId = () => {
 													{renderSongNumber(index)}
 												</div>
 											</td>
-											<td className="p-3 grid grid-cols-2 gap-1 items-center">
+											<td className="p-3 flex gap-1 items-center">
 												<div className="relative">
 													<Image
 														src={song.coverImage}
@@ -177,24 +177,27 @@ const ArtistId = () => {
 												</div>
 												<div>
 													<p
-														className={`font-medium text text-sm ${
+														className={`font-medium text-left text-sm ${
 															currentSongIndex === index ? "text-red-500" : ""
 														}`}
 													>
 														{song.title}
 													</p>
+													<td className="font-medium md:hidden text-left">
+														{song.artist}
+													</td>
 												</div>
 											</td>
-											<td className="p-3 font-medium text-left">
+											<td className="p-3 font-medium hidden md:table-cell text-left">
 												{song.artist}
 											</td>
-                                            <td className="p-3 font-medium text-left">
+											<td className="p-3 hidden md:table-cell font-medium text-left">
 												{song.duration}
 											</td>
-											<td className="p-3 font-medium text-center">
+											<td className="p-3 font-medium text-center hidden md:table-cell">
 												<Heart size={20} />
 											</td>
-											<td className="p-3 font-medium text-center">
+											<td className="p-3 font-medium text-center ">
 												<EllipsisVertical size={20} />
 											</td>
 										</tr>
