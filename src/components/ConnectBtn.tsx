@@ -12,8 +12,6 @@ export const ConnectBtn = () => {
         authenticationStatus,
         mounted,
       }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
@@ -36,7 +34,7 @@ export const ConnectBtn = () => {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="w-full bg-gradient-to-r from-[#B51960] to-[#B81A3F] text-white  py-2 px-7 text-sm rounded-full"
+                    className="w-full bg-gradient-to-r from-[#B51960] to-[#B81A3F] text-white  py-2 md:px-7 px-3 md:text-sm text-xs rounded-full"
                   >
                     Connect Wallet
                   </button>

@@ -36,7 +36,7 @@ const Hero = () => {
 			<div className=" bg-gradient-to-br flex flex-col md:pt-36 font-roboto md:-mt-24 md:mb-0 -mb-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
 				<div className="text-center w-11/12 m-auto">
 					<h1
-						className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
+						className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
 						style={{
 							WebkitBackgroundClip: "text",
 							WebkitTextFillColor: "transparent",
@@ -51,13 +51,13 @@ const Hero = () => {
 						<div className="mt-10 flex justify-center md:justify-start">
 							<Link
 								href="/dashboard"
-								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full text-center md:w-[196px] h-[50px] md:h-[50px]"
+								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full text-center md:w-[196px] h-auto md:h-[50px]"
 							>
 								Start Listening
 							</Link>
 						</div>
 
-						<div className="flex justify-between items-center border-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
+						<div className="flex justify-between relative items-center border-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
 							<input
 								type="email"
 								value={email}
@@ -69,7 +69,7 @@ const Hero = () => {
 							<button
 								onClick={JoinWaitlist}
 								disabled={loading}
-								className="bg-pink-600 md:text-base text-xs text-white font-semibold md:px-6 px-4 py-2 rounded-full focus:outline-none hover:bg-pink-700 transition"
+								className="bg-pink-600 absolute right-1 md:text-base text-xs text-white font-medium md:px-6 px-3 py-2 rounded-full focus:outline-none hover:bg-pink-700 transition"
 							>
 								Join the Waitlist
 							</button>

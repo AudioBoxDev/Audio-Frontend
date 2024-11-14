@@ -69,7 +69,7 @@ const MarketPlaceCard = () => {
 
 	return (
 		<div className="text-white pb-8  mb-60 border-b border-[#151515] font-roboto pt-6">
-			{/* <h2 className="text-base font-bold mb-4">Trending</h2> */}
+			
 			<Slider {...settings}>
 				{recentlyPlayedData.map((item, index) => (
 					<div key={index} className="p-2">
@@ -95,7 +95,7 @@ const MarketPlaceCard = () => {
 								<h3 className="text-sm font-bold">Current bid</h3>
 								<p className="text-xs text-pink-600">3.1 Eth</p>
 							</div>
-							<button className="text-sm bg-pink-600 p-2 px-3 text-white font-bold rounded-full">
+							<button className="md:text-sm text-xs bg-pink-600 p-2 px-3 text-white font-bold rounded-full">
 								Place bid
 							</button>
 						</div>

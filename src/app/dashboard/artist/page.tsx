@@ -69,20 +69,20 @@ const Artist = () => {
 					</button>
 				</div>
 			</div>
-			<div className="grid grid-cols-4 gap-6 mt-10">
+			<div className="grid md:grid-cols-4  grid-cols-1 md:w-full w-3/4 gap-6 mt-10">
 				{recentlyPlayedData.map((item, index) => (
 					<div key={index} onClick={() => handleClick(item.artist)} className=" cursor-pointer ">
-						<div className=" rounded-lg shadow-lg overflow-hidden">
+						<div className=" rounded-lg shadow-lg flex items-center md:flex-col flex-row overflow-hidden">
 							<div className="rounded-full">
 								<Image
 									src={item.imageUrl}
 									alt={item.title}
 									width={180}
 									height={200}
-									className="w-40 rounded-full h-40 object-cover"
+									className="md:w-40 w-20 rounded-full md:h-40 h-20 object-cover"
 								/>
 							</div>
-							<div className="p-4 pt-2 text-center">
+							<div className="p-4 pt-2 md:text-center  text-left">
 								<h3 className="text-lg font-semibold">{item.title}</h3>
 								<p className="text-sm text-gray-400">{item.artist}</p>
 								<p className="text-sm text-gray-400">{item.year}</p>

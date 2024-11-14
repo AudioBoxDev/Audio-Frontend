@@ -11,7 +11,6 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 
 	const handleSearch = () => {
-		// Perform search logic here
 		console.log("Searching for:", search);
 	};
 
@@ -41,7 +40,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 								/>
 							</div>
 							<Link href="/" className="hover:text-white">
-								<li>Streams</li>
+								<li>Home</li>
 							</Link>
 							<Link href="/" className="hover:text-white md:block hidden">
 								<li>Artist hub</li>
