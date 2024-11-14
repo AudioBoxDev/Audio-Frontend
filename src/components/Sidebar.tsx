@@ -1,6 +1,6 @@
 import React from 'react'
 import SidebarItems from './SidebarItems';
-import { Upload, TrendingUp,Bolt,Settings, Star, CirclePlus, MicVocal, Music, FileMusic, Wallet, ArrowBigLeft } from 'lucide-react';
+import { Upload, TrendingUp,Bolt,Settings, Star, CirclePlus, Music, FileMusic, Wallet, ArrowBigLeft, Mic } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from "next/navigation";
 
@@ -41,17 +41,17 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
         </div>
         <div className="space-y-6">
           <SidebarItems icon={Wallet} label="Wallet" to="/dashboard" isActive={pathname === "/dashboard"} />
-          <SidebarItems icon={Music} label="Playlist" to="/dashboard" />
+          <SidebarItems icon={Music} label="Playlist" to="#" />
           <SidebarItems icon={FileMusic} label="Album" to="/dashboard/album" isActive={pathname === "/dashboard/album"}/>
-          <SidebarItems icon={MicVocal} label="Artist" to="/dashboard"  />
+          <SidebarItems icon={Mic} label="Subscription" to="#"  />
         </div>
 
         
         <div className="pt-8 space-y-4">
           <h2 className="text-xs text-gray-500 mb-4">DISCOVERY</h2>
           <div className="space-y-6">
-            <SidebarItems icon={TrendingUp} label="Trending" to="/dashboard" isActive={pathname === "/dashboard"} />
-            <SidebarItems icon={Star} label="Popular" to="/dashboard" isActive={pathname === "/dashboard"}/>
+            <SidebarItems icon={TrendingUp} label="Trending" to="#" />
+            <SidebarItems icon={Star} label="Popular" to="#" />
           </div>
         </div>
 
