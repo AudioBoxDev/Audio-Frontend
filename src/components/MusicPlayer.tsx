@@ -26,42 +26,6 @@ export interface Song {
   saves: number;
   released: string;
 }
-
-<<<<<<< HEAD
-const MusicPlayer: React.FC = () => {
-	const songs: Song[] = [
-		{
-			title: "Story",
-			artist: "Wiffi Drips ft. Greatman Takit AceSoundz",
-			src: "https://soundcloud.com/wilfred-wiffi-adzer/story-ft-ace-greatman-takiti?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
-			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+1",
-		},
-		{
-			title: "Song 1",
-			artist: "Artist 1",
-			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+1",
-		},
-		{
-			title: "Song 2",
-			artist: "Artist 2",
-			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+2",
-		},
-		{
-			title: "Song 3",
-			artist: "Artist 3",
-			src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-			albumCover: "https://via.placeholder.com/300x300.png?text=Album+Cover+3",
-		},
-		{
-			title: "Strong City",
-			artist: "Wiffi Drips ft. Bethel & Eclipse Nkasi",
-			src: "https://soundcloud.com/wilfred-wiffi-adzer/02-strong-city-ft-bethel?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
-			albumCover: "https://i.scdn.co/image/ab67616d00001e02e3c4f2b3e2b4b4e2b4b4b4b4",
-		}
-	];
-=======
 interface MusicPlayerProps {
   songs: Song[];
   currentSongIndex: number;
@@ -71,7 +35,6 @@ interface MusicPlayerProps {
   onPreviousSong: () => void;
   onSongEnd: () => void;
 }
->>>>>>> 5a7c59460639819f341d1df7fd6fd2081d8a23cb
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({
   songs,
