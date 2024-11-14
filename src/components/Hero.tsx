@@ -57,7 +57,7 @@ const Hero = () => {
 							</Link>
 						</div>
 
-						<div className="flex justify-between relative items-center border-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
+						<div className="flex md:w-1/3 w-full justify-between relative items-center border-2 md:p-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
 							<input
 								type="email"
 								value={email}

@@ -8,6 +8,7 @@ import Rectangle1 from "/public/images/Rectangle1.png";
 import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 import * as Tabs from "@radix-ui/react-tabs";
+import CommentSection from "@/components/Comment";
 
 const ArtistId = () => {
 	const { playSong, setSongs } = useMusicPlayer();
@@ -131,7 +132,7 @@ const ArtistId = () => {
 						</Tabs.Trigger>
 					</Tabs.List>
 					<Tabs.Content value="songs">
-						<div className="overflow-x-auto mb-40">
+						<div className="overflow-x-auto mb-8">
 							<table className="min-w-full text-[#666C6C] border-separate border-spacing-y-2">
 								<thead>
 									<tr className="text-sm hidden font-medium">
@@ -209,6 +210,7 @@ const ArtistId = () => {
 					<Tabs.Content value="album">nothing...</Tabs.Content>
 					<Tabs.Content value="playlist">nothing...</Tabs.Content>
 				</Tabs.Root>
+				<CommentSection/>
 			</div>
 		</>
 	);
