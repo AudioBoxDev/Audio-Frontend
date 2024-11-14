@@ -8,7 +8,7 @@ import Rectangle1 from "/public/images/Rectangle1.png";
 import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 
-const AlbumArt = () => {
+const AlbumArt2 = () => {
 	const { playSong, setSongs } = useMusicPlayer();
 
 	useEffect(() => {
@@ -108,11 +108,11 @@ const AlbumArt = () => {
 							</span>
 							<span>Tip Artist</span>
 						</div>
-						<h1 className="md:text-5xl text-xl font-bold text-white mb-2">Artist Name</h1>
+						<h1 className="text-5xl font-bold text-white mb-2">Artist Name</h1>
 						<p className="text-base mb-4 text-[#91A2A4]">Artist Name</p>
 					</div>
 
-					<div className="absolute right-4 top-7 bottom-0 md:h-44 h-20 md:w-44 w-20 rounded-full border border-white overflow-hidden">
+					<div className="absolute right-4 bottom-0 h-44 w-44 rounded-full border border-white overflow-hidden">
 						<Image
 							src={image}
 							alt="Music"
@@ -125,10 +125,12 @@ const AlbumArt = () => {
 					<table className="min-w-full text-[#666C6C] border-separate border-spacing-y-2">
 						<thead>
 							<tr className="text-sm font-medium">
-								<th className="p-3 text-left"></th>
-								<th className="p-3 text-left"></th>
-								<th className="p-3 text-center"></th>
-								<th className="p-3 text-center"></th>
+								<th className="p-3 text-left">#</th>
+								<th className="p-3 text-left">Songs</th>
+								<th className="p-3 text-center">Streams</th>
+								<th className="p-3 text-center">Listeners</th>
+								<th className="p-3 text-center">Saves</th>
+								<th className="p-3 text-center">Released</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -149,7 +151,7 @@ const AlbumArt = () => {
 											{renderSongNumber(index)}
 										</div>
 									</td>
-									<td className="p-3 grid grid-cols-2 gap-2 items-center">
+									<td className="p-3 flex items-center">
 										<div className="relative">
 											<Image
 												src={song.coverImage}
@@ -165,7 +167,7 @@ const AlbumArt = () => {
 										</div>
 										<div>
 											<p
-												className={`font-medium text text-sm ${
+												className={`font-medium text-sm ${
 													currentSongIndex === index ? "text-red-500" : ""
 												}`}
 											>
@@ -180,7 +182,12 @@ const AlbumArt = () => {
 									<td className="p-3 text-sm font-medium text-center">
 										{song.listeners.toLocaleString()}
 									</td>
-									
+									<td className="p-3 text-sm font-medium text-center">
+										{song.saves.toLocaleString()}
+									</td>
+									<td className="p-3 text-sm font-medium text-center">
+										{song.released}
+									</td>
 								</tr>
 							))}
 						</tbody>
@@ -191,4 +198,4 @@ const AlbumArt = () => {
 	);
 };
 
-export default AlbumArt;
+export default AlbumArt2;

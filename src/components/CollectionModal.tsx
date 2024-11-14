@@ -11,7 +11,7 @@ const CollectionModal = () => {
             
             <div className="relative">
               <label className="text-white text-sm mb-2 block">Album Title *</label>
-              <Input
+              <input
                 className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
                 type="text"
                 placeholder="Song Title"
@@ -22,7 +22,7 @@ const CollectionModal = () => {
            
             <div className="relative">
               <label className="text-white text-sm mb-2 block">Description *</label>
-              <Input
+              <input
                 className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
                 type="text"
                 placeholder="Description of music"
@@ -40,7 +40,7 @@ const CollectionModal = () => {
               </div>
               <div className='col-span-1'>
                 <label className="text-white text-sm mb-2 block">Release Date *</label>
-                <Input
+                <input
                   className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
                   type="text"
                   placeholder="DDMMYYYY"
@@ -53,7 +53,7 @@ const CollectionModal = () => {
             <div className="grid grid-cols-2 gap-7">
               <div className='col-span-1'>
                 <label className="text-white text-sm mb-2 block">Purchase Price *</label>
-                <Input
+                <input
                   className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
                   type="text"
                   placeholder="Enter Purchase Price"
@@ -62,7 +62,7 @@ const CollectionModal = () => {
               </div>
               <div className='col-span-1'>
                 <label className="text-white text-sm mb-2 block">Royalty *</label>
-                <Input
+                <input
                   className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
                   type="text"
                   placeholder="Enter Royalty"
@@ -75,7 +75,7 @@ const CollectionModal = () => {
             <div className="grid grid-cols-2 gap-7">
               <div className='col-span-1'>
                 <label className="text-white text-sm mb-2 block">Price per Stream *</label>
-                <Input
+                <input
                   className="w-full bg-[#1C1C1F] border border-pink-600 rounded-full py-2 px-4 text-white focus:outline-none"
                   type="text"
                   placeholder="Enter Price per Stream"

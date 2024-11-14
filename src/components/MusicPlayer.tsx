@@ -1,23 +1,33 @@
-"use client";
 import React, { useState, useRef, useEffect } from "react";
 import {
-	Play,
-	Redo,
-	Pause,
-	SkipForward,
-	SkipBack,
-	Volume2,
-	EllipsisVertical,
-	VolumeOff,
+  Play,
+  Redo,
+  Pause,
+  SkipForward,
+  SkipBack,
+  Volume2,
+  EllipsisVertical,
+  Volume1,
+  VolumeX,
+  Volume,
+  Shuffle,
+  Repeat
 } from "lucide-react";
+import Image from "next/image";
 
-interface Song {
-	title: string;
-	artist: string;
-	src: string;
-	albumCover: string;
+export interface Song {
+  id: string;
+  title: string;
+  artist: string;
+  src: string;
+  coverImage: any;
+  streams: number;
+  listeners: number;
+  saves: number;
+  released: string;
 }
 
+<<<<<<< HEAD
 const MusicPlayer: React.FC = () => {
 	const songs: Song[] = [
 		{
@@ -51,193 +61,279 @@ const MusicPlayer: React.FC = () => {
 			albumCover: "https://i.scdn.co/image/ab67616d00001e02e3c4f2b3e2b4b4e2b4b4b4b4",
 		}
 	];
+=======
+interface MusicPlayerProps {
+  songs: Song[];
+  currentSongIndex: number;
+  isPlaying: boolean;
+  onPlayPause: () => void;
+  onNextSong: () => void;
+  onPreviousSong: () => void;
+  onSongEnd: () => void;
+}
+>>>>>>> 5a7c59460639819f341d1df7fd6fd2081d8a23cb
 
-	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
-	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [currentTime, setCurrentTime] = useState<number>(0);
-	const [duration, setDuration] = useState<number>(0);
-	const [volume, setVolume] = useState<number>(1);
-	const [isVolumeVisible, setIsVolumeVisible] = useState<boolean>(false);
+const MusicPlayer: React.FC<MusicPlayerProps> = ({
+  songs,
+  currentSongIndex,
+  isPlaying,
+  onPlayPause,
+  onPreviousSong,
+  onNextSong,
+  onSongEnd,
+}) => {
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(1);
+  const [isVolumeHovered, setIsVolumeHovered] = useState<boolean>(false);
+  const [repeatMode, setRepeatMode] = useState<'off' | 'all' | 'one'>('off');
+  const [isShuffleOn, setIsShuffleOn] = useState<boolean>(false);
+  const [shuffledQueue, setShuffledQueue] = useState<number[]>([]);
+  
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const volumeTimeout = useRef<NodeJS.Timeout>();
 
-	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const progressBarRef = useRef<HTMLDivElement | null>(null);
+  // Initialize shuffle queue
+  useEffect(() => {
+    if (isShuffleOn && shuffledQueue.length === 0) {
+      const newQueue = Array.from({ length: songs.length }, (_, i) => i)
+        .filter(i => i !== currentSongIndex);
+      for (let i = newQueue.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newQueue[i], newQueue[j]] = [newQueue[j], newQueue[i]];
+      }
+      newQueue.unshift(currentSongIndex);
+      setShuffledQueue(newQueue);
+    }
+  }, [isShuffleOn, songs.length, currentSongIndex]);
 
-	const togglePlayPause = () => {
-		if (isPlaying) {
-			audioRef.current?.pause();
-		} else {
-			audioRef.current?.play();
-		}
-		setIsPlaying(!isPlaying);
-	};
+  const updateProgress = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+      setDuration(audioRef.current.duration);
+    }
+  };
 
-	const updateProgress = () => {
-		if (audioRef.current) {
-			setCurrentTime(audioRef.current.currentTime);
-			setDuration(audioRef.current.duration);
-		}
-	};
+  const handleProgressBarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newTime = parseFloat(event.target.value);
+    setCurrentTime(newTime);
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+    }
+  };
 
-	const handleProgressBarChange = (
-		event: React.ChangeEvent<HTMLInputElement>,
-	) => {
-		const newTime = parseFloat(event.target.value);
-		setCurrentTime(newTime);
-		if (audioRef.current) {
-			audioRef.current.currentTime = newTime;
-		}
-	};
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(event.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
 
-	const playNextSong = () => {
-		setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
-		resetPlayer();
-		setIsPlaying(true); // Ensure the next song plays automatically
-	};
+  const handleSongEnd = () => {
+    if (repeatMode === 'one') {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+    } else {
+      const nextIndex = getNextSongIndex();
+      if (nextIndex !== -1) {
+        onNextSong();
+      } else if (repeatMode === 'all') {
+        if (isShuffleOn) {
+          setShuffledQueue([]); // Trigger new shuffle
+        }
+        onNextSong();
+      } else {
+        onSongEnd();
+      }
+    }
+  };
 
-	// Play the previous song
-	const playPreviousSong = () => {
-		setCurrentSongIndex(
-			(prevIndex) => (prevIndex - 1 + songs.length) % songs.length,
-		);
-		resetPlayer();
-		setIsPlaying(true); // Ensure the previous song plays automatically
-	};
+  const getNextSongIndex = (): number => {
+    if (isShuffleOn) {
+      const currentQueueIndex = shuffledQueue.indexOf(currentSongIndex);
+      return currentQueueIndex < shuffledQueue.length - 1 ? shuffledQueue[currentQueueIndex + 1] : -1;
+    }
+    return currentSongIndex < songs.length - 1 ? currentSongIndex + 1 : -1;
+  };
 
-	const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const newVolume = parseFloat(event.target.value);
-		setVolume(newVolume);
-		if (audioRef.current) {
-			audioRef.current.volume = newVolume;
-		}
-	};
+  const toggleRepeat = () => {
+    setRepeatMode(current => {
+      switch (current) {
+        case 'off': return 'all';
+        case 'all': return 'one';
+        case 'one': return 'off';
+      }
+    });
+  };
 
-	const resetPlayer = () => {
-		if (audioRef.current) {
-			audioRef.current.pause();
-			setCurrentTime(0);
-			setDuration(0);
-			audioRef.current.load(); // Load the new song
-		}
-	};
+  const toggleShuffle = () => {
+    setIsShuffleOn(current => !current);
+    if (!isShuffleOn) {
+      setShuffledQueue([]); // Trigger new shuffle
+    }
+  };
 
-	const formatTime = (time: number): string => {
-		const minutes = Math.floor(time / 60);
-		const seconds = Math.floor(time % 60);
-		return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-	};
+  const getVolumeIcon = () => {
+    if (volume === 0) return <VolumeX />;
+    if (volume < 0.3) return <Volume />;
+    if (volume < 0.7) return <Volume1 />;
+    return <Volume2 />;
+  };
 
-	const onLoadedMetadata = () => {
-		if (audioRef.current) {
-			setDuration(audioRef.current.duration);
-		}
-	};
 
-	useEffect(() => {
-		if (isPlaying) {
-			audioRef.current?.play();
-		}
-	}, [currentSongIndex]);
 
-	return (
-		<div className="fixed grid grid-cols-4 gap-4 md:left-64  left-0 bottom-0 items-center justify-between w-full bg-[#0D0D0D] text-white p-4 rounded-lg shadow-lg max-w-3xl mx-auto">
-			{/* Album Cover and Song Info */}
-			<div className="flex col-span-1 items-center space-x-4">
-				<img
-					src={songs[currentSongIndex].albumCover}
-					alt="Album Cover"
-					className="md:w-12 md:h-12 w-6 h-6 rounded-full"
-				/>
-				<div>
-					<h3 className="text-red-500 font-semibold text-sm">
-						{songs[currentSongIndex].title}
-					</h3>
-					<p className="text-gray-400 text-xs">
-						{songs[currentSongIndex].artist}
-					</p>
-				</div>
-			</div>
+  const formatTime = (time: number): string => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
 
-			{/* Audio Element */}
-			<audio
-				ref={audioRef}
-				src={songs[currentSongIndex].src}
-				onTimeUpdate={updateProgress}
-				onLoadedMetadata={onLoadedMetadata}
-			></audio>
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+    }
+  }, [isPlaying, currentSongIndex]);
 
-			{/* Control Buttons */}
-			<div className="flex col-span-2 space-y-3 flex-col">
-				<div className="flex items-center justify-center space-x-4">
-					<button className="text-gray-400 hover:text-white">
-						<Redo className="w-5 h-5" />
-					</button>
-					<button
-						onClick={playPreviousSong}
-						className="text-gray-400 hover:text-white"
-					>
-						<SkipBack className="w-5 h-5" />
-					</button>
-					<button
-						onClick={togglePlayPause}
-						className="bg-white text-black p-2 rounded-full hover:bg-gray-300 transition"
-					>
-						{isPlaying ? (
-							<Pause className="w-5 h-5" />
-						) : (
-							<Play className="w-5 h-5" />
-						)}
-					</button>
-					<button
-						onClick={playNextSong}
-						className="text-gray-400 hover:text-white"
-					>
-						<SkipForward className="w-5 h-5" />
-					</button>
-					<div className="relative flex items-center space-x-6">
-						<button
-							onClick={() => setIsVolumeVisible((prev) => !prev)}
-							className="text-gray-400 hover:text-white"
-						>
-							{volume > 0 ? (
-								<Volume2 className="w-5 h-5" />
-							) : (
-								<VolumeOff className="w-5 h-5" />
-							)}
-						</button>
-						{isVolumeVisible && (
-							<input
-								type="range"
-								min="0"
-								max="1"
-								step="0.01"
-								value={volume}
-								onChange={handleVolumeChange}
-								className="w-20 absolute h-1 cursor-pointer accent-pink-500 top-1/2 transform -translate-y-1/2"
-							/>
-						)}
-					</div>
-				</div>
+  const handleVolumeEnter = () => {
+    if (volumeTimeout.current) {
+      clearTimeout(volumeTimeout.current);
+    }
+    setIsVolumeHovered(true);
+  };
 
-				{/* Progress Bar and Time */}
-				<div className="flex items-center space-x-2 w-full">
-					<p className="text-sm">{formatTime(currentTime)}</p>
-					<input
-						type="range"
-						min="0"
-						max={duration}
-						step="0.1"
-						value={currentTime}
-						onChange={handleProgressBarChange}
-						className="w-full h-1 cursor-pointer accent-pink-500  rounded-lg"
-					/>
-					<p className="text-sm">{formatTime(duration)}</p>
-				</div>
-			</div>
-			<button className="text-gray-400 col-span-1 hover:text-white">
-				<EllipsisVertical />
-			</button>
-		</div>
-	);
+  const handleVolumeLeave = () => {
+    volumeTimeout.current = setTimeout(() => {
+      setIsVolumeHovered(false);
+    }, 300);
+  };
+
+  return (
+    <div className="fixed grid grid-cols-1 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
+      <audio
+        ref={audioRef}
+        src={songs[currentSongIndex].src}
+        onTimeUpdate={updateProgress}
+        onEnded={handleSongEnd}
+      />
+
+      <div className="flex col-span-1 items-center space-x-4">
+        <Image
+		width={100}
+		height={100}
+          src={songs[currentSongIndex].coverImage}
+          alt="Album Cover"
+          className="md:w-12 md:h-12 w-8 h-8 rounded object-cover shadow-lg"
+        />
+        <div className="overflow-hidden">
+          <h3 className="text-white font-medium text-sm truncate hover:text-red-500 transition-colors">
+            {songs[currentSongIndex].title}
+          </h3>
+          <p className="text-neutral-400 text-xs truncate hover:text-white transition-colors">
+            {songs[currentSongIndex].artist}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex col-span-2 space-y-2 flex-col">
+        <div className="flex items-center justify-center space-x-4">
+          <button 
+            onClick={toggleShuffle}
+            className={`text-neutral-400 hover:text-white transition-colors p-1 ${
+              isShuffleOn ? 'text-red-500' : ''
+            }`}
+          >
+            <Shuffle className="w-4 h-4" />
+          </button>
+          <button
+            onClick={onPreviousSong}
+            className="text-neutral-400 hover:text-white transition-colors p-1"
+          >
+            <SkipBack className="w-5 h-5" />
+          </button>
+          <button
+            onClick={onPlayPause}
+            className="bg-white text-black p-2 rounded-full hover:bg-neutral-200 transition-colors"
+          >
+            {isPlaying ? (
+              <Pause className="w-5 h-5" />
+            ) : (
+              <Play className="w-5 h-5" />
+            )}
+          </button>
+          <button
+            onClick={onNextSong}
+            className="text-neutral-400 hover:text-white transition-colors p-1"
+          >
+            <SkipForward className="w-5 h-5" />
+          </button>
+          <button 
+            onClick={toggleRepeat}
+            className={`text-neutral-400 hover:text-white transition-colors p-1 relative ${
+              repeatMode !== 'off' ? 'text-red-500' : ''
+            }`}
+          >
+            <Repeat className="w-4 h-4" />
+            {repeatMode === 'one' && (
+              <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 text-xs">
+                1
+              </span>
+            )}
+          </button>
+          <div 
+            className="relative group"
+            onMouseEnter={handleVolumeEnter}
+            onMouseLeave={handleVolumeLeave}
+          >
+            <button className="text-neutral-400 hover:text-white transition-colors p-1">
+              {getVolumeIcon()}
+            </button>
+            <div className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-2 bg-neutral-800 rounded-lg p-2 transition-opacity duration-200 ${isVolumeHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="w-24 h-1 appearance-none bg-neutral-600 rounded-lg cursor-pointer accent-red-500 hover:accent-red-600"
+                style={{
+                  background: `linear-gradient(to right, rgb(239, 68, 68) 0%, rgb(239, 68, 68) ${volume * 100}%, rgb(82, 82, 82) ${volume * 100}%, rgb(82, 82, 82) 100%)`
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-2 w-full">
+          <span className="text-xs text-neutral-400">{formatTime(currentTime)}</span>
+          <div className="relative w-full group">
+            <input
+              type="range"
+              min="0"
+              max={duration}
+              step="0.1"
+              value={currentTime}
+              onChange={handleProgressBarChange}
+              className="w-full h-1 appearance-none bg-neutral-600 rounded-full cursor-pointer accent-red-500 hover:accent-red-600"
+              style={{
+                background: `linear-gradient(to right, rgb(239, 68, 68) 0%, rgb(239, 68, 68) ${(currentTime / duration) * 100}%, rgb(82, 82, 82) ${(currentTime / duration) * 100}%, rgb(82, 82, 82) 100%)`
+              }}
+            />
+          </div>
+          <span className="text-xs text-neutral-400">{formatTime(duration)}</span>
+        </div>
+      </div>
+
+      <button className="text-neutral-400 md:block hidden col-span-1 hover:text-white transition-colors justify-self-end p-1">
+        <EllipsisVertical className="w-5 h-5" />
+      </button>
+    </div>
+  );
 };
 
 export default MusicPlayer;
