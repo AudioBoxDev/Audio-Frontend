@@ -42,8 +42,8 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
         <div className="space-y-6">
           <SidebarItems icon={Wallet} label="Wallet" to="/dashboard" isActive={pathname === "/dashboard"} />
           <SidebarItems icon={Music} label="Playlist" to="#" />
-          <SidebarItems icon={FileMusic} label="Album" to="/dashboard/album" isActive={pathname === "/dashboard/album"}/>
-          <SidebarItems icon={Mic} label="Subscription" to="#"  />
+          <SidebarItems icon={FileMusic} label="Artist" to="/dashboard/artist" isActive={pathname === "/dashboard/artist"}/>
+          <SidebarItems icon={Mic} label="Subscription" to="/dashboard/subscription" isActive={pathname === "/dashboard/subscription"} />
         </div>
 
         
