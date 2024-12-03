@@ -15,7 +15,12 @@ import { Tabs, TabsList, TabsContent, TabsTrigger } from './ui/tabs'
 import { useIpfsUpload } from '@/hooks/useIpfsUpload';
 import { toSmartAccount } from 'viem/zksync'
 import { toast } from 'react-toastify'
-import { replaceSpecialCharacters } from '@/lib/helper'
+import { convertDateToUnixTimestamp, replaceSpecialCharacters } from '@/lib/helper'
+import { ABI } from "../ABI/AudioBox.json";
+import { useWriteContract } from 'wagmi'
+import { ethers } from 'ethers';
+
+
 
 
 
@@ -33,6 +38,8 @@ const UploadModal = () => {
 
   const genre = ["Hip-hop", "Gospel", "R & B", "Jazz", "Classic"]
   const { pinFileToIpfs, pinJsonToIpfs, loading, error } = useIpfsUpload();
+  const { writeContract } = useWriteContract()
+
 
   const [formData, setFormData] = useState<FormData>({
     title: '',
@@ -89,14 +96,36 @@ const UploadModal = () => {
       };
 
       // Upload metadata JSON to IPFS using Pinata
-      const metadataUrl = await pinJsonToIpfs(metadata);
+      const metadatahash = await pinJsonToIpfs(metadata);
 
-      console.log('Metadata uploaded to IPFS:', metadataUrl);
+      console.log('Metadata uploaded to IPFS:', metadatahash);
 
       //Smart Contract interaction is here.
+      try {
+        writeContract({
+          abi: ABI,
+          address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+          functionName: 'uploadSong',
+          args: [
+            title,
+            description,
+            convertDateToUnixTimestamp(release_date),  // Ensure it's in the correct format
+            genre,
+            ethers.parseEther(purchase_price), // Ensure it's in the correct format
+            false,
+            metadatahash
+          ],
+        });      
+        const tx = await uploadSong();
+        toast.success("Song Uploaded Successfully");
+        console.log('Transaction sent:', tx);
+      } catch (error) {
+        console.error('Error uploading song:', error);
+        toast.error("Error writing song to Chain");
+      }
 
-      alert('Song uploaded successfully!');
-      toast.success("Song Uploaded Successfully");
+
+      
       
     } catch (err) {
       console.error('Error uploading song or metadata:', err);

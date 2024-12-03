@@ -14,8 +14,12 @@ export const useIpfsUpload = () => {
 
 
   const pinFileToIpfs = async (file: File): Promise<string> => {
+    console.log("file:", file);
+    console.log("file.name:", file.name);
+
     const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
     const formData = new FormData();
+
     const randomFileName = generateRandomFileName(file.name);
     const renamedFile = new File([file], randomFileName, { type: file.type });
     // formData.append('file', file);
@@ -70,7 +74,7 @@ export const useIpfsUpload = () => {
         });
 
         console.log("Pinata response:", response.data);
-        return `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`;
+        return response.data.IpfsHash;
     } catch (err) {
         console.error('Error uploading JSON to Pinata:', err);
         setError(err as Error);
