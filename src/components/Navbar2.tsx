@@ -64,8 +64,8 @@ const Navbar2 = () => {
 			<nav className="items-center font-roboto w-11/12 m-auto text-white py-7 flex justify-between">
 				<div className="space-x-10 flex items-center">
 					<Link href="/" className="flex space-x-3 items-center">
-						<div className="bg-pink-500 rounded-full h-10 w-10"></div>
-						<h1 className="text-2xl font-semibold text-pink-400">
+						<div className="bg-pink-500 rounded-full md:h-10 h-7 w-7 md:w-10"></div>
+						<h1 className="md:text-2xl text-lg font-semibold text-pink-400">
 							AudioBlocks
 						</h1>
 					</Link>

@@ -6,6 +6,7 @@ import LeftBar from "@/components/LeftBar";
 import { ToastContainer } from "react-toastify";
 import { MusicPlayerProvider } from '../../context/MusicPlayer';
 import GlobalMusicPlayer from '../../components/GlobalMusicPlayer';
+import { WIPBanner } from "@/components/Wim";
 
 const Dashboardlayout = ({
 	children,
@@ -31,6 +32,7 @@ const Dashboardlayout = ({
 
 	return (
 		<>
+		<WIPBanner/>
 			<div>
 				<Sidebar isOpen={isOpen} toggleClose={toggleClose} toggleOpen={toggleOpen}  />
 
