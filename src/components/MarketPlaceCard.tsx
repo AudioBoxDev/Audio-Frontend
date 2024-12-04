@@ -187,21 +187,21 @@ const MarketPlaceCard: React.FC = () => {
 		},
 	];
 
-	return (
-		<div className="text-white pb-8  mb-60 border-b border-[#151515] font-roboto pt-6">
+	// return (
+		// <div className="text-white pb-8  mb-60 border-b border-[#151515] font-roboto pt-6">
 			
-			<Slider {...settings}>
-				{recentlyPlayedData.map((item, index) => (
-					<div key={index} className="p-2">
-						<div className=" rounded-lg shadow-lg overflow-hidden">
-							<div className="rounded-lg relative">
-								<Image
-									src={item.imageUrl}
-									alt={item.title}
-									width={180}
-									height={200}
-									className="w-40 rounded-lg h-40 object-cover"
-								/>
+		// 	<Slider {...settings}>
+		// 		{recentlyPlayedData.map((item, index) => (
+		// 			<div key={index} className="p-2">
+		// 				<div className=" rounded-lg shadow-lg overflow-hidden">
+		// 					<div className="rounded-lg relative">
+		// 						<Image
+		// 							src={item.imageUrl}
+		// 							alt={item.title}
+		// 							width={180}
+		// 							height={200}
+		// 							className="w-40 rounded-lg h-40 object-cover"
+		// 						/>
   return (
     <div className="text-white pb-8 mb-60 border-b border-[#151515] font-roboto pt-6">
       <h2 className="text-base font-bold mb-4">Trending</h2>
