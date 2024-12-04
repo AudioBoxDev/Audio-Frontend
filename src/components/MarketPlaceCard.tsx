@@ -160,13 +160,48 @@ const MarketPlaceCard: React.FC = () => {
     ],
   };
 
-  const recentlyPlayedData: Item[] = [
-    { title: "Good Day", artist: "Taya Bloom", year: 2024, imageUrl: Rectangle1 },
-    { title: "Good Day", artist: "Taya Bloom", year: 2024, imageUrl: Rectangle2 },
-    { title: "Good Day", artist: "Taya Bloom", year: 2024, imageUrl: Rectangle3 },
-    { title: "Good Day", artist: "Taya Bloom", year: 2024, imageUrl: Rectangle4 },
-  ];
+	const recentlyPlayedData = [
+		{
+			title: "Good Day",
+			artist: "Taya Bloom",
+			year: 2024,
+			imageUrl: Rectangle1,
+		},
+		{
+			title: "Good Day",
+			artist: "Taya Bloom",
+			year: 2024,
+			imageUrl: Rectangle2,
+		},
+		{
+			title: "Good Day",
+			artist: "Taya Bloom",
+			year: 2024,
+			imageUrl: Rectangle3,
+		},
+		{
+			title: "Good Day",
+			artist: "Taya Bloom",
+			year: 2024,
+			imageUrl: Rectangle4,
+		},
+	];
 
+	return (
+		<div className="text-white pb-8  mb-60 border-b border-[#151515] font-roboto pt-6">
+			
+			<Slider {...settings}>
+				{recentlyPlayedData.map((item, index) => (
+					<div key={index} className="p-2">
+						<div className=" rounded-lg shadow-lg overflow-hidden">
+							<div className="rounded-lg relative">
+								<Image
+									src={item.imageUrl}
+									alt={item.title}
+									width={180}
+									height={200}
+									className="w-40 rounded-lg h-40 object-cover"
+								/>
   return (
     <div className="text-white pb-8 mb-60 border-b border-[#151515] font-roboto pt-6">
       <h2 className="text-base font-bold mb-4">Trending</h2>
@@ -183,22 +218,22 @@ const MarketPlaceCard: React.FC = () => {
                   className="w-40 rounded-lg h-40 object-cover"
                 />
 
-                <div className="p-4 absolute bottom-0">
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="text-sm text-gray-400">{item.artist} {item.year}</p>
-                </div>
-              </div>
-              <div className="flex mt-6 gap-4 items-center">
-                <div>
-                  <h3 className="text-sm font-bold">Current bid</h3>
-                  <p className="text-xs text-pink-600">3.1 Eth</p>
-                </div>
-              
-                  <Link href={`/dashboard/marketplace/${item.title}`} className="text-sm bg-pink-600 p-2 px-3 text-white font-bold rounded-full">
-                    Place bid
-                  </Link>
-              
-              </div>
+								<div className="p-4 absolute bottom-0">
+									<h3 className="text-lg font-semibold">{item.title}</h3>
+									<p className="text-sm text-gray-400">
+										{item.artist} {item.year}
+									</p>
+								</div>
+							</div>
+						<div className="flex mt-6 gap-4 items-center">
+							<div>
+								<h3 className="text-sm font-bold">Current bid</h3>
+								<p className="text-xs text-pink-600">3.1 Eth</p>
+							</div>
+							<button className="md:text-sm text-xs bg-pink-600 p-2 px-3 text-white font-bold rounded-full">
+								Place bid
+							</button>
+						</div>
             </div>
           </div>
         ))}
