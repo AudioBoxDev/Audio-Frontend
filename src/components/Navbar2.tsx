@@ -74,9 +74,9 @@ const Navbar2 = () => {
 							<Link href="/" className="hover:text-white">
 								<li>Streams</li>
 							</Link>
-							<Link href="/" className="hover:text-white">
+							{/* <Link href="/" className="hover:text-white">
 								<li>Artist hub</li>
-							</Link>
+							</Link> */}
 							<Link href="/dashboard/marketplace" className="hover:text-white">
 								<li>Marketplace</li>
 							</Link>

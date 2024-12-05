@@ -41,7 +41,7 @@ const LeftBar = ({ close, open}:any) => {
 						</li>
 					</ul>
 				</div>
-				<div className="py-4">
+				{/* <div className="py-4">
 					<Link
 						href="#"
 						className="flex bg-[#B1198E]   text-white text-sm px-7 py-3 rounded-full"
@@ -49,7 +49,13 @@ const LeftBar = ({ close, open}:any) => {
 						<Gem className="h-4 w-4 mr-3" />
 						Upgrade to Premium
 					</Link>
-				</div>
+				</div> */}
+				<Link href="/" className="flex mt-10 items-center">
+						{/* <div className="bg-gray-900 rounded-full md:h-10 h-7 w-7 md:w-10"></div> */}
+						<h1 className="md:text-2xl text-lg font-semibold text-gray-900">
+							AudioBlocks
+						</h1>
+				</Link>
 			</div>
 		</>
 	);

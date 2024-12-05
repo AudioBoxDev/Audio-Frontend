@@ -54,21 +54,21 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 				</div>
 
 				<nav className="space-y-4">
-					<div className="flex items-center space-x-3 text-pink-500">
+					{/* <div className="flex items-center space-x-3 text-pink-500">
 						<Bolt className="w-4 h-4" />
 						<span>Discover</span>
-					</div>
+					</div> */}
 					<div className="space-y-6">
-						<SidebarItems
+						{/* <SidebarItems
 							icon={Wallet}
 							label="Wallet"
 							to="/dashboard"
 							isActive={pathname === "/dashboard"}
-						/>
-						<SidebarItems icon={Music} label="Playlist" to="#" />
+						/> */}
+						<SidebarItems icon={Wallet} label="Wallet" to="#" />
 						<SidebarItems
 							icon={FileMusic}
-							label="Artist"
+							label="Songs"
 							to="/dashboard/artist"
 							isActive={pathname === "/dashboard/artist"}
 						/>
@@ -80,15 +80,15 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 						/>
 					</div>
 
-					<div className="pt-8 space-y-4">
+					{/* <div className="pt-8 space-y-4">
 						<h2 className="text-xs text-gray-500 mb-4">DISCOVERY</h2>
 						<div className="space-y-6">
 							<SidebarItems icon={TrendingUp} label="Trending" to="#" />
 							<SidebarItems icon={Star} label="Popular" to="#" />
 						</div>
-					</div>
+					</div> */}
 
-					<div className="pt-8 space-y-3">
+					{/* <div className="pt-8 space-y-3">
 						<h2 className="text-xs text-gray-500 mb-4">MY PLAYLIST</h2>
 						<SidebarItems icon={CirclePlus} label="Create New" />
 						<ul className="space-y-5 mt-4 text-base text-gray-500">
@@ -96,15 +96,17 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 							<li className="cursor-pointer hover:text-pink-500">Playlist 2</li>
 							<li className="cursor-pointer hover:text-pink-500">Playlist 3</li>
 						</ul>
-					</div>
-
-					<div className='flex pt-24 items-center text-base text-gray-500 space-x-3  cursor-pointer hover:text-pink-500"'>
+					</div> */}
+					<div className="">
+					<div className='flex pt-80 items-center text-base text-gray-500 space-x-3  cursor-pointer hover:text-pink-500"'>
 						<Settings className="w-4 h-4" />
 						<span>Settings</span>
 					</div>
 					<div onClick={disconnectWallet}>
 						<SidebarItems icon={PowerIcon} label="Log Out" to="#" />
 					</div>
+					</div>
+
 				</nav>
 			</div>
 		</>
