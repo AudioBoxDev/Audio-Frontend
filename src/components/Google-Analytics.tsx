@@ -20,14 +20,15 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
     useEffect(() => {
         const url = pathname + searchParams.toString();
 
-        if (typeof window !== 'undefined' && window.gtag) {
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
             window.gtag('config', GA_MEASUREMENT_ID, {
                 page_path: url,
             });
         }
+        console.log(typeof window.gtag);
     }, [pathname, searchParams, GA_MEASUREMENT_ID]);
 
-    // Script is added to the head of the document. To Begin, consent is denied.
+    // Script is added to the head of the document.
     return (
         <>
             <Script strategy="afterInteractive"
@@ -39,15 +40,9 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-
-                gtag('consent', 'default', {
-                    'analytics_storage': 'granted'
-                });
                 
-                gtag('config', '${GA_MEASUREMENT_ID}', {
-                    page_path: window.location.pathname,
-                });
-                `,
+                gtag('config', '${GA_MEASUREMENT_ID}', { debug_mode: true });
+                `
                 }}
             />
         </>
