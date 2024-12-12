@@ -28,7 +28,7 @@ export default function Home() {
       <div className="md:grid items-center md:grid-cols-5 md:gap-6 gap-0">
       <div className="md:col-span-2 md:pl-16 space-y-9">
         <h1 className="text-6xl md:text-8xl text-center md:text-left text-[#68BDE4] font-bold leading-tight">
-        Stream Support Own
+        Stream Earn Own
         </h1>
         <p className="text-lg md:text-xl text-center md:text-left text-white">
         Join our community where your support makes a real difference, and every play, tip, or purchase helps artists thrive.
