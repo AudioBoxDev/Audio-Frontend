@@ -30,7 +30,7 @@ export interface Song {
 interface MusicPlayerProps {
 	songs: Song[];
 	currentSongIndex: number;
-	isPlaying: boolean;
+	isPlaying: string;
 	onPlayPause: () => void;
 	onNextSong: () => void;
 	onPreviousSong: () => void;
@@ -58,6 +58,19 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	const volumeTimeout = useRef<NodeJS.Timeout>();
 
 	// Initialize shuffle queue
+
+	// useEffect(()=>{
+	// 	const songGateway = metadata.animation_url.replace(
+	// 		"ipfs://",
+	// 		`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`
+	// 	);
+
+	// 	// Fetch the song file from IPFS
+	// 	const songResponse = await axios.get(songGateway, {
+	// 		responseType: "blob", // Ensure we get a binary Blob
+	// 	});
+	// 	const blobUrl = URL.createObjectURL(songResponse.data);
+	// })
 	useEffect(() => {
 		if (isShuffleOn && shuffledQueue.length === 0) {
 			const newQueue = Array.from({ length: songs.length }, (_, i) => i).filter(

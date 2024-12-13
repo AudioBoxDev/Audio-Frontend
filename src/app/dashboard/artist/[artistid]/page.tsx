@@ -81,9 +81,9 @@ const ArtistId = () => {
 	const fetchSong = async (songDataArray: any[]) => {
 		try {
 			const songs = [];
-			for (const profileData of songDataArray) {
+			for (const songData of songDataArray) {
 				
-				const gateway = profileData.result.songCID.replace(
+				const gateway = songData.result.songCID.replace(
 					"ipfs://",
 					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 				);
