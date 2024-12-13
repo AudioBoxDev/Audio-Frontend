@@ -5,7 +5,7 @@ import Link from "next/link";
 const LeftBar = ({ close, open}:any) => {
 	return (
 		<>
-			<div className="bg-[#0E070C] z-30 space-y-2 mt-2 p-6 rounded-3xl">
+			<div className="bg-[#0E070C] z-30 space-y-2 mt-12 p-6 rounded-3xl">
 			<ArrowRightToLine  className="md:hidden block text-white" onClick={close} size={16}/>
 				<h2 className="text-base">Welcome Back</h2>
 				<h1 className="text-white font-bold text-5xl">Wini</h1>

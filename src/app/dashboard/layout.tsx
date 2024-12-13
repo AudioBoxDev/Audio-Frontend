@@ -6,7 +6,7 @@ import LeftBar from "@/components/LeftBar";
 import { ToastContainer } from "react-toastify";
 import { MusicPlayerProvider } from '../../context/MusicPlayer';
 import GlobalMusicPlayer from '../../components/GlobalMusicPlayer';
-import { WIPBanner } from "@/components/Wim";
+// import { WIPBanner } from "@/components/Wim";
 
 const Dashboardlayout = ({
 	children,
@@ -32,11 +32,11 @@ const Dashboardlayout = ({
 
 	return (
 		<>
-		<WIPBanner/>
+		{/* <WIPBanner/> */}
 			<div>
 				<Sidebar isOpen={isOpen} toggleClose={toggleClose} toggleOpen={toggleOpen}  />
 
-				<div className="md:ml-48 px-4 font-roboto grid grid-cols-12 gap-1">
+				<div className="md:ml-48 mb-24 px-4 font-roboto grid grid-cols-12 gap-1">
 					<div className="flex flex-col md:col-span-9 col-span-12 justify-center items-center">
 						<Navbar toggleLeftBar={toggleLeftBar}  toggleOpen={toggleOpen}/>
 						<MusicPlayerProvider>

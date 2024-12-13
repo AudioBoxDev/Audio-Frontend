@@ -16,15 +16,15 @@ import {
 import Image from "next/image";
 
 export interface Song {
-	id: string;
-	title: string;
-	artist: string;
-	src: string;
-	coverImage: any;
-	streams: number;
-	listeners: number;
-	saves: number;
-	released: string;
+	// id: string;
+	name: string;
+	// artist: string;
+	animation_url: string;
+	image: any;
+	// streams: number;
+	// listeners: number;
+	// saves: number;
+	// released: string;
 }
 
 interface MusicPlayerProps {
@@ -186,25 +186,31 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 		<div className="fixed grid grid-cols-1 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
 			<audio
 				ref={audioRef}
-				src={songs[currentSongIndex].src}
+				src={songs[currentSongIndex].animation_url?.replace(
+					"ipfs://",
+					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
+				)}
 				onTimeUpdate={updateProgress}
 				onEnded={handleSongEnd}
 			/>
 
 			<div className="flex col-span-1 items-center space-x-4">
-				<Image
+				<img
 					width={100}
 					height={100}
-					src={songs[currentSongIndex].coverImage}
+					src={songs[currentSongIndex].image?.replace(
+						"ipfs://",
+						`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
+					)}
 					alt="Album Cover"
 					className="md:w-12 md:h-12 w-8 h-8 rounded object-cover shadow-lg"
 				/>
 				<div className="overflow-hidden">
 					<h3 className="text-white font-medium text-sm truncate hover:text-red-500 transition-colors">
-						{songs[currentSongIndex].title}
+						{songs[currentSongIndex].name}
 					</h3>
 					<p className="text-neutral-400 text-xs truncate hover:text-white transition-colors">
-						{songs[currentSongIndex].artist}
+						{/* {songs[currentSongIndex].artist} */}
 					</p>
 				</div>
 			</div>
