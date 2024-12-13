@@ -3,6 +3,7 @@
 import { ArrowLeftToLine, Menu, Search, Upload, X } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
+import AvatarDropdown from "./Dropdown";
 
 
 
@@ -28,7 +29,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 
 	return (
 		<>
-			<div className="w-full z-10 sticky top-0 bg-[#0A0507]">
+			<div className="w-full z-10 sticky top-10 bg-[#0A0507]">
 				<nav className="items-center font-roboto w-11/12 m-auto text-white py-7 flex justify-between">
 					<div>
 						<ul className="flex gap-9 font-medium text-sm text-gray-400">
@@ -39,7 +40,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 									size={16}
 								/>
 							</div>
-							<Link href="/" className="hover:text-white">
+							{/* <Link href="/" className="hover:text-white">
 								<li>Home</li>
 							</Link>
 							<Link href="/" className="hover:text-white md:block hidden">
@@ -47,10 +48,11 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 							</Link>
 							<Link href="/dashboard/marketplace" className="hover:text-white">
 								<li>Marketplace</li>
-							</Link>
+							</Link> */}
 						</ul>
+					
 					</div>
-					<div className=" md:hidden block">
+					{/* <div className=" md:hidden block">
 						{!isSearchOpen && (
 							<Search
 								onClick={handleSearchIconClick}
@@ -65,8 +67,8 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 								size={16}
 							/>
 						)}
-					</div>
-					<div className="w-1/2 md:block hidden">
+					</div> */}
+					<div className="w-3/4 md:block ">
 						<div className="flex items-center bg-[#1D1F1F] rounded-full px-3 py-2">
 							<Search className="text-gray-500 mr-2" size={16} />
 							<input
@@ -76,6 +78,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 							/>
 						</div>
 					</div>
+					<AvatarDropdown />
 					<div className="md:hidden block">
 						<ArrowLeftToLine
 							className="-mr-10"
@@ -84,7 +87,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 						/>
 					</div>
 				</nav>
-				{isSearchOpen && (
+				{/* {isSearchOpen && (
 					<div className="w-full mb-3 ">
 						<div className="flex items-center bg-[#1D1F1F] rounded-full px-3 py-2">
 							<Search className="text-gray-500 mr-2" size={16} />
@@ -95,7 +98,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 							/>
 						</div>
 					</div>
-				)}
+				)} */}
 			</div>
 		</>
 	);

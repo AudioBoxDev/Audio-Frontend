@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import Providers from "@/context/providers";
 import { ToastContainer } from "react-toastify";
+import { headers } from "next/headers";
+import { WIPBanner } from "@/components/Wim";
 
 
 const geistSans = localFont({
@@ -29,7 +31,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+  const cookies = headers().get('cookie')
   return (
     <html lang="en">
       <head>
@@ -38,7 +40,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
+          
+          <Providers cookies={cookies}>
+            <WIPBanner/>
             {children}
             <ToastContainer />
         </Providers>

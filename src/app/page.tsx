@@ -15,7 +15,7 @@ import { WIPBanner } from "@/components/Wim";
 export default function Home() {
   return (
   <>
-  <WIPBanner/>
+  {/* <WIPBanner/> */}
     <Navbar2/>
       <Hero/>
     <AudioBoxFeatures/>
