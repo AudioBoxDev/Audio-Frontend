@@ -6,7 +6,6 @@ import Hero from "@/components/Hero";
 import Navbar2 from "@/components/Navbar2";
 import Image from "next/image";
 import headset from "/public/images/img.png";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 
 export default function Home() {

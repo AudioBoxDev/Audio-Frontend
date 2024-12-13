@@ -30,7 +30,7 @@ export interface Song {
 interface MusicPlayerProps {
 	songs: Song[];
 	currentSongIndex: number;
-	isPlaying: string;
+	isPlaying: boolean;
 	onPlayPause: () => void;
 	onNextSong: () => void;
 	onPreviousSong: () => void;
@@ -58,19 +58,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	const volumeTimeout = useRef<NodeJS.Timeout>();
 
 	// Initialize shuffle queue
-
-	// useEffect(()=>{
-	// 	const songGateway = metadata.animation_url.replace(
-	// 		"ipfs://",
-	// 		`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`
-	// 	);
-
-	// 	// Fetch the song file from IPFS
-	// 	const songResponse = await axios.get(songGateway, {
-	// 		responseType: "blob", // Ensure we get a binary Blob
-	// 	});
-	// 	const blobUrl = URL.createObjectURL(songResponse.data);
-	// })
 	useEffect(() => {
 		if (isShuffleOn && shuffledQueue.length === 0) {
 			const newQueue = Array.from({ length: songs.length }, (_, i) => i).filter(
@@ -199,7 +186,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 		<div className="fixed grid grid-cols-1 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
 			<audio
 				ref={audioRef}
-				src={songs[currentSongIndex].animation_url?.replace(
+				src={ songs[currentSongIndex].animation_url?.replace(
 					"ipfs://",
 					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 				)}
