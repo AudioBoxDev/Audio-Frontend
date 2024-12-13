@@ -24,7 +24,7 @@ export interface Song {
 	// streams: number;
 	// listeners: number;
 	// saves: number;
-	// released: string;
+	released: string;
 }
 
 interface MusicPlayerProps {

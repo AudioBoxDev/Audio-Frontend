@@ -31,7 +31,7 @@ export const fetchArtist = () => {
 			})) || [],
 	});
 
-	console.log("hello:", data);
+
 
 	// const { data: song, isSuccess:success } = useReadContract({
 	// 	address: contractAddress,
