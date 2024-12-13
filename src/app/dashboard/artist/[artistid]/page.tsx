@@ -10,7 +10,7 @@ import { useMusicPlayer } from "@/context/MusicPlayer";
 import * as Tabs from "@radix-ui/react-tabs";
 import CommentSection from "@/components/Comment";
 import { contractAddress, abi } from "@/config/abi";
-import { useReadContract, useReadContracts} from "wagmi";
+import { useReadContract, useReadContracts } from "wagmi";
 import { useAccount } from "wagmi";
 import { useParams } from "next/navigation";
 import axios from "axios";
@@ -21,6 +21,11 @@ const ArtistId = () => {
 	const { address } = useAccount();
 	const [artist, setArtist] = useState<any>();
 	const params = useParams();
+	const [liked, setLiked] = useState(false);
+
+	const toggleLike = () => {
+		setLiked((prev) => !prev);
+	};
 
 	const { data: artistId, isSuccess }: any = useReadContract({
 		address: contractAddress,
@@ -29,7 +34,7 @@ const ArtistId = () => {
 		args: [params.artistid],
 		account: address,
 	});
-// console.log(artistId.artistAddress);
+	// console.log(artistId.artistAddress);
 
 	const fetchProfileDetails = async (profileDataArray: any) => {
 		try {
@@ -66,23 +71,21 @@ const ArtistId = () => {
 		account: address,
 	});
 
-	const { data, isSuccess:success }: any = useReadContracts({
+	const { data, isSuccess: success }: any = useReadContracts({
 		contracts:
-		songIds?.map((songid: any) => ({
+			songIds?.map((songid: any) => ({
 				abi: abi,
 				address: contractAddress,
 				functionName: "getSongById",
 				args: [songid],
 				account: address,
 			})) || [],
-		
 	});
 
 	const fetchSong = async (songDataArray: any[]) => {
 		try {
 			const songs = [];
 			for (const songData of songDataArray) {
-				
 				const gateway = songData.result.songCID.replace(
 					"ipfs://",
 					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
@@ -93,65 +96,22 @@ const ArtistId = () => {
 					},
 				});
 				const artistSong = {
-					...response.data
+					...response.data,
 				};
 				songs.push(artistSong);
 				setSongsData(songs);
 				setSongs(songs);
-				
 			}
 		} catch (error: any) {
 			console.error("Error fetching song details:", error.message);
 		}
 	};
-	
+
 	useEffect(() => {
-		if(data && success){
-		fetchSong(data);
-	}
-}, [data]);
-// const songs = [
-	// 	{
-	// 		id: 1,
-	// 		title: "Relax and Unwind",
-	// 		coverImage: Rectangle1,
-	// 		src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-	// 		artist: "Lily Moonshadow",
-	// 		duration: "20:24",
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		title: "Relax and Unwind",
-	// 		coverImage: Rectangle1,
-	// 		src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-	// 		artist: "Ruby Riversong",
-	// 		duration: "15:15",
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		title: "Relax and Unwind",
-	// 		coverImage: Rectangle1,
-	// 		src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-	// 		artist: "Finn Oceanwood",
-	// 		duration: "54:32",
-	// 	},
-	// 	{
-	// 		id: 4,
-	// 		title: "Relax and Unwind",
-	// 		coverImage: Rectangle1,
-	// 		src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-	// 		artist: "Finn Oceanwood",
-	// 		duration: "54:32",
-	// 	},
-	// 	{
-	// 		id: 5,
-	// 		title: "Relax and Unwind",
-	// 		coverImage: Rectangle1,
-	// 		src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-	// 		artist: "Finn Oceanwood",
-	// 		duration: "54:32",
-	// 	},
-	// ];
+		if (data && success) {
+			fetchSong(data);
+		}
+	}, [data]);
 
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -231,96 +191,101 @@ const ArtistId = () => {
 						</Tabs.Trigger>
 					</Tabs.List>
 					<Tabs.Content value="songs">
-						<div className="overflow-x-auto mb-8">
-							<table className="min-w-full text-[#666C6C] border-separate border-spacing-y-2">
-								<thead>
-									<tr className="text-sm hidden font-medium">
-										<th className="p-3 text-left"></th>
-										<th className="p-3 text-left"></th>
-										<th className="p-3 text-left"></th>
-										<th className="p-3 text-left"></th>
-										<th className="p-3 text-left"></th>
-										<th className="p-3 text-left"></th>
-									</tr>
-								</thead>
-								{songs?.length  > 0 ? (
-									<tbody>
-										{songs.map((song:any, index:any) => (
-											<tr
-												key={index}
-												className={`hover:bg-[#0E0B0E] text-sm cursor-pointer transition-colors ${
-													currentSongIndex === index
-														? "bg-[#0E0B0E] bg-opacity-50"
-														: ""
-												}`}
-												onMouseEnter={() => setHoveredRow(index)}
-												onMouseLeave={() => setHoveredRow(null)}
-												onClick={() => handlePlaySong(index)}
+						{/* <div className="overflow-x-auto mb-8"> */}
+						<table className="min-w-full overflow-x-auto mb-8 text-[#666C6C] border-separate border-spacing-y-2">
+							<thead>
+								<tr className="text-sm hidden font-medium">
+									<th className="p-3 text-left"></th>
+									<th className="p-3 text-left"></th>
+									<th className="p-3 text-left"></th>
+									<th className="p-3 text-left"></th>
+									<th className="p-3 text-left"></th>
+									<th className="p-3 text-left"></th>
+								</tr>
+							</thead>
+							{songs?.length > 0 ? (
+								<tbody>
+									{songs.map((song: any, index: any) => (
+										<tr
+											key={index}
+											className={`hover:bg-[#0E0B0E] text-sm cursor-pointer transition-colors ${
+												currentSongIndex === index
+													? "bg-[#0E0B0E] bg-opacity-50"
+													: ""
+											}`}
+											onMouseEnter={() => setHoveredRow(index)}
+											onMouseLeave={() => setHoveredRow(null)}
+											onClick={() => handlePlaySong(index)}
+										>
+											<td className="p-3 w-10">
+												<div className="flex items-center justify-center w-6">
+													{renderSongNumber(index)}
+												</div>
+											</td>
+											<td className="p-3 flex gap-1 items-center">
+												<div className="relative">
+													<img
+														src={song?.image.replace(
+															"ipfs://",
+															`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
+														)}
+														alt={`${song.name} Cover`}
+														width={48}
+														height={48}
+														className={`rounded-md mr-4 ${
+															currentSongIndex === index && isPlaying
+																? "animate-pulse"
+																: ""
+														}`}
+													/>
+												</div>
+												<div>
+													<p
+														className={`font-medium text-left text-sm ${
+															currentSongIndex === index ? "text-red-500" : ""
+														}`}
+													>
+														{song.name}
+													</p>
+													<td className="font-medium md:hidden text-left">
+														{song?.fullName}
+													</td>
+												</div>
+											</td>
+											<td className="p-3 font-medium hidden md:table-cell text-left">
+												{artist?.fullName}
+											</td>
+											<td className="p-3 hidden md:table-cell font-medium text-left">
+												{song.duration}
+											</td>
+											<td
+												className="p-3 font-medium text-center hidden md:table-cell"
+												onClick={toggleLike}
+												style={{ cursor: "pointer" }}
 											>
-												<td className="p-3 w-10">
-													<div className="flex items-center justify-center w-6">
-														{renderSongNumber(index)}
-													</div>
-												</td>
-												<td className="p-3 flex gap-1 items-center">
-													<div className="relative">
-														<img
-															src={song?.image.replace(
-																"ipfs://",
-																`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
-															)}
-															alt={`${song.name} Cover`}
-															width={48}
-															height={48}
-															className={`rounded-md mr-4 ${
-																currentSongIndex === index && isPlaying
-																	? "animate-pulse"
-																	: ""
-															}`}
-														/>
-													</div>
-													<div>
-														<p
-															className={`font-medium text-left text-sm ${
-																currentSongIndex === index ? "text-red-500" : ""
-															}`}
-														>
-															{song.name}
-														</p>
-														<td className="font-medium md:hidden text-left">
-															{song?.fullName}
-														</td>
-													</div>
-												</td>
-												<td className="p-3 font-medium hidden md:table-cell text-left">
-													{artist?.fullName}
-												</td>
-												<td className="p-3 hidden md:table-cell font-medium text-left">
-													{song.duration}
-												</td>
-												<td className="p-3 font-medium text-center hidden md:table-cell">
-													<Heart size={20} />
-												</td>
-												<td className="p-3 font-medium text-center ">
-													<EllipsisVertical size={20} />
-												</td>
-											</tr>
-										))}
-									</tbody>
-								) : (
-									<div className="flex flex-col items-center justify-center h-full">
-										<img
-											src="https://via.placeholder.com/300x300?text=No+Songs+Available"
-											alt="No songs available"
-											className="w-32 h-32 mb-4"
-										/>
-										<p className="text-lg font-medium text-gray-600">
-											No songs available for this artist.
-										</p>
-									</div>
-								)}
-							</table>
-						</div>
+												<Heart size={20} color={liked ? "red" : "white"} />
+											</td>
+
+											<td className="p-3 font-medium text-center ">
+												<EllipsisVertical size={20} />
+											</td>
+										</tr>
+									))}
+								</tbody>
+							) : (
+								<div className="flex flex-col items-center justify-center h-full">
+									<img
+										src="https://via.placeholder.com/300x300?text=No+Songs+Available"
+										alt="No songs available"
+										className="w-32 h-32 mb-4"
+									/>
+									<p className="text-lg font-medium text-gray-600">
+										No songs available for this artist.
+									</p>
+								</div>
+							)}
+						</table>
+						{/* </div> */}
 					</Tabs.Content>
 					<Tabs.Content value="album">
 						<div className="h-64">No Album created</div>

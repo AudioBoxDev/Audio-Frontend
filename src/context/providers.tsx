@@ -81,7 +81,6 @@
 
 // export default Providers;
 
-
 'use client'
 
 import { wagmiAdapter, projectId } from '@/config/config'

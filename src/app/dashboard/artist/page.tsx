@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
-import Rectangle1 from "/public/images/Rectangle1.png";
-import Rectangle2 from "/public/images/Rectangle2.png";
-import Rectangle3 from "/public/images/Rectangle3.png";
-import Rectangle4 from "/public/images/Rectangle4.png";
-import Image from "next/image";
+// import Rectangle1 from "/public/images/Rectangle1.png";
+// import Rectangle2 from "/public/images/Rectangle2.png";
+// import Rectangle3 from "/public/images/Rectangle3.png";
+// import Rectangle4 from "/public/images/Rectangle4.png";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
