@@ -46,7 +46,7 @@ const Artist = () => {
 					</button>
 				</div>
 			</div>
-			<div className="grid md:grid-cols-4  grid-cols-1 md:w-full w-3/4 gap-6 mt-10">
+			<div className="grid md:grid-cols-4  grid-cols-2 md:w-full w-3/4 gap-6 mt-10">
 				{artists.length > 0 ? (
 					artists.map((artist, index) => (
 						<div
@@ -54,7 +54,7 @@ const Artist = () => {
 							onClick={() => handleClick(artist.id)}
 							className=" cursor-pointer "
 						>
-							<div className=" rounded-lg shadow-lg flex items-center md:flex-col flex-row overflow-hidden">
+							<div className=" rounded-lg shadow-lg flex items-center md:flex-col overflow-hidden">
 								<div className="rounded-full">
 									<img
 										src={

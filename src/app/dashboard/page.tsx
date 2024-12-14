@@ -3,7 +3,7 @@ import {useState} from 'react'
 import Image from 'next/image';
 import { Music, X} from 'lucide-react';
 import image from "/public/images/Group1.png"
-import RecentlyPlayed from '@/components/RecentPlayed';
+import Artist from '@/components/Artist';
 import Trending from '@/components/Trending';
 import MusicPlayer from '@/components/MusicPlayer';
 import GlobalMusicPlayer from '@/components/GlobalMusicPlayer';
@@ -64,7 +64,7 @@ import GlobalMusicPlayer from '@/components/GlobalMusicPlayer';
             </div>
           </div>
 
-          <RecentlyPlayed />
+          <Artist />
           <Trending />
         </div>
       </div>

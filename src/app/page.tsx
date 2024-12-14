@@ -16,7 +16,7 @@ export default function Home() {
       <Hero/>
     <AudioBoxFeatures/>
     <AudioCardItem/>
-    
+   
     <div className="bg-gradient-to-r from-[#991E7035] to-[#333A5670] text-white py-6">
       <div className="grid w-11/12 m-auto items-center md:grid-cols-5 grid-cols-12 gap-6">
       <div className="md:col-span-2 col-span-12 md:text-left text-center md:pl-16 space-y-5">
@@ -38,6 +38,17 @@ export default function Home() {
           alt="Headphone"
         />
       </div>
+      </div>
+    </div>
+    <div className="bg-[#471439] text-white py-4">
+      <div className="container mx-auto flex items-center justify-center space-x-2">
+        <span className="text-sm font-bold">Powered by</span>
+        <img
+          src="/images/lisk.png" 
+          alt="Lisk Logo"
+          className="h-12"
+        />
+        <span className="text-sm font-bold">Lisk</span>
       </div>
     </div>
     <Footer/>

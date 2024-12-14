@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
-const RecentlyPlayed = () => {
+const Artist = () => {
 	const router = useRouter();
 	const { artists } = fetchArtist();
 
@@ -59,7 +59,7 @@ const RecentlyPlayed = () => {
 	return (
 		<div className="text-white border-b border-[#151515] font-roboto pt-6">
 			<h2 className="text-base font-bold mb-4">Artist</h2>
-			{/* <Slider {...settings}> */}
+			<Slider {...settings}>
 				{/* {artists.map((artist, index) => (
 					<div
 						key={index}
@@ -88,7 +88,7 @@ const RecentlyPlayed = () => {
 
 				))} */}
 				{artists.length > 0 ? (
-					artists.slice(0, 3).map((artist, index) => (
+					artists.map((artist, index) => (
 						<div
 							key={index}
 							onClick={() => handleClick(artist.id)}
@@ -116,9 +116,9 @@ const RecentlyPlayed = () => {
 				) : (
 					<div className="text-center text-white">No artists found.</div>
 				)}
-			{/* </Slider> */}
+			</Slider>
 		</div>
 	);
 };
 
-export default RecentlyPlayed;
+export default Artist;

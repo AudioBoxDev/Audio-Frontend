@@ -12,6 +12,7 @@ import Link from "next/link";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 
 const truncateAddress = (address: any) =>
 	`${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -22,19 +23,18 @@ export default function AvatarDropdown() {
 	const { data: balance } = useBalance({ address });
 	const [isCopied, setIsCopied] = useState(false);
 	const route = useRouter();
-
+	const { artistProfileDetails } = uploadProfileDetails();
 
 	const disconnectWallet = () => {
 		Cookies.remove("audioblocks_jwt");
 		disconnect();
-		route.push( "/" );
+		route.push("/");
 	};
 
 	const handleCopy = () => {
 		navigator.clipboard.writeText(address || "");
 		setIsCopied(true);
 
-		
 		setTimeout(() => {
 			setIsCopied(false);
 		}, 3000);
@@ -42,7 +42,12 @@ export default function AvatarDropdown() {
 
 	// Generate a random avatar based on the address (or use a placeholder if not connected)
 	const avatarUrl = isConnected
-		? `https://api.dicebear.com/6.x/pixel-art/svg?seed=${address}`
+		? artistProfileDetails?.profilePicture
+			? artistProfileDetails?.profilePicture?.replace(
+					"ipfs://",
+					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
+			  )
+			: `https://api.dicebear.com/6.x/pixel-art/svg?seed=${address}`
 		: "https://via.placeholder.com/40";
 
 	return (
@@ -115,7 +120,7 @@ export default function AvatarDropdown() {
 					</Link>
 
 					<DropdownMenuItem
-						onClick={ disconnectWallet}
+						onClick={disconnectWallet}
 						className="px-4 py-1 border-none outline-none font-medium hover:text-pink-600 cursor-pointer text-white"
 					>
 						Logout
