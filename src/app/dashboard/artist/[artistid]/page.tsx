@@ -288,9 +288,11 @@ const ArtistId = () => {
 						{/* </div> */}
 					</Tabs.Content>
 					<Tabs.Content value="album">
-						<div className="h-64">No Album created</div>
+						<div className="h-64 text-center">No Album created</div>
 					</Tabs.Content>
-					<Tabs.Content value="playlist">nothing...</Tabs.Content>
+					<Tabs.Content value="playlist">
+					<div className="h-64 text-center">No Playlist created</div>
+					</Tabs.Content>
 				</Tabs.Root>
 				<CommentSection />
 			</div>

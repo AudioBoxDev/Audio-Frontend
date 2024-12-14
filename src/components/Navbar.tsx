@@ -4,6 +4,7 @@ import { ArrowLeftToLine, Menu, Search, Upload, X } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import AvatarDropdown from "./Dropdown";
+import SearchBar from "./SearchBar";
 
 
 
@@ -69,14 +70,7 @@ const Navbar = ({ toggleLeftBar, toggleOpen }: any) => {
 						)}
 					</div> */}
 					<div className="w-3/4 md:block ">
-						<div className="flex items-center bg-[#1D1F1F] rounded-full px-3 py-2">
-							<Search className="text-gray-500 mr-2" size={16} />
-							<input
-								type="text"
-								placeholder="Search by artists, songs or albums"
-								className="w-full rounded-full  px-3 border-none focus:outline-none  bg-[#1D1F1F] text-white placeholder-gray-400"
-							/>
-						</div>
+					<SearchBar/>
 					</div>
 					<AvatarDropdown />
 					<div className="md:hidden block">

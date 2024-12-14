@@ -5,13 +5,39 @@ import Link from "next/link";
 import axios from "axios";
 import EmailVerificationModal from "./VerificationModal";
 import { toast } from "react-toastify";
-
+import Cookies from "js-cookie";
+import { useAccount } from "wagmi";
+import { useRouter } from "next/navigation";
+import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 const Hero = () => {
 	const [email, setEmail] = useState("");
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const url = "https://theaudiobox-backend.onrender.com";
+	const token = Cookies.get("audioblocks_jwt");
+	const router = useRouter();
+	const { artistProfileDetails } = uploadProfileDetails();
+	const {isConnected} = useAccount();
+	const getStarted = () => {
+		if (token) {
+			if (artistProfileDetails) {
+				router.push("/dashboard");
+			} else {
+				router.push("/dashboard/profile");
+			}
+		} else {
+			if(!isConnected){
+				toast.error(
+					"Please connect your wallet",
+				);
+			}else{
 
+				toast.error(
+					"Please sign the Authentication message",
+				);
+			}
+		}
+	};
 	const JoinWaitlist = () => {
 		setIsModalOpen(true);
 	};
@@ -21,7 +47,7 @@ const Hero = () => {
 		try {
 			const response = await axios.post(`${url}/waitlist/join`, { email });
 			toast.success(response.data.message || "Your email has been Added!");
-		} catch (error:any) {
+		} catch (error: any) {
 			toast.error(
 				error?.response.data.message ||
 					"There was an error joining the waitlist. Please try again.",
@@ -50,7 +76,8 @@ const Hero = () => {
 					<div className=" md:flex  md:justify-center items-center  md:gap-5 gap-0">
 						<div className="mt-10 flex justify-center md:justify-start">
 							<Link
-								href="/dashboard"
+								href="#"
+								onClick={getStarted}
 								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full text-center md:w-[196px] h-auto md:h-[50px]"
 							>
 								Start Listening
@@ -76,7 +103,11 @@ const Hero = () => {
 						</div>
 					</div>
 					<div className="md:h-32 h-44 my-7">
-						<Image src={bottom} alt="" className="md:h-32 h-44 rounded-full object-cover" />
+						<Image
+							src={bottom}
+							alt=""
+							className="md:h-32 h-44 rounded-full object-cover"
+						/>
 					</div>
 				</div>
 			</div>
