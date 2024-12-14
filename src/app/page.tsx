@@ -7,6 +7,7 @@ import Navbar2 from "@/components/Navbar2";
 import Image from "next/image";
 import headset from "/public/images/img.png";
 import Link from "next/link";
+import Artist from "@/components/Artist";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
       <Hero/>
     <AudioBoxFeatures/>
     <AudioCardItem/>
-   
+   <Artist/>
     <div className="bg-gradient-to-r from-[#991E7035] to-[#333A5670] text-white py-6">
       <div className="grid w-11/12 m-auto items-center md:grid-cols-5 grid-cols-12 gap-6">
       <div className="md:col-span-2 col-span-12 md:text-left text-center md:pl-16 space-y-5">
