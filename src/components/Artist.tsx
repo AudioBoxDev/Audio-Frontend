@@ -92,19 +92,19 @@ const Artist = () => {
 						<div
 							key={index}
 							onClick={() => handleClick(artist.id)}
-							className=" cursor-pointer "
+							className=" cursor-pointer p-2 "
 						>
-							<div className=" rounded-lg shadow-lg flex items-center md:flex-col flex-row overflow-hidden">
+							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
 								<div className="rounded-full">
 									<img
-										src={
-											artist.profilePicture.replace(
-												"ipfs://",
-												`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
-											)
-										}
+										src={artist.profilePicture.replace(
+											"ipfs://",
+											`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
+										)}
+										width={180}
+										height={200}
 										alt={artist.fullName}
-										className="md:w-40 w-20 border border-white rounded-full md:h-40 h-20 object-cover"
+										className="w-40  border border-white rounded-full h-40 object-cover"
 									/>
 								</div>
 								<div className="p-4 pt-2 md:text-center  text-left">
