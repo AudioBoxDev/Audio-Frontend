@@ -4,7 +4,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { Heart, Play } from "lucide-react";
 import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
-import SearchArtist from "@/components/SearchArtist";
+// import SearchArtist from "@/components/SearchArtist";
 import SearchAlbum from "@/components/SearchAlbum";
 
 const Search = () => {
@@ -121,7 +121,7 @@ const Search = () => {
 
     
       <Tabs.Content value="artist" className="mt-10">
-       <SearchArtist/>
+       {/* <SearchArtist/> */}
       </Tabs.Content>
       <Tabs.Content value="album" className="mt-10">
         <SearchAlbum/>
