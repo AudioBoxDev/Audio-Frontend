@@ -86,7 +86,7 @@
 import { wagmiAdapter, projectId } from '@/config/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react'
-import React, { type ReactNode } from 'react'
+import React, { type ReactNode } from 'react' 
 import { liskSepolia, mainnet, sepolia } from '@reown/appkit/networks'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 
