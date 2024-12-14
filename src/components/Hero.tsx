@@ -75,13 +75,12 @@ const Hero = () => {
 					</p>
 					<div className=" md:flex  md:justify-center items-center  md:gap-5 gap-0">
 						<div className="mt-10 flex justify-center md:justify-start">
-							<Link
-								href="#"
+							<button
 								onClick={getStarted}
 								className="bg-gradient-to-r from-[#B1198E] p-1 to-[#B81A3F] text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full text-center md:w-[196px] h-auto md:h-[50px]"
 							>
 								Start Listening
-							</Link>
+							</button>
 						</div>
 
 						<div className="flex md:w-1/3 w-full justify-between relative items-center border-2 md:p-2 p-1 border-pink-500 mt-10 rounded-full overflow-hidden">
