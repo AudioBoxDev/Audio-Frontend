@@ -105,7 +105,6 @@ export const ConnectBtn = () => {
 	const { open } = useAppKit();
 	const { address, isConnected } = useAccount();
 	const { signMessageAsync } = useSignMessage();
-	const { connectAsync } = useConnect();
 
 	const [isLoadingConnect, setIsLoadingConnect] = useState(false);
 	const [isLoadingSign, setIsLoadingSign] = useState(false);
@@ -141,7 +140,7 @@ export const ConnectBtn = () => {
 			);
 			setJwt(token);
 		} catch (error: any) {
-			toast.error(error.message || "Signing message failed");
+			toast.error(error.message || "SignIn failed");
 		} finally {
 			setIsLoadingSign(false);
 		}
@@ -168,7 +167,7 @@ export const ConnectBtn = () => {
 		} catch (error: any) {
 			console.error(error.response?.data?.message);
 			toast.error(error.response?.data?.message || "Authentication failed");
-			throw error;
+			
 		}
 	};
 
@@ -203,7 +202,7 @@ export const ConnectBtn = () => {
 							<div className="absolute inset-0 border-2 border-pink-900 border-t-transparent rounded-full animate-spin"></div>
 						</div>
 					) : (
-						"Sign Message"
+						"Sign In"
 					)}
 				</button>
 			)}

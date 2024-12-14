@@ -30,8 +30,7 @@ const Hero = () => {
 				toast.error(
 					"Please connect your wallet",
 				);
-			}else{
-
+			}else if(isConnected && !token){
 				toast.error(
 					"Please sign the Authentication message",
 				);
