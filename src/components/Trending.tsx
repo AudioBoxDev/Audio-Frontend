@@ -1,14 +1,43 @@
 "use client";
 import Slider from "react-slick";
 import { useRouter } from "next/navigation";
-import { fetchArtist } from "@/hooks/fetchArtist";
+import { fetchAllSongs } from "@/hooks/fetchAllSongs";
+import { useMusicPlayer } from "@/context/MusicPlayer";
+import { PlayingIndicator } from "./PlayingIndicator";
+import { Play } from "lucide-react";
+import { DividerHorizontalIcon } from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
 
 const Trending = () => {
-  const router = useRouter();
-	const { artists, isLoading } = fetchArtist();
+	const router = useRouter();
+	const { music, isLoading } = fetchAllSongs();
+	const { playSong, setSongs } = useMusicPlayer();
+	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
+	const [isPlaying, setIsPlaying] = useState<boolean>(false);
+	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
-	const handleClick = (artistId: string) => {
-		router.push(`/dashboard/artist/${artistId}`);
+	const handlePlaySong = (index: number) => {
+		if (index === currentSongIndex && isPlaying) {
+			setIsPlaying(false);
+			playSong(index);
+		} else {
+			setCurrentSongIndex(index);
+			setIsPlaying(true);
+			playSong(index);
+		}
+	};
+	useEffect(() => {
+		setSongs(music);
+	}, [music, setSongs]);
+
+	const renderSongNumber = (index: number) => {
+		if (hoveredRow === index) {
+			return <Play size={15} className="text-white" />;
+		}
+		if (currentSongIndex === index && isPlaying) {
+			return <PlayingIndicator />;
+		}
+		return index + 1;
 	};
 
 	const settings = {
@@ -51,29 +80,33 @@ const Trending = () => {
 					<div className="absolute inset-0 border-2 border-blue-100 rounded-full animate-spin-slow"></div>
 					<div className="absolute inset-0 border-2 border-pink-900 border-t-transparent rounded-full animate-spin"></div>
 				</div>
-			) : artists.length > 0 ? (
+			) : music.length > 0 ? (
 				<Slider {...settings}>
-					{artists.map((artist, index) => (
+					{music.map((music, index) => (
 						<div
-							key={index}
-							onClick={() => handleClick(artist.id)}
-							className=" cursor-pointer p-2 "
+							key={music.id}
+							className={`hover:bg-[#0E0B0E] cursor-pointer transition-colors ${
+								currentSongIndex === index ? "bg-[#0E0B0E] bg-opacity-50" : ""
+							}`}
+							onMouseEnter={() => setHoveredRow(index)}
+							onMouseLeave={() => setHoveredRow(null)}
+							onClick={() => handlePlaySong(index)}
 						>
 							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
 								<div className="rounded-full">
 									<img
-										src={artist.profilePicture.replace(
+										src={music.image.replace(
 											"ipfs://",
 											`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 										)}
 										width={180}
 										height={200}
-										alt={artist.fullName}
-										className="w-40  border border-white rounded-full h-40 object-cover"
+										alt={music.fullName}
+										className="w-40 rounded-full h-40 object-cover"
 									/>
 								</div>
 								<div className="p-4 pt-2 md:text-center  text-left">
-									<p className="text-sm text-gray-400">{artist.fullName}</p>
+									<p className="text-sm text-gray-400">{music.name.replace(/_/g, ' ')}</p>
 								</div>
 							</div>
 						</div>
@@ -85,6 +118,5 @@ const Trending = () => {
 		</div>
 	);
 };
-
 
 export default Trending;

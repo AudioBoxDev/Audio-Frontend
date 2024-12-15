@@ -186,7 +186,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 		<div className="fixed grid grid-cols-1 z-50 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
 			<audio
 				ref={audioRef}
-				src={ songs[currentSongIndex].animation_url?.replace(
+				src={ songs[currentSongIndex]?.animation_url?.replace(
 					"ipfs://",
 					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 				)}
@@ -198,7 +198,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 				<img
 					width={100}
 					height={100}
-					src={songs[currentSongIndex].image?.replace(
+					src={songs[currentSongIndex]?.image?.replace(
 						"ipfs://",
 						`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 					)}

@@ -61,7 +61,7 @@ const Artist = () => {
 											`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 										)}
 										alt={artist.fullName}
-										className="md:w-40 w-20 border border-white rounded-full md:h-40 h-20 object-cover"
+										className="md:w-40 w-20 rounded-full md:h-40 h-20 object-cover"
 									/>
 								</div>
 								<div className="p-4 pt-2 md:text-center text-left">
