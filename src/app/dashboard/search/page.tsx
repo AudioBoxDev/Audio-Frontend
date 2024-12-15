@@ -177,7 +177,7 @@ const Search = () => {
 			</Tabs.Content>
 
 			<Tabs.Content value="artist" className="mt-10">
-				<div className="grid grid-cols-4 gap-4">
+				<div className="grid md:grid-cols-4 grid-cols-2 gap-4">
 					{filteredArtists.map((artist) => (
 						<div
 							key={artist.id}

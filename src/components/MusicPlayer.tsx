@@ -183,7 +183,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	};
 
 	return (
-		<div className="fixed grid grid-cols-1 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
+		<div className="fixed grid grid-cols-1 z-50 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
 			<audio
 				ref={audioRef}
 				src={ songs[currentSongIndex].animation_url?.replace(
