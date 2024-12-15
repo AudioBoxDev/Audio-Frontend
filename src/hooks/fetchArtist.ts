@@ -12,6 +12,7 @@ import { useAccount } from "wagmi";
 export const fetchArtist = () => {
 	const { address } = useAccount();
 	const [artists, setArtist] = useState<any[]>([]);
+	const [isLoading, setIsLoading]=useState(false);
 
 	const { data: artistIds, isSuccess }: any = useReadContract({
 		address: contractAddress,
@@ -44,6 +45,7 @@ export const fetchArtist = () => {
 	const fetchProfileDetails = async (profileDataArray: any[]) => {
 		try {
 			const profiles = [];
+			setIsLoading(true)
 			for (const profileData of profileDataArray) {
 				
 				const gateway = profileData.result.artistCid.replace(
@@ -62,7 +64,9 @@ export const fetchArtist = () => {
 				profiles.push(profileWithAddress);
 			}
 			setArtist(profiles);
+			setIsLoading(false)
 		} catch (error: any) {
+			setIsLoading(false);
 			console.error("Error fetching profile details:", error.message);
 		}
 	};
@@ -79,5 +83,6 @@ export const fetchArtist = () => {
 	return {
 		fetchProfileDetails,
 		artists,
+		isLoading
 	};
 };

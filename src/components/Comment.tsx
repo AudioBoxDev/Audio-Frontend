@@ -4,18 +4,7 @@ import { useState } from "react";
 const CommentSection = () => {
 	const { artistProfileDetails } = uploadProfileDetails();
 	const [comments, setComments] = useState<any[]>([
-		// {
-		// 	id: 1,
-		// 	name: artistProfileDetails?.fullName,
-		// 	time: "6 days ago",
-		// 	text: "Dummy comment - But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings...",
-		// },
-		// {
-		//   id: 2,
-		//   name: "Michael Busch",
-		//   time: "6 days ago",
-		//   text: "Dummy comment - But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings...",
-		// },
+		
 	]);
 
 	const [newComment, setNewComment] = useState("");
@@ -35,7 +24,7 @@ const CommentSection = () => {
 	};
 
 	return (
-		<div className="bg-black text-white mb-40 rounded-md space-y-6 max-w-2xl mx-auto">
+		<div className="bg-black text-white mb-40 rounded-md space-y-6 w-full mx-auto">
 			<div className="flex justify-between items-center border-b border-gray-700">
 				<h2 className="text-lg font-semibold">{comments.length} comments</h2>
 			</div>
@@ -61,7 +50,7 @@ const CommentSection = () => {
 			</div>
 			<div className="flex flex-col space-y-4">
 				<textarea
-					className="bg-[#ffffff08] text-gray-300 p-3 rounded-md resize-none focus:outline-none "
+					className="bg-[#ffffff27] text-gray-300 p-3 rounded-md resize-none focus:outline-none "
 					placeholder="What are your thoughts?"
 					rows={3}
 					value={newComment}

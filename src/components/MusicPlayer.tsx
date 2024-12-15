@@ -18,7 +18,7 @@ import Image from "next/image";
 export interface Song {
 	// id: string;
 	name: string;
-	// artist: string;
+	artistName: string;
 	animation_url: string;
 	image: any;
 	// streams: number;
@@ -210,7 +210,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 						{songs[currentSongIndex].name}
 					</h3>
 					<p className="text-neutral-400 text-xs truncate hover:text-white transition-colors">
-						{/* {songs[currentSongIndex].artist} */}
+						{songs[currentSongIndex].artistName}
 					</p>
 				</div>
 			</div>
@@ -269,7 +269,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 							{getVolumeIcon()}
 						</button>
 						<div
-							className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-2 bg-neutral-800 rounded-lg p-2 transition-opacity duration-200 ${
+							className={`absolute left-1/2 -translate-x-1/2 bottom-full bg-neutral-800 rounded-lg px-3 py-1 transition-opacity duration-200 ${
 								isVolumeHovered
 									? "opacity-100"
 									: "opacity-0 pointer-events-none"
@@ -282,7 +282,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 								step="0.01"
 								value={volume}
 								onChange={handleVolumeChange}
-								className="w-24 h-1 appearance-none bg-neutral-600 rounded-lg cursor-pointer accent-red-500 hover:accent-red-600"
+								className="w-20 h-1 appearance-none bg-neutral-600 rounded-lg cursor-pointer accent-red-500 hover:accent-red-600"
 								style={{
 									background: `linear-gradient(to right, rgb(239, 68, 68) 0%, rgb(239, 68, 68) ${
 										volume * 100

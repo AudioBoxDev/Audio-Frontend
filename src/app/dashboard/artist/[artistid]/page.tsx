@@ -22,6 +22,15 @@ const ArtistId = () => {
 	const [artist, setArtist] = useState<any>();
 	const params = useParams();
 	const [liked, setLiked] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
+	const [isPlaying, setIsPlaying] = useState<boolean>(false);
+	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+	const [isExpanded, setIsExpanded] = useState(false);
+
+	const toggleBio = () => {
+		setIsExpanded(!isExpanded);
+	};
 
 	const toggleLike = () => {
 		setLiked((prev) => !prev);
@@ -85,6 +94,7 @@ const ArtistId = () => {
 	const fetchSong = async (songDataArray: any[]) => {
 		try {
 			const songs = [];
+			setIsLoading(true);
 			for (const songData of songDataArray) {
 				const gateway = songData.result.songCID.replace(
 					"ipfs://",
@@ -102,7 +112,9 @@ const ArtistId = () => {
 				setSongsData(songs);
 				setSongs(songs);
 			}
+			setIsLoading(false);
 		} catch (error: any) {
+			setIsLoading(false);
 			console.error("Error fetching song details:", error.message);
 		}
 	};
@@ -112,10 +124,6 @@ const ArtistId = () => {
 			fetchSong(data);
 		}
 	}, [data]);
-
-	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
-	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
 	const handlePlaySong = (index: number) => {
 		if (index === currentSongIndex && isPlaying) {
@@ -145,6 +153,12 @@ const ArtistId = () => {
 						<h1 className="md:text-6xl text-3xl font-bold">
 							{artist?.fullName}
 						</h1>
+						<div className="flex  cursor-pointer">
+							<p className="text-sm text-ellipsis" onClick={toggleBio}>
+								{isExpanded ? artist?.bio : `${artist?.bio.slice(0, 53)}...`}
+							</p>
+							
+						</div>
 
 						<div className=" grid grid-flow-col gap-2 w-2/5 mt-3">
 							<span className="flex gap-2 text-xs">
@@ -175,7 +189,7 @@ const ArtistId = () => {
 							value="songs"
 							className="px-5 py-1 border font-semibold border-[#666C6C] text-[#666C6C] rounded-full data-[state=active]:bg-[#B6195B] data-[state=active]:border-none data-[state=active]:text-white hover:text-white  hover:bg-[#B6195B] text-sm"
 						>
-							Songs
+							Songs ({songs.length})
 						</Tabs.Trigger>
 						<Tabs.Trigger
 							value="album"
@@ -203,7 +217,12 @@ const ArtistId = () => {
 									<th className="p-3 text-left"></th>
 								</tr>
 							</thead>
-							{songs?.length > 0 ? (
+							{isLoading ? (
+								<div className="relative w-12 h-12 m-auto">
+									<div className="absolute inset-0 border-2 border-blue-100 rounded-full animate-spin-slow"></div>
+									<div className="absolute inset-0 border-2 border-pink-900 border-t-transparent rounded-full animate-spin"></div>
+								</div>
+							) : songs?.length > 0 ? (
 								<tbody>
 									{songs.map((song: any, index: any) => (
 										<tr
@@ -215,14 +234,14 @@ const ArtistId = () => {
 											}`}
 											onMouseEnter={() => setHoveredRow(index)}
 											onMouseLeave={() => setHoveredRow(null)}
-											onClick={() => handlePlaySong(index)}
+											
 										>
-											<td className="p-3 w-10">
+											<td onClick={() => handlePlaySong(index)} className="p-3 w-10">
 												<div className="flex items-center justify-center w-6">
 													{renderSongNumber(index)}
 												</div>
 											</td>
-											<td className="p-3 flex gap-1 items-center">
+											<td onClick={() => handlePlaySong(index)} className="p-3 flex gap-1 items-center">
 												<div className="relative">
 													<img
 														src={song?.image.replace(
@@ -265,7 +284,6 @@ const ArtistId = () => {
 											>
 												<Heart size={20} color={liked ? "red" : "white"} />
 											</td>
-
 											<td className="p-3 font-medium text-center ">
 												<EllipsisVertical size={20} />
 											</td>
@@ -274,11 +292,6 @@ const ArtistId = () => {
 								</tbody>
 							) : (
 								<div className="flex flex-col items-center justify-center h-full">
-									<img
-										src="https://via.placeholder.com/300x300?text=No+Songs+Available"
-										alt="No songs available"
-										className="w-32 h-32 mb-4"
-									/>
 									<p className="text-lg font-medium text-gray-600">
 										No songs available for this artist.
 									</p>
@@ -291,7 +304,7 @@ const ArtistId = () => {
 						<div className="h-64 text-center">No Album created</div>
 					</Tabs.Content>
 					<Tabs.Content value="playlist">
-					<div className="h-64 text-center">No Playlist created</div>
+						<div className="h-64 text-center">No Playlist created</div>
 					</Tabs.Content>
 				</Tabs.Root>
 				<CommentSection />
