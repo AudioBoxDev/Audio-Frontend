@@ -43,8 +43,8 @@ const Dashboardlayout = ({
 					<div className="flex flex-col md:col-span-9 col-span-12 justify-center items-center">
 						<Navbar toggleLeftBar={toggleLeftBar} toggleOpen={toggleOpen} />
 						<MusicPlayerProvider>
-							<GlobalMusicPlayer />
 							<div className="text-white z-0 md:w-11/12 w-full">{children}</div>
+							<GlobalMusicPlayer />
 						</MusicPlayerProvider>
 					</div>
 					<div
