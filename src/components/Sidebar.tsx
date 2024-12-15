@@ -57,11 +57,11 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 				</div>
 
 				<nav className="flex flex-col justify-between h-4/5">
+						<div className=" text-white">
+							{/* <Bolt className="w-4 h-4" /> */}
+							<span>Music</span>
+						</div>
 					<div className="space-y-6 border-y border-[#151515] py-3 ">
-						{/* <div className="flex items-center space-x-3 text-pink-500">
-							<Bolt className="w-4 h-4" />
-							<span>Discover</span>
-						</div> */}
 						<SidebarItems
 							icon={Bolt}
 							label="Discover"

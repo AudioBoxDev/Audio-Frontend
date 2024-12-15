@@ -5,8 +5,6 @@ import { Music, X} from 'lucide-react';
 import image from "/public/images/Group1.png"
 import Artist from '@/components/Artist';
 import Trending from '@/components/Trending';
-import MusicPlayer from '@/components/MusicPlayer';
-import GlobalMusicPlayer from '@/components/GlobalMusicPlayer';
 
  const Dashboard = () => {
  
@@ -32,44 +30,12 @@ import GlobalMusicPlayer from '@/components/GlobalMusicPlayer';
                 <Image src={image} alt="Music" width={260} height={228} />
               </div>
             </div>
-         
-
-          <div className="text-white">
-            <h2 className="text-base font-bold mb-4">Category</h2>
-            <div className="flex gap-4 text-sm flex-wrap">
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                All
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                Pop music
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                Christian
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                Hip Hop music
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                Rock music
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                R&B music
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                Electronic music
-              </button>
-              <button className="border border-gray-800 hover:bg-pink-600 text-white px-4 py-2 rounded-full">
-                Country music
-              </button>
-            </div>
-          </div>
 
           <Artist />
           <Trending />
         </div>
       </div>
     </div>
-    <GlobalMusicPlayer />
   </>
   )
 }

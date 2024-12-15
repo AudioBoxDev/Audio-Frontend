@@ -14,8 +14,10 @@ const SearchAlbum = () => {
       ];
   return (
     <>
-    <div className="grid grid-cols-4 gap-6">
-    {recentlyPlayedData.map((item, index) => (
+    <div className="">
+
+      <p className='text-center text-2xl'>Coming Soon</p>
+    {/* {recentlyPlayedData.map((item, index) => (
           <div key={index} className=' cursor-pointer '>
             <div className=" rounded-lg shadow-lg overflow-hidden">
               <div className='rounded-full'> 
@@ -35,7 +37,7 @@ const SearchAlbum = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
     </div>
     </>
   )

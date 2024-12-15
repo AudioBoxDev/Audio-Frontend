@@ -32,7 +32,6 @@ const Dashboardlayout = ({
 
 	return (
 		<>
-			{/* <WIPBanner/> */}
 			<div>
 				<Sidebar
 					isOpen={isOpen}
@@ -40,22 +39,22 @@ const Dashboardlayout = ({
 					toggleOpen={toggleOpen}
 				/>
 
-				<MusicPlayerProvider>
-					<div className="md:ml-48 mb-24 px-4 font-roboto grid grid-cols-12 gap-1">
-						<div className="flex flex-col md:col-span-9 col-span-12 justify-center items-center">
-							<Navbar toggleLeftBar={toggleLeftBar} toggleOpen={toggleOpen} />
+				<div className="md:ml-48 mb-24 px-4 font-roboto grid grid-cols-12 gap-1">
+					<div className="flex flex-col md:col-span-9 col-span-12 justify-center items-center">
+						<Navbar toggleLeftBar={toggleLeftBar} toggleOpen={toggleOpen} />
+						<MusicPlayerProvider>
+							<GlobalMusicPlayer />
 							<div className="text-white z-0 md:w-11/12 w-full">{children}</div>
-						</div>
-						<div
-							className={`fixed top-0 z-30 right-0 h-full w-72 transform transition-transform duration-300 ${
-								open ? "translate-x-0" : "translate-x-full"
-							} lg:translate-x-0 lg:block`}
-						>
-							<LeftBar close={Close} />
-						</div>
+						</MusicPlayerProvider>
 					</div>
-					<GlobalMusicPlayer />
-				</MusicPlayerProvider>
+					<div
+						className={`fixed top-0 z-30 right-0 h-full w-72 transform transition-transform duration-300 ${
+							open ? "translate-x-0" : "translate-x-full"
+						} lg:translate-x-0 lg:block`}
+					>
+						<LeftBar close={Close} />
+					</div>
+				</div>
 				<ToastContainer />
 			</div>
 		</>
