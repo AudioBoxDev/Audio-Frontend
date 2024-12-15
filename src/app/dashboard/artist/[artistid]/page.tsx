@@ -179,7 +179,7 @@ const ArtistId = () => {
 								`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 							)}
 							alt="Artist"
-							className="md:w-32 md:h-32 w-20 h-20 rounded-full border border-white object-cover"
+							className="md:w-32 md:h-32 w-20 h-20 rounded-full object-cover"
 						/>
 					</div>
 				</div>

@@ -208,7 +208,7 @@ const Search = () => {
 										width={180}
 										height={200}
 										alt={artist.fullName}
-										className="w-40  border border-white rounded-full h-40 object-cover"
+										className="w-40  rounded-full h-40 object-cover"
 									/>
 								</div>
 								<div className="p-4 pt-2 md:text-center  text-left">
