@@ -11,8 +11,6 @@ const SearchBar: React.FC = () => {
     if (query.trim()) {
       router.push(`/dashboard/search?query=${encodeURIComponent(query)}`);
     }
-    // Clear the search input
-    setQuery("");
   };
 
   return (
