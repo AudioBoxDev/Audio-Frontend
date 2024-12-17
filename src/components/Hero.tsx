@@ -18,6 +18,7 @@ const Hero = () => {
 	const router = useRouter();
 	const { artistProfileDetails } = uploadProfileDetails();
 	const {isConnected} = useAccount();
+	
 	const getStarted = () => {
 		if (!token) {
 			// Handle missing wallet connection or token

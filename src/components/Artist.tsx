@@ -53,16 +53,16 @@ const Artist = () => {
 				</div>
 			) : artists.length > 0 ? (
 				<Slider {...settings}>
-					{artists.map((artist, index) => (
+					{artists?.map((artist, index) => (
 						<div
 							key={index}
-							onClick={() => handleClick(artist.id)}
+							onClick={() => handleClick(artist?.id)}
 							className=" cursor-pointer p-2 "
 						>
 							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
 								<div className="rounded-full">
 									<img
-										src={artist.profilePicture.replace(
+										src={artist?.profilePicture?.replace(
 											"ipfs://",
 											`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 										)}
@@ -73,7 +73,7 @@ const Artist = () => {
 									/>
 								</div>
 								<div className="p-4 pt-2 md:text-center  text-left">
-									<p className="text-sm text-gray-400">{artist.fullName}</p>
+									<p className="text-sm text-gray-400">{artist?.fullName}</p>
 								</div>
 							</div>
 						</div>
