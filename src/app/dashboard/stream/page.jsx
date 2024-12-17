@@ -1,9 +1,9 @@
 "use client"
 import {useState} from 'react'
 import Image from 'next/image';
-import { X} from 'lucide-react';
+import {X} from 'lucide-react';
 import image from "/public/images/Group1.png"
-import RecentlyPlayed from '@/components/RecentPlayed';
+import Artist from '@/components/Artist';
 import Trending from '@/components/Trending';
 
 
@@ -54,7 +54,7 @@ import Trending from '@/components/Trending';
             </div>
           </div>
           
-          <RecentlyPlayed/>
+          <Artist/>
           
           <Trending/>
         </div>
