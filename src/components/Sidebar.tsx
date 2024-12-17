@@ -13,10 +13,12 @@ import {
 	ArrowBigLeft,
 	Mic,
 	PowerIcon,
+	User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useDisconnect } from "wagmi";
+import Cookies from "js-cookie";
 
 const Sidebar = ({ isOpen, toggleClose }: any) => {
 	const pathname = usePathname();
@@ -24,6 +26,7 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 	const { disconnect } = useDisconnect();
 
 	const disconnectWallet = () => {
+		Cookies.remove("audioblocks_jwt");
 		disconnect();
 		route.push("/");
 	};
@@ -53,6 +56,7 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 					/>
 				</div>
 
+<<<<<<< HEAD
 				<nav className="space-y-4">
 					{/* <div className="flex items-center space-x-3 text-pink-500">
 						<Bolt className="w-4 h-4" />
@@ -66,18 +70,46 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 							isActive={pathname === "/dashboard"}
 						/> */}
 						<SidebarItems icon={Wallet} label="Wallet" to="#" />
+=======
+				<nav className="flex flex-col justify-between h-4/5">
+					<div className="space-y-6 ">
+						<div className=" text-white">
+							{/* <Bolt className="w-4 h-4" /> */}
+							<span>Music</span>
+						</div>
+					<div className="border-t border-[#151515] py-3 ">
+
+						<SidebarItems
+							icon={Bolt}
+							label="Discover"
+							to="/dashboard"
+							isActive={pathname === "/dashboard"}
+						/>
+					</div>
+						<SidebarItems
+							icon={Wallet}
+							label="Wallet"
+							to="/dashboard/wallet"
+							isActive={pathname === "/wallet"}
+						/>
+						<SidebarItems icon={Music} label="Playlist" to="#" />
+>>>>>>> fc617fd88886d82a6927ffd3b2c87f716c9bbf1d
 						<SidebarItems
 							icon={FileMusic}
 							label="Songs"
 							to="/dashboard/artist"
 							isActive={pathname === "/dashboard/artist"}
 						/>
+						<div className="flex space-x-2">
+
 						<SidebarItems
 							icon={Mic}
 							label="Subscription"
-							to="/dashboard/subscription"
-							isActive={pathname === "/dashboard/subscription"}
+							to="#"
+							isActive={pathname === "#"}
 						/>
+						<span className="bg-gray-400 text-gray-700 rounded-full text-xs px-1">soon</span>
+						</div>
 					</div>
 
 					{/* <div className="pt-8 space-y-4">
@@ -97,6 +129,7 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 							<li className="cursor-pointer hover:text-pink-500">Playlist 3</li>
 						</ul>
 					</div> */}
+<<<<<<< HEAD
 					<div className="">
 					<div className='flex pt-80 items-center text-base text-gray-500 space-x-3  cursor-pointer hover:text-pink-500"'>
 						<Settings className="w-4 h-4" />
@@ -104,6 +137,19 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 					</div>
 					<div onClick={disconnectWallet}>
 						<SidebarItems icon={PowerIcon} label="Log Out" to="#" />
+=======
+
+					<div className=" space-y-3 pt-32 text-base text-gray-500">
+						<SidebarItems
+							icon={User}
+							label="Profile"
+							to="/dashboard/profile"
+							isActive={pathname === "/dashboard/profile"}
+						/>
+						<div onClick={disconnectWallet}>
+							<SidebarItems icon={PowerIcon} label="Log Out" to="#" />
+						</div>
+>>>>>>> fc617fd88886d82a6927ffd3b2c87f716c9bbf1d
 					</div>
 					</div>
 

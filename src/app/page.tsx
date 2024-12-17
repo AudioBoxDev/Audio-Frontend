@@ -6,45 +6,50 @@ import Hero from "@/components/Hero";
 import Navbar2 from "@/components/Navbar2";
 import Image from "next/image";
 import headset from "/public/images/img.png";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
-import Faq from "@/components/Faq";
-import MusicScene from "@/components/MusicScene";
-import { WIPBanner } from "@/components/Wim";
+import Artist from "@/components/Artist";
 
 export default function Home() {
   return (
   <>
-  <WIPBanner/>
+  {/* <WIPBanner/> */}
     <Navbar2/>
       <Hero/>
     <AudioBoxFeatures/>
-    <MusicScene/>
     <AudioCardItem/>
-
-    <Faq/>
-    
-    <div className="border-[#CC76FF0F] border font-roboto w-11/12 mx-auto rounded-3xl text-white py-16 my-16 px-4">
-      <div className="md:grid items-center md:grid-cols-5 md:gap-6 gap-0">
-      <div className="md:col-span-2 md:pl-16 space-y-9">
-        <h1 className="text-6xl md:text-8xl text-center md:text-left text-[#68BDE4] font-bold leading-tight">
-        Stream Earn Own
+   <Artist/>
+    <div className="bg-gradient-to-r from-[#991E7035] to-[#333A5670] text-white py-6">
+      <div className="grid w-11/12 m-auto items-center md:grid-cols-5 grid-cols-12 gap-6">
+      <div className="md:col-span-2 col-span-12 md:text-left text-center md:pl-16 space-y-5">
+        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+          Stream,Support, and Own it!
         </h1>
-        <p className="text-lg md:text-xl text-center md:text-left text-white">
-        Join our community where your support makes a real difference, and every play, tip, or purchase helps artists thrive.
+        <p className="text-lg md:text-xl text-white">
+          Join a community where your support makes a real difference, and every play, tip, or purchase helps artists thrive.
         </p>
-        <div className='flex justify-center md:justify-start'>
+        <div>
 
-        <Link href="/login" className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-6 py-3 rounded-full w-full text-center md:w-[196px]">Start Listening</Link>
+        <Link href="/login" className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-4 py-2 rounded-full">Get Started</Link>
         </div>
       </div>
-      <div className="col-span-3">
+      <div className="md:col-span-3 col-span-12">
         <Image
           className="w-full md:w-96 mx-auto"
           src={headset}
           alt="Headphone"
         />
       </div>
+      </div>
+    </div>
+    <div className="bg-[#471439] text-white py-4">
+      <div className="container mx-auto flex items-center justify-center space-x-2">
+        <span className="text-sm font-bold">Powered by</span>
+        <img
+          src="/images/lisk.png" 
+          alt="Lisk Logo"
+          className="h-12"
+        />
+        <span className="text-sm font-bold">Lisk</span>
       </div>
     </div>
     <Footer/>

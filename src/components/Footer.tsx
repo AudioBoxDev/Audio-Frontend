@@ -72,7 +72,7 @@ const Footer = () => {
           <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Social Media</h3>
           <p className="mb-4">For recent updates and news follow our social media feeds</p>
           <div className="flex space-x-4">
-            <Link href="/" className="hover:text-white">
+            <Link href="https://www.youtube.com/@AudioBlocks102" className="hover:text-white">
               <i className="fab fa-youtube"></i>
               <Youtube className="w-6 h-6" />
             </Link>
@@ -82,10 +82,10 @@ const Footer = () => {
             <Link href="/" className="hover:text-white">
               <Facebook className="w-6 h-6" />
             </Link>
-            <Link href="/" className="hover:text-white">
+            <Link href="https://x.com/audioboxonchain?t=G8OG_rr_alJaFWEbzrKD2g&s=09" className="hover:text-white">
               <Twitter className="w-6 h-6" />
             </Link>
-            <Link href="/" className="hover:text-white">
+            <Link href="" className="hover:text-white">
               <Mail className="w-6 h-6" />
             </Link>
           </div>
