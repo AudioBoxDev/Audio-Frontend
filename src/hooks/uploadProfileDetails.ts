@@ -143,7 +143,7 @@ export const uploadProfileDetails = () => {
 
 	const fetchProfileDetails = async (profileData: any) => {
 		try {
-			const gateway = profileData.cid.replace(
+			const gateway = profileData?.cid.replace(
 				"ipfs://",
 				`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 			);

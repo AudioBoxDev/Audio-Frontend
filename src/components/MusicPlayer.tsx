@@ -207,10 +207,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 				/>
 				<div className="overflow-hidden">
 					<h3 className="text-white font-medium text-sm truncate hover:text-red-500 transition-colors">
-						{songs[currentSongIndex].name}
+						{songs[currentSongIndex]?.name}
 					</h3>
 					<p className="text-neutral-400 text-xs truncate hover:text-white transition-colors">
-						{songs[currentSongIndex].artistName}
+						{songs[currentSongIndex]?.artistName}
 					</p>
 				</div>
 			</div>
