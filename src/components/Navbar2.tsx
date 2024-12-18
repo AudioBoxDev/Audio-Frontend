@@ -69,19 +69,7 @@ const Navbar2 = () => {
 							AudioBlocks
 						</h1>
 					</Link>
-					<div className="md:block hidden">
-						{/* <ul className="flex gap-9 font-semibold text-gray-400">
-							<Link href="/" className="hover:text-white">
-								<li>Streams</li>
-							</Link>
-							{/* <Link href="/" className="hover:text-white">
-								<li>Artist hub</li>
-							</Link> */}
-							<Link href="/dashboard/marketplace" className="hover:text-white">
-								<li>Marketplace</li>
-							</Link>
-						</ul> */}
-					</div>
+		
 				</div>
 				<div className=" ">
 					<ul className="flex items-center font-semibold text-gray-400 gap-5">
