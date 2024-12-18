@@ -18,24 +18,21 @@ const Hero = () => {
 	const router = useRouter();
 	const { artistProfileDetails } = uploadProfileDetails();
 	const {isConnected} = useAccount();
+	
 	const getStarted = () => {
-		if (token) {
-			if (artistProfileDetails) {
-				router.push("/dashboard");
+		if (!token) {
+			// Handle missing wallet connection or token
+			if (!isConnected) {
+				toast.error("Please connect your wallet");
 			} else {
-				router.push("/dashboard/profile");
+				toast.error("Please sign the Authentication message");
 			}
 		} else {
-			if(!isConnected){
-				toast.error(
-					"Please connect your wallet",
-				);
-			}else if(!token){
-				toast.error(
-					"Please sign the Authentication message",
-				);
-			}
+			// Redirect based on artist profile details
+			const redirectPath = artistProfileDetails ? "/dashboard" : "/dashboard/profile";
+			router.push(redirectPath);
 		}
+
 	};
 	const JoinWaitlist = () => {
 		setIsModalOpen(true);

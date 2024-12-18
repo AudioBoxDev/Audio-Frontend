@@ -48,7 +48,7 @@ export const fetchArtist = () => {
 			setIsLoading(true)
 			for (const profileData of profileDataArray) {
 				
-				const gateway = profileData.result.artistCid.replace(
+				const gateway = profileData.result?.artistCid.replace(
 					"ipfs://",
 					`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
 				);
