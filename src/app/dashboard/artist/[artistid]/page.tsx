@@ -1,10 +1,7 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useEffect,  useRef, useState } from "react";
 import { EllipsisVertical, Heart, MessageCircle, Users } from "lucide-react";
-import image from "/public/images/Ellipse.png";
-import { Album, Play } from "lucide-react";
-import Rectangle1 from "/public/images/Rectangle1.png";
+import {  Play } from "lucide-react";
 import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 import * as Tabs from "@radix-ui/react-tabs";
@@ -129,13 +126,13 @@ const ArtistId = () => {
 	// 	}
 	// }, [data]);
 
-	const isFetched = useRef(false);
 
+	const isFetched = useRef(false);
 	if (data && success && !isFetched.current) {
 		isFetched.current = true; // Set the flag
 		fetchSong(data); // Call your function only once
 	}
-	
+
 	const handlePlaySong = (index: number) => {
 		if (index === currentSongIndex && isPlaying) {
 			setIsPlaying(false);

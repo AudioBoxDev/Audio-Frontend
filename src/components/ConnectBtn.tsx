@@ -108,7 +108,7 @@ export const ConnectBtn = () => {
 
 	const [isLoadingConnect, setIsLoadingConnect] = useState(false);
 	const [isLoadingSign, setIsLoadingSign] = useState(false);
-	const [jwt, setJwt] = useState(null);
+	const jwt= Cookies.get("audioblocks_jwt");
 
 	const handleConnect = async () => {
 		setIsLoadingConnect(true);
@@ -138,7 +138,6 @@ export const ConnectBtn = () => {
 				messageToSign,
 				"listener",
 			);
-			setJwt(token);
 		} catch (error: any) {
 			toast.error(error.message || "SignIn failed");
 		} finally {
