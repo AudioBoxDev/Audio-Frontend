@@ -29,7 +29,7 @@ const Hero = () => {
 				// Handle missing wallet connection or token
 				if (!isConnected) {
 					toast.error("Please connect your wallet");
-				} else {
+				} else if(isConnected && !token){
 					toast.error("Please sign the Authentication message");
 				}
 			}
@@ -72,7 +72,7 @@ const Hero = () => {
 						Stream Music <br /> Own the Experience
 					</h1>
 					<p className="text-lg md:text-xl text-white mt-5">
-						Own the music, support the artists, revolutionize the industry
+						Own the music, earn tokens, revolutionize the industry
 					</p>
 					<div className=" md:flex  md:justify-center items-center  md:gap-5 gap-0">
 						<div className="mt-10 flex justify-center md:justify-start">

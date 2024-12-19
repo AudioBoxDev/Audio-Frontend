@@ -138,6 +138,7 @@ export const ConnectBtn = () => {
 				messageToSign,
 				"listener",
 			);
+			window.location.reload();
 		} catch (error: any) {
 			toast.error(error.message || "SignIn failed");
 		} finally {

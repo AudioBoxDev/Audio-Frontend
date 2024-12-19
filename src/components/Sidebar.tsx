@@ -62,15 +62,14 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 							{/* <Bolt className="w-4 h-4" /> */}
 							<span>Music</span>
 						</div>
-					<div className="border-t border-[#151515] pt-4">
-
-						<SidebarItems
-							icon={Bolt}
-							label="Discover"
-							to="/dashboard"
-							isActive={pathname === "/dashboard"}
-						/>
-					</div>
+						<div className="border-t border-[#151515] pt-4">
+							<SidebarItems
+								icon={Bolt}
+								label="Discover"
+								to="/dashboard"
+								isActive={pathname === "/dashboard"}
+							/>
+						</div>
 						<SidebarItems
 							icon={Wallet}
 							label="Wallet"
@@ -80,19 +79,20 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 						<SidebarItems icon={Music} label="Playlist" to="#" />
 						<SidebarItems
 							icon={FileMusic}
-							label="Artist"
+							label="Songs"
 							to="/dashboard/artist"
 							isActive={pathname === "/dashboard/artist"}
 						/>
 						<div className="flex space-x-2">
-
-						<SidebarItems
-							icon={Mic}
-							label="Subscription"
-							to="#"
-							isActive={pathname === "#"}
-						/>
-						<span className="bg-gray-400 text-gray-700 rounded-full text-xs px-1">soon</span>
+							<SidebarItems
+								icon={Mic}
+								label="Subscription"
+								to="#"
+								isActive={pathname === "#"}
+							/>
+							<span className="bg-gray-400 text-gray-700 rounded-full text-xs px-1">
+								soon
+							</span>
 						</div>
 					</div>
 

@@ -25,7 +25,6 @@ export interface Song {
 	// saves: number;
 	released: string;
 }
-
 interface MusicPlayerProps {
 	songs: Song[];
 	currentSongIndex: number;

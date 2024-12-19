@@ -61,6 +61,7 @@ const Artist = () => {
 						>
 							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
 								<div className="rounded-full">
+								
 									<img
 										src={artist?.profilePicture?.replace(
 											"ipfs://",
@@ -80,7 +81,7 @@ const Artist = () => {
 					))}
 				</Slider>
 			) : (
-				<div className="text-center text-white">No artists found.</div>
+				<div className="text-center lg:p-10"><h1 className="text-4xl lg:text-6xl font-bold text-gray-900">AudioBlocks</h1></div>
 			)}
 		</div>
 	);
