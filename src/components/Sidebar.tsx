@@ -56,6 +56,21 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 					/>
 				</div>
 
+<<<<<<< HEAD
+				<nav className="space-y-4">
+					{/* <div className="flex items-center space-x-3 text-pink-500">
+						<Bolt className="w-4 h-4" />
+						<span>Discover</span>
+					</div> */}
+					<div className="space-y-6">
+						{/* <SidebarItems
+							icon={Wallet}
+							label="Wallet"
+							to="/dashboard"
+							isActive={pathname === "/dashboard"}
+						/> */}
+						<SidebarItems icon={Wallet} label="Wallet" to="#" />
+=======
 				<nav className="flex flex-col justify-between h-4/5">
 					<div className="space-y-6 ">
 						<div className=" text-white -mb-4">
@@ -78,9 +93,10 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 							isActive={pathname === "/wallet"}
 						/>
 						<SidebarItems icon={Music} label="Playlist" to="#" />
+>>>>>>> fc617fd88886d82a6927ffd3b2c87f716c9bbf1d
 						<SidebarItems
 							icon={FileMusic}
-							label="Artist"
+							label="Songs"
 							to="/dashboard/artist"
 							isActive={pathname === "/dashboard/artist"}
 						/>
@@ -113,6 +129,15 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 							<li className="cursor-pointer hover:text-pink-500">Playlist 3</li>
 						</ul>
 					</div> */}
+<<<<<<< HEAD
+					<div className="">
+					<div className='flex pt-80 items-center text-base text-gray-500 space-x-3  cursor-pointer hover:text-pink-500"'>
+						<Settings className="w-4 h-4" />
+						<span>Settings</span>
+					</div>
+					<div onClick={disconnectWallet}>
+						<SidebarItems icon={PowerIcon} label="Log Out" to="#" />
+=======
 
 					<div className=" space-y-3 pt-32 text-base text-gray-500">
 						<SidebarItems
@@ -124,7 +149,10 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 						<div onClick={disconnectWallet}>
 							<SidebarItems icon={PowerIcon} label="Log Out" to="#" />
 						</div>
+>>>>>>> fc617fd88886d82a6927ffd3b2c87f716c9bbf1d
 					</div>
+					</div>
+
 				</nav>
 			</div>
 		</>

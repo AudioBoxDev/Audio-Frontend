@@ -64,24 +64,13 @@ const Navbar2 = () => {
 			<nav className="items-center font-roboto w-11/12 m-auto text-white py-7 flex justify-between">
 				<div className="space-x-10 flex items-center">
 					<Link href="/" className="flex space-x-3 items-center">
-						<div className="bg-pink-500 rounded-full md:h-10 h-7 w-7 md:w-10"></div>
+						{/* <div className="bg-pink-500 rounded-full md:h-10 h-7 w-7 md:w-10"></div> */}
+						<img src="/images/logo.jpeg" height={40} width={40} alt="logo" className="rounded-full" />
 						<h1 className="md:text-2xl text-lg font-semibold text-pink-400">
 							AudioBlocks
 						</h1>
 					</Link>
-					<div className="md:block hidden">
-						{/* <ul className="flex gap-9 font-semibold text-gray-400">
-							<Link href="/" className="hover:text-white">
-								<li>Streams</li>
-							</Link>
-							<Link href="/" className="hover:text-white">
-								<li>Artist hub</li>
-							</Link>
-							<Link href="/dashboard/marketplace" className="hover:text-white">
-								<li>Marketplace</li>
-							</Link>
-						</ul> */}
-					</div>
+		
 				</div>
 				<div className=" ">
 					<ul className="flex items-center font-semibold text-gray-400 gap-5">

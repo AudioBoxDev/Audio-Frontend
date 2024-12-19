@@ -45,7 +45,6 @@ const Artist = () => {
 
 	return (
 		<div className="text-white border-b border-[#151515] pb-5 font-roboto pt-6">
-			<h2 className="text-base font-bold mb-4">Artist</h2>
 			{isLoading ? (
 				<div className="relative w-12 h-12 m-auto">
 					<div className="absolute inset-0 border-2 border-blue-100 rounded-full animate-spin-slow"></div>
@@ -61,6 +60,7 @@ const Artist = () => {
 						>
 							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
 								<div className="rounded-full">
+								<h2 className="text-base font-bold mb-4 flex justify-center">Artist</h2>
 									<img
 										src={artist?.profilePicture?.replace(
 											"ipfs://",
@@ -80,7 +80,7 @@ const Artist = () => {
 					))}
 				</Slider>
 			) : (
-				<div className="text-center text-white">No artists found.</div>
+				<div className="text-center lg:p-10"><h1 className="text-4xl lg:text-6xl font-bold text-gray-900">AudioBlocks</h1></div>
 			)}
 		</div>
 	);

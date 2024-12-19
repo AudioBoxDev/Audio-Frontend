@@ -30,7 +30,7 @@ const Artist = () => {
 	// Navigate to artist's page
 	const handleClick = (artistId: string) => {
 		router.push(`/dashboard/artist/${artistId}`);
-	};
+	};	
 
 	// Genre list for filtering
 	const genres = [
