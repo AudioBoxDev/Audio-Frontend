@@ -6,7 +6,7 @@ import { useMusicPlayer } from "@/context/MusicPlayer";
 import { PlayingIndicator } from "./PlayingIndicator";
 import { Play } from "lucide-react";
 import { DividerHorizontalIcon } from "@radix-ui/react-icons";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 // Skeleton for when no songs are found
 const SkeletonCard = () => (
@@ -38,37 +38,24 @@ const Trending = () => {
 		[currentSongIndex, isPlaying, playSong]
 	  );
 	  
-	//   const isFetched = useRef(false);
 	  
-	// 	if (music) {
-	// 		isFetched.current = true; // Set the flag
-	// 		setSongs((prev:any) => (prev === music ? prev : music));
-	// 	}
-	// useEffect(() => {
-		// if (music.length > 0) {
-		//   setSongs((prev:any) => (prev === music ? prev : music));
-		// }
-	//   }, [music, setSongs]);
 	useEffect(() => {
-		if (music.length > 0 && isLoading)  {
-		  setSongs((prevSongs:any) => {
-			// Avoid updating if songs haven't changed
-			const isSame = prevSongs === music;
-			return isSame ? prevSongs : music;
-		  });
+		if (music.length > 0) {
+		  setSongs((prev:any) => (prev === music ? prev : music));
 		}
-	  }, [music, setSongs, isLoading]);
+	  }, [music, setSongs]);
+	  
+	// useMemo(() => {
+	// 	if (music)  {
+	// 	  setSongs((prevSongs:any) => {
+	// 		// Avoid updating if songs haven't changed
+	// 		const isSame = prevSongs === music;
+	// 		return isSame ? prevSongs : music;
+	// 	  });
+	// 	}
+	//   }, [music, setSongs]);
 
-	const renderSongNumber = (index: number) => {
-		if (hoveredRow === index) {
-			return <Play size={15} className="text-white" />;
-		}
-		if (currentSongIndex === index && isPlaying) {
-			return <PlayingIndicator />;
-		}
-		return index + 1;
-	};
-
+	
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -105,10 +92,12 @@ const Trending = () => {
 		<div className="text-white border-b border-[#151515] pb-5 font-roboto pt-6">
 			<h2 className="text-base font-bold mb-4">Trending</h2>
 			{isLoading ? (
-				<div className="relative w-12 h-12 m-auto">
-					<div className="absolute inset-0 border-2 border-blue-100 rounded-full animate-spin-slow"></div>
-					<div className="absolute inset-0 border-2 border-pink-900 border-t-transparent rounded-full animate-spin"></div>
-				</div>
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+				{[...Array(4)].map((_, index) => (
+					<SkeletonCard key={index} />
+				))}
+			</div>
+				
 			) : music.length > 0 ? (
 				<Slider {...settings}>
 					{music.map((music, index) => (
@@ -142,11 +131,7 @@ const Trending = () => {
 					))}
 				</Slider>
 			) : (
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-					{[...Array(4)].map((_, index) => (
-						<SkeletonCard key={index} />
-					))}
-				</div>
+				<div className="text-center text-white">No Music found.</div>
 			)}
 		</div>
 	);

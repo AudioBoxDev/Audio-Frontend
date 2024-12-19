@@ -19,21 +19,26 @@ const Hero = () => {
 	const { artistProfileDetails } = uploadProfileDetails();
 	const {isConnected} = useAccount();
 	
-	const getStarted = () => {
-		if (!token) {
-			// Handle missing wallet connection or token
-			if (!isConnected) {
-				toast.error("Please connect your wallet");
-			} else {
-				toast.error("Please sign the Authentication message");
-			}
-		} else {
-			// Redirect based on artist profile details
-			const redirectPath = artistProfileDetails ? "/dashboard" : "/dashboard/profile";
-			router.push(redirectPath);
-		}
 
+	const getStarted = async() => {
+		try {
+			if (token && token.trim() !== "") {
+				const redirectPath = artistProfileDetails ? "/dashboard" : "/dashboard/profile";
+				router.push(redirectPath);
+			} else {
+				// Handle missing wallet connection or token
+				if (!isConnected) {
+					toast.error("Please connect your wallet");
+				} else {
+					toast.error("Please sign the Authentication message");
+				}
+			}
+		} catch (error:any) {
+			toast.error(error);
+		}
+		
 	};
+	
 	const JoinWaitlist = () => {
 		setIsModalOpen(true);
 	};

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import  { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 

@@ -1,7 +1,5 @@
 "use client"
-import {useState} from 'react'
 import Image from 'next/image';
-import { Music, X} from 'lucide-react';
 import image from "/public/images/Group1.png"
 import Artist from '@/components/Artist';
 import Trending from '@/components/Trending';
