@@ -11,18 +11,24 @@ import { useAccount } from "wagmi";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { fetchArtist } from "@/hooks/fetchArtist";
 
 export default function Home() {
 	const { artistProfileDetails } = uploadProfileDetails();
 	const { isConnected } = useAccount();
 	const token = Cookies.get("audioblocks_jwt");
 	const router = useRouter();
+	
+	const { artists, isLoading } = fetchArtist();
 
+	const handleClick = (artistId: string) => {
+		router.push(`/dashboard/artist/${artistId}`);
+	};
 	const getStarted = () => {
 		if (!token) {
 			if (!isConnected) {
 				toast.error("Please connect your wallet");
-			} else {
+			} else  if(isConnected && !token){
 				toast.error("Please sign the Authentication message");
 			}
 		} else {
@@ -39,6 +45,38 @@ export default function Home() {
 			<Hero />
 			<AudioBoxFeatures />
 			<AudioCardItem />
+			{!isLoading &&
+			<div>
+			<h1 className="text-2xl text-white text-center font-bold mb-2">Artist</h1>
+				<div className="flex w-11/12 m-auto items-center justify-between flex-wrap">
+					{artists?.slice(0,4).map((artist, index) => (
+						<div
+							key={index}
+							onClick={() => handleClick(artist?.id)}
+							className=" cursor-pointer p-2 "
+						>
+							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
+								<div className="rounded-full">
+								<h2 className="text-base font-bold mb-4 flex justify-center">Artist</h2>
+									<img
+										src={artist?.profilePicture?.replace(
+											"ipfs://",
+											`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/`,
+										)}
+										width={180}
+										height={200}
+										alt={artist.fullName}
+										className="w-40 rounded-full h-40 object-cover"
+									/>
+								</div>
+								<div className="p-4 pt-2 md:text-center  text-left">
+									<p className="text-sm text-gray-400">{artist?.fullName}</p>
+								</div>
+							</div>
+						</div>
+					))}
+			</div>
+			</div>}
 
 			<div className="bg-gradient-to-r from-[#991E7035] to-[#333A5670] text-white py-6">
 				<div className="grid w-11/12 m-auto items-center md:grid-cols-5 grid-cols-12 gap-6">
