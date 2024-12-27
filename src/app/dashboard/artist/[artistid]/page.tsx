@@ -1,16 +1,18 @@
 "use client";
-import { useEffect,  useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EllipsisVertical, Heart, MessageCircle, Users } from "lucide-react";
-import {  Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 import * as Tabs from "@radix-ui/react-tabs";
 import CommentSection from "@/components/Comment";
+import { FaHeart } from "react-icons/fa";
 import { contractAddress, abi } from "@/config/abi";
 import { useReadContract, useReadContracts } from "wagmi";
 import { useAccount } from "wagmi";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { ArtistCardSkeleton } from "@/components/ArtistCardSkeleton";
 
 const ArtistId = () => {
@@ -19,21 +21,49 @@ const ArtistId = () => {
 	const { address } = useAccount();
 	const [artist, setArtist] = useState<any>();
 	const params = useParams();
-	const [liked, setLiked] = useState(false);
+	const [likedSongs, setLikedSongs] = useState<{ [key: number]: boolean }>({});
 	const [isLoading, setIsLoading] = useState(false);
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 	const [isExpanded, setIsExpanded] = useState(false);
-
+	const url = process.env.NEXT_PUBLIC_API_URL;
+	const jwt = Cookies.get("audioblocks_jwt");
 	const toggleBio = () => {
 		setIsExpanded(!isExpanded);
 	};
 
-	const toggleLike = () => {
-		setLiked((prev) => !prev);
-	};
+	
 
+	const toggleLike = async (index: number) => {
+		const isLiked = likedSongs[index] || false;
+
+		try {
+			if (isLiked) {
+				// Unlike the song
+				await axios.post(`${url}/song/unlike`,{songId: index}, {
+					headers: {
+						Authorization: `Bearer ${jwt}`,
+					},
+				});
+			} else {
+				// Like the song
+				await axios.post(`${url}/song/like`,{songId: index}, {
+					headers: {
+						Authorization: `Bearer ${jwt}`,
+					},
+				});
+			}
+
+			// Update local like state
+			setLikedSongs((prev) => ({
+				...prev,
+				[index]: !(prev[index] || false), 
+			}));
+		} catch (error: any) {
+			console.error("Error toggling like:", error.message);
+		}
+	};
 	const { data: artistId, isSuccess }: any = useReadContract({
 		address: contractAddress,
 		abi: abi,
@@ -108,7 +138,9 @@ const ArtistId = () => {
 				});
 				const artistSong = {
 					...response.data,
+					songId: Number(songData.result.songId),
 				};
+				
 				songs.push(artistSong);
 				setSongsData(songs);
 				setSongs(songs);
@@ -120,12 +152,35 @@ const ArtistId = () => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (data && success) {
-	// 		fetchSong(data);
-	// 	}
-	// }, [data]);
+	useEffect(() => {
+		const fetchLikedStatus = async () => {
+			try {
+				const songIds = songs.map(async(song) => {
 
+					const response = await axios.get(`${url}/song/isLiked/${song.songId}`, {
+						headers: {
+							Authorization: `Bearer ${jwt}`,
+						},
+					});
+					const likedData = response.data;
+					if (likedData.isLiked) { 
+						setLikedSongs((prev) => ({
+						  ...prev,
+						  [song.songId]: !(prev[song.songId] || false),
+						}));
+					}
+				});
+				// console.log(songIds);
+				
+			} catch (error:any) {
+				console.error("Error fetching liked status:", error.message);
+			}
+		};
+
+		fetchLikedStatus();
+	}, [jwt, songs]);
+	
+	
 
 	const isFetched = useRef(false);
 	if (data && success && !isFetched.current) {
@@ -294,11 +349,11 @@ const ArtistId = () => {
 												{song.duration}
 											</td>
 											<td
-												className="p-3 font-medium text-center hidden md:table-cell"
-												onClick={toggleLike}
+												className="p-3 font-medium cursor-pointer text-center hidden md:table-cell"
+												onClick={() => toggleLike(song?.songId)}
 												style={{ cursor: "pointer" }}
 											>
-												<Heart size={20} color={liked ? "red" : "white"} />
+												{likedSongs[song?.songId] ? <FaHeart size={20} color={"red"} /> : <Heart size={20} color={"white"} />}
 											</td>
 											<td className="p-3 font-medium text-center ">
 												<EllipsisVertical size={20} />
@@ -323,7 +378,7 @@ const ArtistId = () => {
 						<div className="h-64 text-center">No Playlist created</div>
 					</Tabs.Content>
 				</Tabs.Root>
-				<CommentSection />
+				{/* <CommentSection /> */}
 			</div>
 		</>
 	);
