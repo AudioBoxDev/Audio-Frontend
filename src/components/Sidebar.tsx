@@ -79,7 +79,7 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 						<SidebarItems icon={Music} label="Playlist" to="#" />
 						<SidebarItems
 							icon={FileMusic}
-							label="Songs"
+							label="Artist"
 							to="/dashboard/artist"
 							isActive={pathname === "/dashboard/artist"}
 						/>
