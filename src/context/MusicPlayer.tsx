@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { Song } from '../components/MusicPlayer';
 import Cookies from 'js-cookie';
 
@@ -17,9 +17,23 @@ interface MusicPlayerContextType {
 const MusicPlayerContext = createContext<MusicPlayerContextType | undefined>(undefined);
 
 export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [songs, setSongs] = useState<Song[]>([]);
-  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  // const [songs, setSongs] = useState<Song[]>([]);
+  const [songs, setSongs] = useState<Song[]>(() => {
+    const savedSongs = localStorage.getItem('songs');
+    return savedSongs ? JSON.parse(savedSongs) : [];
+  });
+
+  const [currentSongIndex, setCurrentSongIndex] = useState(() => {
+    const savedIndex = localStorage.getItem('currentSongIndex');
+    return savedIndex ? Number(savedIndex) : 0;
+  });
+
+  const [isPlaying, setIsPlaying] = useState(() => {
+    const savedPlaying = localStorage.getItem('isPlaying');
+    return savedPlaying === 'true';
+  });
+  // const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
+  // const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const jwt = Cookies.get("audioblocks_jwt");
 
@@ -46,6 +60,20 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
       console.error('Error starting song session:', error);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('songs',  JSON.stringify(songs, (key, value) =>
+      typeof value === "bigint" ? value.toString() : value
+    ));
+  }, [songs]);
+
+  useEffect(() => {
+    localStorage.setItem('currentSongIndex', currentSongIndex.toString());
+  }, [currentSongIndex]);
+
+  useEffect(() => {
+    localStorage.setItem('isPlaying', isPlaying.toString());
+  }, [isPlaying]);
   
   
   const playSong = useCallback(async (index: number) => {
@@ -78,7 +106,6 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     if (currentSongIndex < songs.length - 1) {
       playNextSong();
     } else {
-      console.log(songs);
       setIsPlaying(false);
       setCurrentSongIndex(0);
     }
