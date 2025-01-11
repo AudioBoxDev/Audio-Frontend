@@ -142,7 +142,7 @@ const SongDetails = () => {
 	return (
 		<>
 			<div className="bg-gradient-to-r from-[#4B0B3E] to-[#274749] p-8 rounded-lg text-white flex md:flex-row flex-col items-center justify-between">
-				<div className="flex-1 gap-2 md:order-2 order-1" >
+				<div className="flex-1 gap-2" >
 					<div className="flex space-x-3 items-center">
 						<div
 							onClick={() => handlePlaySong(id)}
@@ -186,7 +186,7 @@ const SongDetails = () => {
 						</span>
 					</div>
 				</div>
-				<div className="flex-shrink-0">
+				<div className="flex-shrink-0 md:order-2 order-1">
 					<img
 						src={songData?.image?.replace(
 							"ipfs://",
