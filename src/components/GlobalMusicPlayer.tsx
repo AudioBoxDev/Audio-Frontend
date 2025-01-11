@@ -13,7 +13,7 @@ const GlobalMusicPlayer: React.FC = () => {
     handleSongEnd,
   } = useMusicPlayer();
 
-  if (songs.length === 0) return null;
+  if (songs.length === 0) return localStorage.getItem('songs');
 
   return (
     <MusicPlayer
