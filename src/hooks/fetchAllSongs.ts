@@ -9,7 +9,7 @@ import { useAccount } from "wagmi";
 
 export const fetchAllSongs = () => {
 	const { address } = useAccount();
-	const [music, setMusic] = useState<any[]>([]);
+	const [musics, setMusic] = useState<any[]>([]);
 	const [isLoading, setIsLoading]=useState(false);
 
 	const { data: musicIds, isSuccess }:any = useReadContract({
@@ -75,7 +75,7 @@ export const fetchAllSongs = () => {
 
 	return {
 		fetchMusicDetails,
-		music,
+		musics,
 		isLoading
 	};
 };
