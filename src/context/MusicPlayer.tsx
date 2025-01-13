@@ -85,6 +85,7 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, []);
 
   const playNextSong = useCallback(() => {
+    console.log(songs.length);
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(prev => prev + 1);
       setIsPlaying(true);
@@ -103,6 +104,7 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, []);
 
   const handleSongEnd = useCallback(() => {
+    console.log(songs.length);
     if (currentSongIndex < songs.length - 1) {
       playNextSong();
     } else {

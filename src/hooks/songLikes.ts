@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const SongLikes = () => {
+export const SongLikes = () => {
 	const [likes, setLikes] = useState<number | null>(null);
     const url = process.env.NEXT_PUBLIC_API_URL;
 	const jwt = Cookies.get("audioblocks_jwt");
@@ -21,6 +21,7 @@ const SongLikes = () => {
 				const data = response.data;
 				if (data.success) {
 					setLikes(data.data.totalLikes);
+                    
 				}
 			} catch (error) {
 				console.error("Error fetching likes:", error);
@@ -36,4 +37,3 @@ const SongLikes = () => {
 	};
 };
 
-export default SongLikes;
