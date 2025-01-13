@@ -14,7 +14,7 @@ import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { ArtistCardSkeleton } from "@/components/ArtistCardSkeleton";
-import SongLikes from "@/hooks/songLikes";
+import { SongLikes } from "@/hooks/songLikes";
 
 const ArtistId = () => {
 	const { playSong, setSongs } = useMusicPlayer();
@@ -243,7 +243,7 @@ const ArtistId = () => {
 								</p>
 							</div>
 
-							<div className=" grid grid-flow-col gap-2 w-2/5 mt-3">
+							{/* <div className=" grid grid-flow-col gap-2 w-2/5 mt-3">
 								<span className="flex gap-2 text-xs">
 									<MessageCircle size={15} /> 1020{" "}
 								</span>
@@ -253,7 +253,7 @@ const ArtistId = () => {
 								<span className="flex gap-2 text-xs ">
 									<Heart size={15} /> 1,020
 								</span>
-							</div>
+							</div> */}
 						</div>
 						<div className="flex-shrink-0">
 							<img
@@ -367,10 +367,7 @@ const ArtistId = () => {
 													{renderSongNumber(index)}
 												</div>
 											</td>
-											<td
-												
-												className="p-3 flex gap-1 items-center"
-											>
+											<td className="p-3 flex gap-1 items-center">
 												<div className="relative">
 													<img
 														src={song?.image.replace(
@@ -387,7 +384,9 @@ const ArtistId = () => {
 														}`}
 													/>
 												</div>
-												<div onClick={() => songDetails(song?.songId, song?.name)}>
+												<div
+													onClick={() => songDetails(song?.songId, song?.name)}
+												>
 													<p
 														className={`font-medium text-left text-sm ${
 															currentSongIndex === index ? "text-[#B6195B]" : ""
@@ -418,11 +417,14 @@ const ArtistId = () => {
 														<span>{likes}</span>
 													</div>
 												) : (
-													<Heart
-														size={15}
-														className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
-														color={"white"}
-													/>
+													<div className="flex gap-2 text-xs cursor-pointer ">
+														<Heart
+															size={15}
+															className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
+															color={"white"}
+														/>
+														<span>{likes}</span>
+													</div>
 												)}
 											</td>
 											<td className="p-3 font-medium text-center ">
