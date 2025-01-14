@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import { FaHeart } from "react-icons/fa";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 import CommentSection from "@/components/Comment";
-import SongLikes from "@/hooks/songLikes";
+import {SongLikes} from "@/hooks/songLikes";
 
 const SongDetails = () => {
 	const searchParams = useSearchParams();
@@ -177,11 +177,14 @@ const SongDetails = () => {
 									<span>{likes}</span>
 								</div>
 							) : (
+                                <div className="flex gap-2 text-xs cursor-pointer ">
 								<Heart
 									size={15}
 									className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
 									color={"white"}
 								/>
+                                <span>{likes}</span>
+								</div>
 							)}
 						</span>
 					</div>

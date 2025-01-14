@@ -24,7 +24,7 @@ export interface Song {
 	artistName: string;
 	animation_url: string;
 	image: any;
-	songId:any;
+	songId: any;
 	// streams: number;
 	// listeners: number;
 	// saves: number;
@@ -163,24 +163,25 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	useEffect(() => {
 		const fetchLikedStatus = async () => {
 			try {
-			songs.map(async(song) => {
-					
-					const response = await axios.get(`${url}/song/isLiked/${song.songId}`, {
-						headers: {
-							Authorization: `Bearer ${jwt}`,
+				songs.map(async (song) => {
+					const response = await axios.get(
+						`${url}/song/isLiked/${song.songId}`,
+						{
+							headers: {
+								Authorization: `Bearer ${jwt}`,
+							},
 						},
-					});
+					);
 					const likedData = response.data;
-					if (likedData.isLiked) { 
+					if (likedData.isLiked) {
 						setLikedSongs((prev) => ({
-						  ...prev,
-						  [song.songId]: !(prev[song.songId] || false),
+							...prev,
+							[song.songId]: !(prev[song.songId] || false),
 						}));
 					}
 				});
 				// console.log(songIds);
-				
-			} catch (error:any) {
+			} catch (error: any) {
 				console.error("Error fetching liked status:", error.message);
 			}
 		};
@@ -232,14 +233,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	};
 
 	useEffect(() => {
-		
 		if (isPlaying && songs[currentSongIndex]) {
 			audioRef.current?.play();
 		} else {
 			audioRef.current?.pause();
 		}
 	}, [isPlaying, currentSongIndex, songs]);
-
 
 	const handleVolumeEnter = () => {
 		if (volumeTimeout.current) {
@@ -253,9 +252,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 			setIsVolumeHovered(false);
 		}, 300);
 	};
-
-	
-	
 
 	return (
 		<div className="fixed grid grid-cols-1 z-30 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
@@ -288,29 +284,28 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 						{songs[currentSongIndex]?.artistName}
 					</p>
 				</div>
-				
-				<div
-					onClick={() => toggleLike(songs[currentSongIndex]?.songId)}
-					style={{ cursor: "pointer" }}
-				>
-					{likedSongs[songs[currentSongIndex]?.songId] ? (
-						<FaHeart
-							size={15}
-							className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
-							color={"#B6195B"}
-						/>
-					) : (
-						<Heart
-							size={15}
-							className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
-							color={"white"}
-						/>
-					)}
-				</div>
 			</div>
 
 			<div className="flex col-span-2 space-y-2 flex-col">
 				<div className="flex items-center justify-center space-x-4">
+					<div
+						onClick={() => toggleLike(songs[currentSongIndex]?.songId)}
+						style={{ cursor: "pointer" }}
+					>
+						{likedSongs[songs[currentSongIndex]?.songId] ? (
+							<FaHeart
+								size={15}
+								className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
+								color={"#B6195B"}
+							/>
+						) : (
+							<Heart
+								size={15}
+								className="hover:scale-125 hover:-translate-y-1 transition-transform duration-200"
+								color={"white"}
+							/>
+						)}
+					</div>
 					<button
 						onClick={toggleShuffle}
 						className={`text-neutral-400 hover:text-white transition-colors p-1 ${
