@@ -11,10 +11,10 @@ const Footer = () => {
         <div className="col-span-1 md:col-span-1 text-base">
           <div className="flex items-center space-x-3 mb-4">
           <img src="/images/logo.jpeg" height={40} width={40} alt="logo" className="rounded-full" />
-          <h2 className="text-white font-semibold text-xl">AudioBox</h2>
+          <h2 className="text-white font-semibold text-xl">AudioBlocks</h2>
           </div>
           <p className="text-sm">
-          AudioBox is a music platform that empowers artists to retain ownership of their music and earn fair revenue. Fans can discover, stream, and support artists directly
+          AudioBlocks is a music platform that empowers artists to retain ownership of their music and earn fair revenue. Fans can discover, stream, and support artists directly
           </p>
         </div>
 
@@ -28,12 +28,12 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/" className="hover:text-white">
+              <Link href="/comingSoon" className="hover:text-white">
                 Marketplace
               </Link>
             </li>
             <li>
-              <Link href="/" className="hover:text-white">
+              <Link href="https://audioblocks-artist.vercel.app/" className="hover:text-white">
                 Artist Hub
               </Link>
             </li>
@@ -45,7 +45,7 @@ const Footer = () => {
           <h3 className="text-[#5B5C61] font-semibold text-lg mb-4">Support</h3>
           <ul className="space-y-2">
             <li>
-              <Link href="/" className="hover:text-white">
+              <Link href="/comingSoon" className="hover:text-white">
                 FAQ
               </Link>
             </li>
@@ -60,7 +60,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/" className="hover:text-white">
+              <Link href="/termsOfAgreement" className="hover:text-white">
                 Terms of Service
               </Link>
             </li>

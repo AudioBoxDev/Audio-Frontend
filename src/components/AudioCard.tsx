@@ -1,13 +1,31 @@
-import { Heart } from 'lucide-react';
-import Image from 'next/image';
+"use client"
 
-const AudioCard = ({ imageSrc, title, artist, price }:any) => {
+import { Heart } from "lucide-react"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+
+interface AudioCardProps {
+  imageSrc: string
+  title: string
+  artist: string
+  price: string
+}
+
+const AudioCard = ({ imageSrc, title, artist, price }: AudioCardProps) => {
+  const router = useRouter()
+
+  const handleBuyNow = () => {
+    router.push("/coming-soon")
+  }
+
   return (
     <div className="bg-gradient-to-b font-roboto rounded-xl w-11/12 m-auto from-[#FFFFFF1A] to-[#FFFFFF0D] my-5 text-white p-5">
       <div className="relative">
         <Image
-          src={imageSrc}
+          src={imageSrc || "/placeholder.svg"}
           alt={title}
+          width={400}
+          height={200}
           objectFit="cover"
           className="w-full h-[200px] object-cover rounded-xl"
         />
@@ -19,20 +37,24 @@ const AudioCard = ({ imageSrc, title, artist, price }:any) => {
         </div>
       </div>
 
-      <div className=" py-4">
-        <div className='flex justify-between'>
-          <div className=''>
-          <h3 className="text-sm font-bold">{title}</h3>
-          <p className="text-xs text-gray-400">by {artist}</p>
+      <div className="py-4">
+        <div className="flex justify-between">
+          <div>
+            <h3 className="text-sm font-bold">{title}</h3>
+            <p className="text-xs text-gray-400">by {artist}</p>
           </div>
           <p className="mt-2 text-sm font-semibold">{price} ETH</p>
         </div>
-        <button className="w-full text-sm mt-4 h-[50px] bg-gradient-to-r from-[#561445] to-[#621022] text-white font-bold rounded-md">
+        <button
+          className="w-full text-sm mt-4 h-[50px] bg-gradient-to-r from-[#561445] to-[#621022] text-white font-bold rounded-md"
+          onClick={handleBuyNow}
+        >
           Buy Now
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AudioCard;
+export default AudioCard
+
