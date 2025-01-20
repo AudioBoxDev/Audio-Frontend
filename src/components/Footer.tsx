@@ -10,8 +10,8 @@ const Footer = () => {
         
         <div className="col-span-1 md:col-span-1 text-base">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-pink-500"></div>
-            <h2 className="text-white font-semibold text-xl">AudioBox</h2>
+          <img src="/images/logo.jpeg" height={40} width={40} alt="logo" className="rounded-full" />
+          <h2 className="text-white font-semibold text-xl">AudioBox</h2>
           </div>
           <p className="text-sm">
           AudioBox is a music platform that empowers artists to retain ownership of their music and earn fair revenue. Fans can discover, stream, and support artists directly

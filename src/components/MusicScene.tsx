@@ -26,7 +26,7 @@ const MusicScene = () => {
 
         <Link
 						// href="/dashboard/marketplace"
-            href="/"
+            href="/comingSoon"
 						className=" w-44 my-6 px-2 m-auto md:hidden  flex text-white border rounded-full border-[#B81A3C52]  text-sm"
 					>
 						Go to Marketplace 
