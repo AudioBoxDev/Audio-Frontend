@@ -10,14 +10,16 @@ import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 import { useAccount } from "wagmi";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+
 import Faq from "@/components/Faq";
 import MusicScene from "@/components/MusicScene";
+
 
 export default function Home() {
 	const { artistProfileDetails } = uploadProfileDetails();
 	const { isConnected } = useAccount();
 	const token = Cookies.get("audioblocks_jwt");
-	
+
 
 	const getStarted = async() => {
 			try {
@@ -39,16 +41,19 @@ export default function Home() {
 			
 		};
 
+
 	return (
 		<>
 			<Navbar2 />
 			<Hero />
 			<AudioBoxFeatures />
+
 			<MusicScene/>
 			<AudioCardItem />
 	
 			<Faq/>
 			<div className="bg-gradient-to-r border m-auto w-11/12 rounded-xl mb-9 border-[#1B1B1B] text-white py-6">
+
 				<div className="grid w-11/12 m-auto items-center md:grid-cols-5 grid-cols-12 gap-6">
 					<div className="md:col-span-2 col-span-12 md:text-left text-center md:pl-16 space-y-5">
 						<h1 className="text-3xl md:text-5xl font-bold leading-tight">
@@ -61,7 +66,9 @@ export default function Home() {
 						<div>
 							<button
 								onClick={getStarted}
+
 								className="bg-gradient-to-r from-[#B1198E] to-[#B81A3F] text-white text-sm px-6 py-3 rounded-full"
+
 							>
 								Get Started
 							</button>

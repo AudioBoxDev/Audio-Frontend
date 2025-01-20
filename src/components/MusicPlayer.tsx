@@ -12,11 +12,13 @@ import {
 	Volume,
 	Shuffle,
 	Repeat,
+
 	Heart,
 } from "lucide-react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { FaHeart } from "react-icons/fa";
+
 
 export interface Song {
 	id: string;
@@ -24,7 +26,9 @@ export interface Song {
 	artistName: string;
 	animation_url: string;
 	image: any;
+
 	songId: any;
+
 	// streams: number;
 	// listeners: number;
 	// saves: number;
@@ -56,11 +60,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	const [repeatMode, setRepeatMode] = useState<"off" | "all" | "one">("off");
 	const [isShuffleOn, setIsShuffleOn] = useState<boolean>(false);
 	const [shuffledQueue, setShuffledQueue] = useState<number[]>([]);
+
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const volumeTimeout = useRef<NodeJS.Timeout>();
 	const url = process.env.NEXT_PUBLIC_API_URL;
 	const jwt = Cookies.get("audioblocks_jwt");
 	const [likedSongs, setLikedSongs] = useState<{ [key: number]: boolean }>({});
+
 
 	// Initialize shuffle queue
 	useEffect(() => {
@@ -122,6 +128,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 			}
 		}
 	};
+
 	const toggleLike = async (index: number) => {
 		const isLiked = likedSongs[index] || false;
 
@@ -189,6 +196,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 		fetchLikedStatus();
 	}, [jwt, songs]);
 
+
 	const getNextSongIndex = (): number => {
 		if (isShuffleOn) {
 			const currentQueueIndex = shuffledQueue.indexOf(currentSongIndex);
@@ -233,12 +241,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	};
 
 	useEffect(() => {
+
 		if (isPlaying && songs[currentSongIndex]) {
+
 			audioRef.current?.play();
 		} else {
 			audioRef.current?.pause();
 		}
+
 	}, [isPlaying, currentSongIndex, songs]);
+
 
 	const handleVolumeEnter = () => {
 		if (volumeTimeout.current) {
@@ -255,6 +267,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
 	return (
 		<div className="fixed grid grid-cols-1 z-30 md:grid-cols-4 gap-4 md:left-64 left-0 bottom-0 items-center justify-between w-full bg-gradient-to-b from-neutral-900 to-black text-white p-4 rounded-t-lg shadow-lg max-w-3xl mx-auto border-t border-neutral-800">
+
 			<audio
 				ref={audioRef}
 				src={songs[currentSongIndex]?.animation_url?.replace(
@@ -266,6 +279,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 			/>
 
 			<div className="flex col-span-1 items-center space-x-4 cursor-pointer">
+
 				<img
 					width={100}
 					height={100}
@@ -277,7 +291,9 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 					className="md:w-12 md:h-12 w-8 h-8 rounded object-cover shadow-lg"
 				/>
 				<div className="overflow-hidden">
+
 					<h3 className="text-white font-medium text-sm truncate hover:text-[#B6195B] transition-colors">
+
 						{songs[currentSongIndex]?.name}
 					</h3>
 					<p className="text-neutral-400 text-xs truncate hover:text-white transition-colors">
@@ -288,6 +304,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
 			<div className="flex col-span-2 space-y-2 flex-col">
 				<div className="flex items-center justify-center space-x-4">
+
 					<div
 						onClick={() => toggleLike(songs[currentSongIndex]?.songId)}
 						style={{ cursor: "pointer" }}
@@ -310,6 +327,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 						onClick={toggleShuffle}
 						className={`text-neutral-400 hover:text-white transition-colors p-1 ${
 							isShuffleOn ? "text-[#B6195B]" : ""
+
 						}`}
 					>
 						<Shuffle className="w-4 h-4" />
@@ -339,7 +357,9 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 					<button
 						onClick={toggleRepeat}
 						className={`text-neutral-400 hover:text-white transition-colors p-1 relative ${
+
 							repeatMode !== "off" ? "text-[#B6195B]" : ""
+
 						}`}
 					>
 						<Repeat className="w-4 h-4" />
@@ -371,9 +391,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 								step="0.01"
 								value={volume}
 								onChange={handleVolumeChange}
+
 								className="w-20 h-1 appearance-none bg-neutral-600 rounded-lg cursor-pointer accent-[#B6195B] hover:accent-[#B6195B]"
 								style={{
 									background: `linear-gradient(to right, #B6195B 0%, #B6195B ${
+
 										volume * 100
 									}%, rgb(82, 82, 82) ${volume * 100}%, rgb(82, 82, 82) 100%)`,
 								}}
@@ -394,9 +416,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 							step="0.1"
 							value={currentTime}
 							onChange={handleProgressBarChange}
+
 							className="w-full h-1 appearance-none bg-neutral-600 rounded-full cursor-pointer accent-[#B6195B] hover:accent-[#B6195B]"
 							style={{
 								background: `linear-gradient(to right, #B6195B 0%, #B6195B ${
+
 									(currentTime / duration) * 100
 								}%, rgb(82, 82, 82) ${
 									(currentTime / duration) * 100

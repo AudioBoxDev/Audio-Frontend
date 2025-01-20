@@ -1,6 +1,8 @@
+
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { Song } from '../components/MusicPlayer';
 import Cookies from 'js-cookie';
+
 
 interface MusicPlayerContextType {
   songs: Song[];
@@ -17,6 +19,7 @@ interface MusicPlayerContextType {
 const MusicPlayerContext = createContext<MusicPlayerContextType | undefined>(undefined);
 
 export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
   // const [songs, setSongs] = useState<Song[]>([]);
   const [songs, setSongs] = useState<Song[]>(() => {
     const savedSongs = localStorage.getItem('songs');
@@ -80,12 +83,13 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     console.log(songs);
     // const { id: songId, artistId } = songs[index]; 
     // await startSongSession(userId, artistId, songId);
+
     setCurrentSongIndex(index);
     setIsPlaying(true);
   }, []);
 
   const playNextSong = useCallback(() => {
-    console.log(songs.length);
+
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(prev => prev + 1);
       setIsPlaying(true);
@@ -104,7 +108,7 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, []);
 
   const handleSongEnd = useCallback(() => {
-    console.log(songs.length);
+
     if (currentSongIndex < songs.length - 1) {
       playNextSong();
     } else {

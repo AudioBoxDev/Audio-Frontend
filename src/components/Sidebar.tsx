@@ -39,7 +39,9 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 				></div>
 			)}
 			<div
+
 				className={`bg-custom-gradient z-50 overflow-y-scroll  lg:translate-x-0 scrollbar-hide lg:block transform transition-transform duration-300  fixed h-screen ${
+
 					isOpen ? "translate-x-0" : "-translate-x-96"
 				} bg-black text-white text-base p-5`}
 			>
@@ -79,7 +81,9 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 						<SidebarItems icon={Music} label="Playlist" to="#" />
 						<SidebarItems
 							icon={FileMusic}
+
 							label="Artist"
+
 							to="/dashboard/artist"
 							isActive={pathname === "/dashboard/artist"}
 						/>
