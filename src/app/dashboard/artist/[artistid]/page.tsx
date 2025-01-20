@@ -148,6 +148,7 @@ const ArtistId = () => {
 				const artistSong = {
 					...response.data,
 					songId: Number(songData.result.songId),
+					artistAddress: songData.result.artistAddress,
 				};
 
 				songs.push(artistSong);

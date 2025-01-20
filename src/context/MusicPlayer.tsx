@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { Song } from '../components/MusicPlayer';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 interface MusicPlayerContextType {
   songs: Song[];
@@ -36,12 +37,12 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   // const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const jwt = Cookies.get("audioblocks_jwt");
+  const [currentStreamId, setCurrentStreamId] = useState<string | null>(null);
 
   const startSongSession = async (userId: number, artistId: number, songId: number) => {
     try {
       const startTime = new Date().toISOString(); // Current timestamp
-      const response = await fetch(`${url}/song/start-song-session`, {
-        method: 'POST',
+      const response = await axios.post(`${url}/song/start-song-session`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${jwt}`,
@@ -53,11 +54,46 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
           startTime,
         }),
       });
-      if (!response.ok) {
+
+      if (response) {
+        const data = await response;
+        setCurrentStreamId(data.data._id); // Save the stream ID
+      } else {
         console.error('Failed to start song session');
       }
     } catch (error) {
       console.error('Error starting song session:', error);
+    }
+  };
+
+  const endSongSession = async (artistAddress: string) => {
+    if (!currentStreamId) return; // If no active stream, skip ending session
+
+    try {
+      const endTime = new Date().toISOString(); // Current timestamp
+      const response = await axios.post(`${url}/song/end-song-session`, 
+        {
+          streamId: currentStreamId,
+          endTime,
+          artistAddress,
+        },
+        {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        } }
+        
+     );
+
+      if (response) {
+        const data = await response;
+        console.log('Song session ended:', data);
+        setCurrentStreamId(null); // Clear the current stream ID
+      } else {
+        console.error('Failed to end song session');
+      }
+    } catch (error) {
+      console.error('Error ending song session:', error);
     }
   };
 
@@ -77,8 +113,7 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   
   
   const playSong = useCallback(async (index: number) => {
-    console.log(songs);
-    // const { id: songId, artistId } = songs[index]; 
+    // const {songId, artistId } = songs[index]; 
     // await startSongSession(userId, artistId, songId);
     setCurrentSongIndex(index);
     setIsPlaying(true);
@@ -108,6 +143,8 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     if (currentSongIndex < songs.length - 1) {
       playNextSong();
     } else {
+      const { artistAddress }:any = songs[currentSongIndex];
+      endSongSession(artistAddress);
       setIsPlaying(false);
       setCurrentSongIndex(0);
     }
