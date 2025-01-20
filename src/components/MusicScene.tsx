@@ -4,6 +4,7 @@ import React from "react";
 import Ellipse from "/public/images/Ellipse.png";
 import Ellipse4 from "/public/images/Ellipse4.png";
 import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
@@ -15,6 +16,7 @@ const MusicScene = () => {
     const handleClick = (artistId: string) => {
       router.push(`/dashboard/artist/${artistId}`);
     };
+
 
 
   return (
@@ -38,6 +40,7 @@ const MusicScene = () => {
       </div>
 
       {/* Artist Profile Section */}
+
     
       {!isLoading &&
 			<div>
@@ -67,6 +70,7 @@ const MusicScene = () => {
 					))}
 			</div>
 			</div>}
+
 
 
     </div>

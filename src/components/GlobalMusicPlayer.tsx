@@ -15,6 +15,7 @@ const GlobalMusicPlayer: React.FC = () => {
 
   if (songs.length === 0) return localStorage.getItem('songs');
 
+
   return (
     <MusicPlayer
       songs={songs}

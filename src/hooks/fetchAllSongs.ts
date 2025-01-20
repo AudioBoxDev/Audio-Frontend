@@ -9,7 +9,9 @@ import { useAccount } from "wagmi";
 
 export const fetchAllSongs = () => {
 	const { address } = useAccount();
+
 	const [musics, setMusic] = useState<any[]>([]);
+
 	const [isLoading, setIsLoading]=useState(false);
 
 	const { data: musicIds, isSuccess }:any = useReadContract({
