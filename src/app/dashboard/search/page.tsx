@@ -16,7 +16,7 @@ const Search = () => {
 
 	const { playSong, setSongs } = useMusicPlayer();
 	const { artists } = fetchArtist();
-	const { music } = fetchAllSongs();
+	const { musics } = fetchAllSongs();
 	const [liked, setLiked] = useState(false);
 	const router = useRouter();
 
@@ -28,7 +28,7 @@ const Search = () => {
 		setLiked((prev) => !prev);
 	};
 
-	const [filteredMusic, setFilteredMusic] = useState(music);
+	const [filteredMusic, setFilteredMusic] = useState(musics);
 	const [filteredArtists, setFilteredArtists] = useState(artists);
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const Search = () => {
 	// Filter logic based on the query parameter
 	useEffect(() => {
 		
-		const filteredMusicList = music.filter(
+		const filteredMusicList = musics.filter(
 			(song) =>
 				song.artistName?.toLowerCase().includes(query.toLowerCase()) ||
 				song.name.toLowerCase().includes(query.toLowerCase()),
