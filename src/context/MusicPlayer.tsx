@@ -1,5 +1,8 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { Song } from '../components/MusicPlayer';
+import Cookies from 'js-cookie';
+
 
 interface MusicPlayerContextType {
   songs: Song[];
@@ -16,16 +19,77 @@ interface MusicPlayerContextType {
 const MusicPlayerContext = createContext<MusicPlayerContextType | undefined>(undefined);
 
 export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [songs, setSongs] = useState<Song[]>([]);
-  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const playSong = useCallback((index: number) => {
+  // const [songs, setSongs] = useState<Song[]>([]);
+  const [songs, setSongs] = useState<Song[]>(() => {
+    const savedSongs = localStorage.getItem('songs');
+    return savedSongs ? JSON.parse(savedSongs) : [];
+  });
+
+  const [currentSongIndex, setCurrentSongIndex] = useState(() => {
+    const savedIndex = localStorage.getItem('currentSongIndex');
+    return savedIndex ? Number(savedIndex) : 0;
+  });
+
+  const [isPlaying, setIsPlaying] = useState(() => {
+    const savedPlaying = localStorage.getItem('isPlaying');
+    return savedPlaying === 'true';
+  });
+  // const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
+  // const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  const jwt = Cookies.get("audioblocks_jwt");
+
+  const startSongSession = async (userId: number, artistId: number, songId: number) => {
+    try {
+      const startTime = new Date().toISOString(); // Current timestamp
+      const response = await fetch(`${url}/song/start-song-session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify({
+          userId,
+          artistId,
+          songId,
+          startTime,
+        }),
+      });
+      if (!response.ok) {
+        console.error('Failed to start song session');
+      }
+    } catch (error) {
+      console.error('Error starting song session:', error);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem('songs',  JSON.stringify(songs, (key, value) =>
+      typeof value === "bigint" ? value.toString() : value
+    ));
+  }, [songs]);
+
+  useEffect(() => {
+    localStorage.setItem('currentSongIndex', currentSongIndex.toString());
+  }, [currentSongIndex]);
+
+  useEffect(() => {
+    localStorage.setItem('isPlaying', isPlaying.toString());
+  }, [isPlaying]);
+  
+  
+  const playSong = useCallback(async (index: number) => {
+    console.log(songs);
+    // const { id: songId, artistId } = songs[index]; 
+    // await startSongSession(userId, artistId, songId);
+
     setCurrentSongIndex(index);
     setIsPlaying(true);
   }, []);
 
   const playNextSong = useCallback(() => {
+
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(prev => prev + 1);
       setIsPlaying(true);
@@ -44,6 +108,7 @@ export const MusicPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, []);
 
   const handleSongEnd = useCallback(() => {
+
     if (currentSongIndex < songs.length - 1) {
       playNextSong();
     } else {

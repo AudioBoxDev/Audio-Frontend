@@ -8,7 +8,8 @@ import {
 const Faq = () => {
 	return (
 		<>
-			<div className="w-11/12 md:px-16 px-3 md:py-28 py-10 text-lg m-auto text-white font-roboto">
+			<div className="w-11/12 md:py-28 py-10 text-lg m-auto text-white font-roboto">
+
 				<h1 className="text-4xl text-center font-bold mb-8">Have Questions?</h1>
 
 				<Accordion type="single" collapsible className="space-y-5">
