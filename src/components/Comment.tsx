@@ -1,4 +1,5 @@
 import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -72,6 +73,7 @@ const CommentSection = (songid: any) => {
 
 	return (
 		<div className="bg-black text-white mt-10 mb-40 rounded-md space-y-6 w-full mx-auto">
+
 			<div className="flex justify-between items-center border-b border-gray-700">
 				<h2 className="text-lg font-semibold">{comments.length} comments</h2>
 			</div>
@@ -87,8 +89,10 @@ const CommentSection = (songid: any) => {
 						</div>
 						<div>
 							<div className="flex items-center space-x-2">
+
 								<h4 className="font-semibold text-ellipsis">{comment.name.slice(0, 10)}...</h4>
 								<span className="text-sm text-gray-500"><span className="text-white h-1 w-1 items-center rounded-full bg-white inline-block"></span> {moment(comment.time).fromNow()}</span>
+
 							</div>
 							<p className="text-sm text-gray-300">{comment.text}</p>
 						</div>

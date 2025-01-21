@@ -5,6 +5,7 @@ import { fetchAllSongs } from "@/hooks/fetchAllSongs";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 import { PlayingIndicator } from "./PlayingIndicator";
 import { Play } from "lucide-react";
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 // Skeleton for when no songs are found
@@ -18,10 +19,12 @@ const SkeletonCard = () => (
 const Trending = () => {
 	const router = useRouter();
 	const { musics, isLoading } = fetchAllSongs();
+
 	const { playSong, setSongs } = useMusicPlayer();
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+
 
 	const handlePlaySong = (index: number) => {
 		if (index === currentSongIndex && isPlaying) {
@@ -106,6 +109,7 @@ const Trending = () => {
 								</div>
 
 								{/* Text Content */}
+
 								<div className="p-4 pt-2 md:text-center text-left">
 									<p className="text-sm text-gray-400">
 										{music.name.replace(/_/g, " ")}
@@ -121,6 +125,7 @@ const Trending = () => {
 						AudioBlocks
 					</h1>
 				</div>
+
 			)}
 		</div>
 	);

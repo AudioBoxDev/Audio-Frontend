@@ -6,6 +6,7 @@ import { PlayingIndicator } from "@/components/PlayingIndicator";
 import { useMusicPlayer } from "@/context/MusicPlayer";
 import * as Tabs from "@radix-ui/react-tabs";
 import CommentSection from "@/components/Comment";
+
 import { FaHeart } from "react-icons/fa";
 import { contractAddress, abi } from "@/config/abi";
 import { useReadContract, useReadContracts } from "wagmi";
@@ -16,28 +17,35 @@ import Cookies from "js-cookie";
 import { ArtistCardSkeleton } from "@/components/ArtistCardSkeleton";
 import { SongLikes } from "@/hooks/songLikes";
 
+
 const ArtistId = () => {
 	const { playSong, setSongs } = useMusicPlayer();
 	const [songs, setSongsData] = useState<any[]>([]);
 	const { address } = useAccount();
 	const [artist, setArtist] = useState<any>();
 	const params = useParams();
+
 	const [likedSongs, setLikedSongs] = useState<{ [key: number]: boolean }>({});
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 	const [isExpanded, setIsExpanded] = useState(false);
+
 	const url = process.env.NEXT_PUBLIC_API_URL;
 	const jwt = Cookies.get("audioblocks_jwt");
 	const router = useRouter();
 	const { fetchLikes, likes } = SongLikes();
+
 	const toggleBio = () => {
 		setIsExpanded(!isExpanded);
 	};
 
+
 	const toggleLike = async (index: number) => {
 		const isLiked = likedSongs[index] || false;
+
 
 		try {
 			if (isLiked) {
@@ -83,6 +91,7 @@ const ArtistId = () => {
 	// console.log(artistId.artistAddress);
 
 	const fetchProfileDetails = useCallback(async (profileDataArray: any) => {
+
 		setIsLoading(true);
 		try {
 			const gateway = profileDataArray.artistCid.replace(
@@ -103,6 +112,7 @@ const ArtistId = () => {
 			console.error("Error fetching profile details:", error.message);
 		}
 	}, []);
+
 
 	useEffect(() => {
 		if (artistId && isSuccess) {
@@ -148,11 +158,14 @@ const ArtistId = () => {
 				const artistSong = {
 					...response.data,
 					songId: Number(songData.result.songId),
+
 					artistAddress: songData.result.artistAddress,
+
 				};
 
 				songs.push(artistSong);
 				setSongsData(songs);
+
 			}
 			setIsLoading(false);
 		} catch (error: any) {
@@ -160,6 +173,7 @@ const ArtistId = () => {
 			console.error("Error fetching song details:", error.message);
 		}
 	};
+
 
 	useEffect(() => {
 		const fetchLikedStatus = async () => {
@@ -188,6 +202,7 @@ const ArtistId = () => {
 			}
 		};
 
+
 		fetchLikedStatus();
 	}, [jwt, songs]);
 
@@ -201,14 +216,17 @@ const ArtistId = () => {
 		if (index === currentSongIndex && isPlaying) {
 			setIsPlaying(false);
 			setSongs(songs);
+
 			playSong(index);
 		} else {
 			setCurrentSongIndex(index);
 			setIsPlaying(true);
 			setSongs(songs);
+
 			playSong(index);
 		}
 	};
+
 
 	const songDetails = (id: any, title: any) => {
 		const formattedTitle = title.replace(/\s+/g, "-").toLowerCase();
@@ -221,6 +239,7 @@ const ArtistId = () => {
 	const renderSongNumber = (index: number) => {
 		if (hoveredRow === index) {
 			return <Play size={15} className="text-[#B6195B]" />;
+
 		}
 		if (currentSongIndex === index && isPlaying) {
 			return <PlayingIndicator />;
@@ -244,7 +263,10 @@ const ArtistId = () => {
 								</p>
 							</div>
 
+
 							{/* <div className=" grid grid-flow-col gap-2 w-2/5 mt-3">
+
+
 								<span className="flex gap-2 text-xs">
 									<MessageCircle size={15} /> 1020{" "}
 								</span>
@@ -254,7 +276,9 @@ const ArtistId = () => {
 								<span className="flex gap-2 text-xs ">
 									<Heart size={15} /> 1,020
 								</span>
+
 							</div> */}
+
 						</div>
 						<div className="flex-shrink-0">
 							<img
@@ -264,6 +288,7 @@ const ArtistId = () => {
 								)}
 								alt="Artist"
 								className="md:w-40 md:h-40 w-20 h-20 rounded-3xl object-cover"
+
 							/>
 						</div>
 					</div>
@@ -347,6 +372,7 @@ const ArtistId = () => {
 										</tr>
 									))}
 								</tbody>
+
 							) : songs?.length > 0 ? (
 								<tbody>
 									{songs?.map((song: any, index: any) => (
@@ -369,6 +395,7 @@ const ArtistId = () => {
 												</div>
 											</td>
 											<td className="p-3 flex gap-1 items-center">
+
 												<div className="relative">
 													<img
 														src={song?.image.replace(
@@ -385,16 +412,19 @@ const ArtistId = () => {
 														}`}
 													/>
 												</div>
+
 												<div
 													onClick={() => songDetails(song?.songId, song?.name)}
 												>
 													<p
 														className={`font-medium text-left text-sm ${
 															currentSongIndex === index ? "text-[#B6195B]" : ""
+
 														}`}
 													>
 														{song?.name}
 													</p>
+
 												</div>
 											</td>
 											<td className="p-3 font-medium hidden md:table-cell text-left">
@@ -404,6 +434,7 @@ const ArtistId = () => {
 												{song.duration}
 											</td>
 											<td
+
 												className="p-3 font-medium cursor-pointer text-center hidden md:table-cell"
 												onClick={() => toggleLike(song?.songId)}
 												style={{ cursor: "pointer" }}
@@ -427,6 +458,7 @@ const ArtistId = () => {
 														<span>{likes}</span>
 													</div>
 												)}
+
 											</td>
 											<td className="p-3 font-medium text-center ">
 												<EllipsisVertical size={20} />
@@ -452,6 +484,7 @@ const ArtistId = () => {
 					</Tabs.Content>
 				</Tabs.Root>
 				{/* <CommentSection /> */}
+
 			</div>
 		</>
 	);

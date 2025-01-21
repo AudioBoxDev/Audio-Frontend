@@ -7,6 +7,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
+import { useRouter } from "next/navigation";
+import { fetchArtist } from "@/hooks/fetchArtist";
+
 
 const MusicScene = () => {
     const { artists, isLoading } = fetchArtist();
@@ -15,6 +18,7 @@ const MusicScene = () => {
     const handleClick = (artistId: string) => {
       router.push(`/dashboard/artist/${artistId}`);
     };
+
 
 
   return (
@@ -38,6 +42,7 @@ const MusicScene = () => {
       </div>
 
       {/* Artist Profile Section */}
+
     
       {!isLoading &&
 			<div>
