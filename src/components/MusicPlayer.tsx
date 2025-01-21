@@ -26,7 +26,6 @@ export interface Song {
 	artistName: string;
 	animation_url: string;
 	image: any;
-
 	songId: any;
 
 	// streams: number;
@@ -60,7 +59,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	const [repeatMode, setRepeatMode] = useState<"off" | "all" | "one">("off");
 	const [isShuffleOn, setIsShuffleOn] = useState<boolean>(false);
 	const [shuffledQueue, setShuffledQueue] = useState<number[]>([]);
-
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const volumeTimeout = useRef<NodeJS.Timeout>();
 	const url = process.env.NEXT_PUBLIC_API_URL;
@@ -128,6 +126,72 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 			}
 		}
 	};
+	const toggleLike = async (index: number) => {
+		const isLiked = likedSongs[index] || false;
+
+		try {
+			if (isLiked) {
+				// Unlike the song
+				await axios.post(
+					`${url}/song/unlike`,
+					{ songId: index },
+					{
+						headers: {
+							Authorization: `Bearer ${jwt}`,
+						},
+					},
+				);
+			} else {
+				// Like the song
+				await axios.post(
+					`${url}/song/like`,
+					{ songId: index },
+					{
+						headers: {
+							Authorization: `Bearer ${jwt}`,
+						},
+					},
+				);
+			}
+
+			// Update local like state
+			setLikedSongs((prev) => ({
+				...prev,
+				[index]: !(prev[index] || false),
+			}));
+		} catch (error: any) {
+			console.error("Error toggling like:", error.message);
+		}
+	};
+
+	useEffect(() => {
+		const fetchLikedStatus = async () => {
+			try {
+				songs.map(async (song) => {
+					const response = await axios.get(
+						`${url}/song/isLiked/${song.songId}`,
+						{
+							headers: {
+								Authorization: `Bearer ${jwt}`,
+							},
+						},
+					);
+					const likedData = response.data;
+					if (likedData.isLiked) {
+						setLikedSongs((prev) => ({
+							...prev,
+							[song.songId]: !(prev[song.songId] || false),
+						}));
+					}
+				});
+				// console.log(songIds);
+			} catch (error: any) {
+				console.error("Error fetching liked status:", error.message);
+			}
+		};
+
+		fetchLikedStatus();
+	}, [jwt, songs]);
 
 	const toggleLike = async (index: number) => {
 		const isLiked = likedSongs[index] || false;
@@ -241,7 +305,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 	};
 
 	useEffect(() => {
-
 		if (isPlaying && songs[currentSongIndex]) {
 
 			audioRef.current?.play();
@@ -291,7 +354,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 					className="md:w-12 md:h-12 w-8 h-8 rounded object-cover shadow-lg"
 				/>
 				<div className="overflow-hidden">
-
 					<h3 className="text-white font-medium text-sm truncate hover:text-[#B6195B] transition-colors">
 
 						{songs[currentSongIndex]?.name}
@@ -391,7 +453,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 								step="0.01"
 								value={volume}
 								onChange={handleVolumeChange}
-
 								className="w-20 h-1 appearance-none bg-neutral-600 rounded-lg cursor-pointer accent-[#B6195B] hover:accent-[#B6195B]"
 								style={{
 									background: `linear-gradient(to right, #B6195B 0%, #B6195B ${
@@ -416,7 +477,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 							step="0.1"
 							value={currentTime}
 							onChange={handleProgressBarChange}
-
 							className="w-full h-1 appearance-none bg-neutral-600 rounded-full cursor-pointer accent-[#B6195B] hover:accent-[#B6195B]"
 							style={{
 								background: `linear-gradient(to right, #B6195B 0%, #B6195B ${

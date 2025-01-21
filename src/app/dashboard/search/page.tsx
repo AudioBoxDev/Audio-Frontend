@@ -41,6 +41,7 @@ const Search = () => {
 	// Filter logic based on the query parameter
 	useEffect(() => {
 
+		
 		const filteredMusicList = musics.filter(
 
 			(song) =>

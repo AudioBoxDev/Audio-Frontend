@@ -4,6 +4,8 @@ import React from "react";
 import Ellipse from "/public/images/Ellipse.png";
 import Ellipse4 from "/public/images/Ellipse4.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { fetchArtist } from "@/hooks/fetchArtist";
 
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
@@ -70,7 +72,6 @@ const MusicScene = () => {
 					))}
 			</div>
 			</div>}
-
 
 
     </div>
