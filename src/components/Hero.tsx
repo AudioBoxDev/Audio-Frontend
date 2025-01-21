@@ -7,7 +7,7 @@ import EmailVerificationModal from "./VerificationModal";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useAccount } from "wagmi";
-// import { useRouter } from "next/navigation";
+
 import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 const Hero = () => {
 	const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ const Hero = () => {
 	const [loading, setLoading] = useState(false);
 	const url = "https://theaudiobox-backend.onrender.com";
 	const token = Cookies.get("audioblocks_jwt");
-	// const router = useRouter();
+
 	const { artistProfileDetails } = uploadProfileDetails();
 	const {isConnected} = useAccount();
 	
@@ -24,8 +24,10 @@ const Hero = () => {
 		try {
 			if (token && token.trim() !== "") {
 				const redirectPath = artistProfileDetails ? "/dashboard" : "/dashboard/profile";
+
 				// router.push(redirectPath);
 				window.open(redirectPath, "_blank");
+
 			} else {
 				// Handle missing wallet connection or token
 				if (!isConnected) {
