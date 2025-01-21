@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
-import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
 
