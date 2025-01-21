@@ -20,7 +20,6 @@ export default function Home() {
 	const { isConnected } = useAccount();
 	const token = Cookies.get("audioblocks_jwt");
 
-
 	const getStarted = async() => {
 			try {
 				if (token && token.trim() !== "") {

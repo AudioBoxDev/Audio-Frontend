@@ -8,8 +8,6 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useAccount } from "wagmi";
 
-// import { useRouter } from "next/navigation";
-
 import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 const Hero = () => {
 	const [email, setEmail] = useState("");
@@ -17,8 +15,6 @@ const Hero = () => {
 	const [loading, setLoading] = useState(false);
 	const url = "https://theaudiobox-backend.onrender.com";
 	const token = Cookies.get("audioblocks_jwt");
-
-	// const router = useRouter();
 
 	const { artistProfileDetails } = uploadProfileDetails();
 	const {isConnected} = useAccount();

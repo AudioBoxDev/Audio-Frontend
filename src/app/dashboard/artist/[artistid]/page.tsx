@@ -46,6 +46,7 @@ const ArtistId = () => {
 	const toggleLike = async (index: number) => {
 		const isLiked = likedSongs[index] || false;
 
+
 		try {
 			if (isLiked) {
 				// Unlike the song
@@ -80,7 +81,6 @@ const ArtistId = () => {
 			console.error("Error toggling like:", error.message);
 		}
 	};
-
 	const { data: artistId, isSuccess }: any = useReadContract({
 		address: contractAddress,
 		abi: abi,
@@ -158,6 +158,9 @@ const ArtistId = () => {
 				const artistSong = {
 					...response.data,
 					songId: Number(songData.result.songId),
+
+					artistAddress: songData.result.artistAddress,
+
 				};
 
 				songs.push(artistSong);
@@ -199,9 +202,9 @@ const ArtistId = () => {
 			}
 		};
 
+
 		fetchLikedStatus();
 	}, [jwt, songs]);
-
 
 	const isFetched = useRef(false);
 	if (data && success && !isFetched.current) {
@@ -212,7 +215,6 @@ const ArtistId = () => {
 	const handlePlaySong = (index: number) => {
 		if (index === currentSongIndex && isPlaying) {
 			setIsPlaying(false);
-
 			setSongs(songs);
 
 			playSong(index);
@@ -263,6 +265,7 @@ const ArtistId = () => {
 
 
 							{/* <div className=" grid grid-flow-col gap-2 w-2/5 mt-3">
+
 
 								<span className="flex gap-2 text-xs">
 									<MessageCircle size={15} /> 1020{" "}
