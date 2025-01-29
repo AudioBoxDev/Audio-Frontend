@@ -105,6 +105,7 @@ const Hero = () => {
 							</button>
 						</div>
 					</div>
+
 					<div className="md:h-32 h-44 my-7">
 						<Image
 							src={bottom}
