@@ -65,7 +65,7 @@ const Navbar2 = () => {
 				<div className="space-x-10 flex items-center">
 					<Link href="/" className="flex space-x-3 items-center">
 						{/* <div className="bg-pink-500 rounded-full md:h-10 h-7 w-7 md:w-10"></div> */}
-						<img src="/images/logo.jpeg" height={40} width={40} alt="logo" className="rounded-full" />
+						<img src="/images/logo1.png" height={40} width={40} alt="logo" className="rounded-full" />
 						<h1 className="md:text-2xl text-lg font-semibold text-pink-400">
 							AudioBlocks
 						</h1>
