@@ -214,7 +214,7 @@ const AlbumArt2 = () => {
   const { playSong, setSongs } = useMusicPlayer();
 
   useEffect(() => {
-    setSongs(songs);
+    // setSongs(songs);
   }, []);
 
   const songs = [
