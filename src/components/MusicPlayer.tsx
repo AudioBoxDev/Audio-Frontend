@@ -164,34 +164,35 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 		}
 	};
 
-	useEffect(() => {
-		const fetchLikedStatus = async () => {
-			try {
-				songs.map(async (song) => {
-					const response = await axios.get(
-						`${url}/song/isLiked/${song.songId}`,
-						{
-							headers: {
-								Authorization: `Bearer ${jwt}`,
-							},
+	const fetchLikedStatus = async () => {
+		try {
+			songs?.map(async (song) => {
+				const response = await axios.get(
+					`${url}/song/isLiked/${song.songId}`,
+					{
+						headers: {
+							Authorization: `Bearer ${jwt}`,
 						},
-					);
-					const likedData = response.data;
-					if (likedData.isLiked) {
-						setLikedSongs((prev) => ({
-							...prev,
-							[song.songId]: !(prev[song.songId] || false),
-						}));
-					}
-				});
-				// console.log(songIds);
-			} catch (error: any) {
-				console.error("Error fetching liked status:", error.message);
-			}
-		};
+					},
+				);
+				const likedData = response.data;
+				if (likedData.isLiked) {
+					setLikedSongs((prev) => ({
+						...prev,
+						[song.songId]: !(prev[song.songId] || false),
+					}));
+				}
+			});
+			// console.log(songIds);
+		} catch (error: any) {
+			console.error("Error fetching liked status:", error.message);
+		}
+	};
+
+	useEffect(() => {
 
 		fetchLikedStatus();
-	}, [jwt, songs]);
+	}, [songs]);
 
 
 	const getNextSongIndex = (): number => {

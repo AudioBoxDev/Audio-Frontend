@@ -1,9 +1,9 @@
 "use client";
 import Slider from "react-slick";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { fetchAllSongs } from "@/hooks/fetchAllSongs";
 import { useMusicPlayer } from "@/context/MusicPlayer";
-import { PlayingIndicator } from "./PlayingIndicator";
+// import { PlayingIndicator } from "./PlayingIndicator";
 import { Play } from "lucide-react";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -17,13 +17,11 @@ const SkeletonCard = () => (
 );
 
 const Trending = () => {
-	const router = useRouter();
 	const { musics, isLoading } = fetchAllSongs();
 
 	const { playSong, setSongs } = useMusicPlayer();
 	const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
 
 	const handlePlaySong = (index: number) => {
@@ -85,14 +83,14 @@ const Trending = () => {
 					{musics.map((music, index) => (
 						<div
 							key={music.id}
-							className={`relative group cursor-pointer transition-colors ${
+							className={`group cursor-pointer transition-colors ${
 								currentSongIndex === index ? "bg-[#0E0B0E] bg-opacity-50" : ""
 							}`}
 							onClick={() => handlePlaySong(index)}
 						>
 							<div className="rounded-lg shadow-lg overflow-hidden flex items-center flex-col ">
 								{/* Image */}
-								<div className="rounded-full">
+								<div className="rounded-full relative">
 									<img
 										src={music.image.replace(
 											"ipfs://",
@@ -103,8 +101,8 @@ const Trending = () => {
 										alt={music.fullName}
 										className="w-40 rounded-full relative h-40 object-cover group-hover:shadow-xl group-hover:shadow-black transition-all"
 									/>
-									<div className="absolute inset-0 w-10 h-10 rounded-full bg-[#0E0B0E] m-auto flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
-										<Play size={20} />
+									<div className="absolute inset-0 w-10 h-10 border shadow-md rounded-full bg-gray-400 m-auto flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
+										<Play size={20} color="#0E0B0E" />
 									</div>
 								</div>
 

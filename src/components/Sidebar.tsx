@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen, toggleClose }: any) => {
 			>
 				<div className="flex">
 					<Link href="/" className="flex items-center space-x-3 mb-10">
-						<div className="bg-pink-500 rounded-full h-10 w-10"></div>
+					<img src="/images/logo1.png" height={30} width={30} alt="logo" className="rounded-full" />
 						<h1 className="text-xl font-semibold text-pink-400">AudioBlocks</h1>
 					</Link>
 

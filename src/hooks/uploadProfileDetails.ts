@@ -27,8 +27,6 @@ interface ArtistProfileDetails {
 }
 
 export const uploadProfileDetails = () => {
-	// const [groupId, setGroupId] = useState<any>();
-	// const [profileHash, setProfileHash] = useState<any>();
 	const { address } = useAccount();
 	const [txHash, setTxHash] = useState<`0x${string}` | null>(null);
 	const [artistProfileDetails, setArtistProfileDetails] =
