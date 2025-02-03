@@ -14,7 +14,7 @@ import {SongLikes} from "@/hooks/songLikes";
 const SongDetails = () => {
 	const searchParams = useSearchParams();
 	const [isLoading, setIsLoading] = useState(false);
-	const [songData, setSongData] = useState<any>();
+	const [songData, setSongData] = useState<any>([]);
 	const [likedSongs, setLikedSongs] = useState<{ [key: number]: boolean }>({});
 	const url = process.env.NEXT_PUBLIC_API_URL;
 	const jwt = Cookies.get("audioblocks_jwt");
@@ -29,12 +29,12 @@ const SongDetails = () => {
 	const handlePlaySong = (index: any) => {
 		if (index === currentSongIndex && isPlaying) {
 			setIsPlaying(false);
-			setSongs(songData);
+			setSongs([songData]);
 			playSong(index);
 		} else {
 			setCurrentSongIndex(index);
 			setIsPlaying(true);
-			setSongs(songData);
+			setSongs([songData]);
 			playSong(index);
 		}
 	};

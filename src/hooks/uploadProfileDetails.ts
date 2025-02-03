@@ -27,16 +27,13 @@ interface ArtistProfileDetails {
 }
 
 export const uploadProfileDetails = () => {
-	// const [groupId, setGroupId] = useState<any>();
-	// const [profileHash, setProfileHash] = useState<any>();
 	const { address } = useAccount();
 	const [txHash, setTxHash] = useState<`0x${string}` | null>(null);
 	const [artistProfileDetails, setArtistProfileDetails] =
 		useState<ArtistProfileDetails | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const { writeContractAsync } = useWriteContract();
-
-	
 
 	const uploadProfilePicture = async (file: File) => {
 		const formData = new FormData();
@@ -98,7 +95,7 @@ export const uploadProfileDetails = () => {
 			);
 
 			console.log("Pinata response:", response.data.IpfsHash);
-			
+
 			return response.data.IpfsHash;
 		} catch (err: any) {
 			console.error("Error uploading JSON to Pinata:", err);
@@ -137,11 +134,12 @@ export const uploadProfileDetails = () => {
 		address: contractAddress,
 		abi: abi,
 		functionName: "getStreamerByAddress",
-		args:[address],
+		args: [address],
 		account: address,
 	});
 
 	const fetchProfileDetails = async (profileData: any) => {
+		setIsLoading(true);
 		try {
 			const gateway = profileData?.cid.replace(
 				"ipfs://",
@@ -154,7 +152,9 @@ export const uploadProfileDetails = () => {
 			});
 			const data = await response.data;
 			setArtistProfileDetails(data);
+			setIsLoading(false)
 		} catch (error: any) {
+			setIsLoading(false)
 			console.error("Error fetching profile details:", error.message);
 		}
 	};
@@ -170,6 +170,7 @@ export const uploadProfileDetails = () => {
 		uploadProfilePicture,
 		writeToContract,
 		fetchProfileDetails,
+		isLoading,
 		artistProfileDetails,
 	};
 };

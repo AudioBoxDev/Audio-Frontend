@@ -3,6 +3,14 @@ import Slider from "react-slick";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
 
+// Skeleton for when no songs are found
+const SkeletonCard = () => (
+	<div className="flex flex-col items-center">
+		<div className="w-40 h-40 rounded-full bg-gray-700 animate-pulse mb-4"></div>
+		<div className="h-4 w-28 bg-gray-700 animate-pulse rounded mb-2"></div>
+	</div>
+);
+
 const Artist = () => {
 	const router = useRouter();
 	const { artists, isLoading } = fetchArtist();
@@ -48,9 +56,10 @@ const Artist = () => {
 			<h2 className="text-base font-bold mb-4">Artists</h2>
 
 			{isLoading ? (
-				<div className="relative w-12 h-12 m-auto">
-					<div className="absolute inset-0 border-2 border-blue-100 rounded-full animate-spin-slow"></div>
-					<div className="absolute inset-0 border-2 border-pink-900 border-t-transparent rounded-full animate-spin"></div>
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+					{[...Array(4)].map((_, index) => (
+						<SkeletonCard key={index} />
+					))}
 				</div>
 			) : artists.length > 0 ? (
 				<Slider {...settings}>
@@ -62,7 +71,6 @@ const Artist = () => {
 						>
 							<div className=" rounded-lg shadow-lg flex items-center flex-col overflow-hidden">
 								<div className="rounded-full">
-								
 									<img
 										src={artist?.profilePicture?.replace(
 											"ipfs://",
@@ -82,7 +90,11 @@ const Artist = () => {
 					))}
 				</Slider>
 			) : (
-				<div className="text-center lg:p-10"><h1 className="text-4xl lg:text-6xl font-bold text-gray-900">AudioBlocks</h1></div>
+				<div className="text-center lg:p-10">
+					<h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
+						AudioBlocks
+					</h1>
+				</div>
 			)}
 		</div>
 	);

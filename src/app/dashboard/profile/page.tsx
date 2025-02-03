@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Twitter, Facebook } from "lucide-react";
 import { useAccount } from "wagmi";
 import axios from "axios";
+import { Tooltip } from "react-tooltip";
 import { toast } from "react-toastify";
 import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 
@@ -32,6 +33,15 @@ export default function Profile() {
 	});
 	const [profilePic, setProfilePic] = useState<File | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		if (!artistProfileDetails) {
+			setIsEditing(true);
+		} else {
+			setIsEditing(false);
+		}
+	}, [artistProfileDetails]);
+
 
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -126,21 +136,28 @@ export default function Profile() {
 						className="object-cover w-full h-full rounded-full"
 					/>
 					{isEditing && (
-						<label
-							htmlFor="profile-pic"
-							className="absolute bottom-2 right-2 bg-[#DC143C] text-white p-2 rounded-full cursor-pointer"
-						>
-							<span className="text-sm">
-								<Pencil size={14} />
-							</span>
-						</label>
+						<>
+							<label
+								htmlFor="profile-pic"
+								className="absolute bottom-2 right-2 bg-[#DC143C] text-white p-2 rounded-full cursor-pointer"
+								data-tooltip-id="profile-pic-tooltip"
+								data-tooltip-content="Upload Profile Picture"
+							>
+								<span className="text-sm">
+									<Pencil size={14} />
+								</span>
+							</label>
+							<Tooltip id="profile-pic-tooltip" />
+						</>
 					)}
 				</div>
 
 				<button
 					onClick={isEditing ? handleSaveInfo : toggleEditMode}
-					className="bg-[#DC143C] text-white px-6 py-2 rounded-full font-semibold"
+					className="bg-[#DC143C] text-white px-6 py-2 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
 					disabled={profileDetails.isEdited}
+					data-tooltip-id="edit-profile-tooltip"
+					data-tooltip-content="Editing is disabled after saving."
 				>
 					{isEditing ? (
 						isLoading ? (
@@ -155,6 +172,7 @@ export default function Profile() {
 						"Edit Profile"
 					)}
 				</button>
+				<Tooltip id="edit-profile-tooltip" />
 			</div>
 
 			{isEditing && (

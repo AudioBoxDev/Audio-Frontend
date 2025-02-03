@@ -52,7 +52,7 @@ export const fetchAllSongs = () => {
 				});
 				const musicWithAddress = {
 					...response.data, 
-					id: musicData.result.songId,
+					songId: Number(musicData.result.songId),
 					artistAddress: musicData.result.artistAddress,
 				};
 				

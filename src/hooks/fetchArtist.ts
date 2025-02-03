@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { contractAddress, abi } from "@/config/abi";
 import {
-	useWaitForTransactionReceipt,
-	useWriteContract,
 	useReadContract,
 	useReadContracts,
 } from "wagmi";
