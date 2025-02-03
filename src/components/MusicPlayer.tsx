@@ -423,7 +423,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 						/>
 					</div>
 					<span className="text-xs text-neutral-400">
-						{formatTime(duration)}
+						{duration ? formatTime(duration): "0:00"}
 					</span>
 				</div>
 			</div>

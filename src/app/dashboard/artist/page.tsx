@@ -1,7 +1,8 @@
 "use client";
-import  { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { fetchArtist } from "@/hooks/fetchArtist";
+import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
 
 // Skeleton for artist cards
 const SkeletonCard = () => (
@@ -12,25 +13,31 @@ const SkeletonCard = () => (
 );
 
 const Artist = () => {
-	const router = useRouter();
-	const { artists, isLoading } = fetchArtist(); // Fetch artists and loading state
 
+	const route = useRouter();
+	const { artists, isLoading } = fetchArtist(); // Fetch artists and loading state
 	// State to manage the selected genre
 	const [selectedGenre, setSelectedGenre] = useState<string>("All");
+	const { artistProfileDetails, isLoading: isLoadingProfile } = uploadProfileDetails();
+
+	useEffect(() => {
+		if (!isLoadingProfile && !artistProfileDetails) {
+			route.push("/dashboard/profile");
+		}
+	}, [artistProfileDetails, isLoadingProfile, route]);
 
 	// Memoize filtered artists to prevent re-calculation
 	const filteredArtists = useMemo(() => {
 		if (selectedGenre === "All") return artists;
 		return artists.filter(
-			(artist) =>
-				artist.genre.toLowerCase() === selectedGenre.toLowerCase(),
+			(artist) => artist.genre.toLowerCase() === selectedGenre.toLowerCase(),
 		);
 	}, [artists, selectedGenre]);
 
 	// Navigate to artist's page
 	const handleClick = (artistId: string) => {
-		router.push(`/dashboard/artist/${artistId}`);
-	};	
+		route.push(`/dashboard/artist/${artistId}`);
+	};
 
 	// Genre list for filtering
 	const genres = [
@@ -96,7 +103,8 @@ const Artist = () => {
 				) : (
 					// No Artists Found Message
 					<div className="text-center col-span-4 text-gray-400">
-						No artists found in <span className="font-bold">{selectedGenre}</span>.
+						No artists found in{" "}
+						<span className="font-bold">{selectedGenre}</span>.
 					</div>
 				)}
 			</div>

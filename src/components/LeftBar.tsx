@@ -10,8 +10,7 @@ import {
 	Pause,
 } from "lucide-react";
 import Link from "next/link";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { handleListenerStat } from "@/hooks/ListenerStat";
 
 // Define interfaces for component props and state
 interface LeftBarProps {
@@ -20,30 +19,23 @@ interface LeftBarProps {
 }
 
 const LeftBar: React.FC<LeftBarProps> = ({ close }) => {
-	const url = process.env.NEXT_PUBLIC_API_URL;
-	const jwt = Cookies.get("audioblocks_jwt");
-	const [listersStat, setListernerStat] = useState<any>(null);
+	const { listersStat } = handleListenerStat();
 
-	useEffect(() => {
-		const handleListerStat = async () => {
-			try {
-				const response = await axios.get(`${url}/user/get-listerner-stats`, {
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${jwt}`,
-					},
-				});
-
-				if (response) {
-					setListernerStat(response.data.data);
-				}
-			} catch (err: any) {
-				console.log(err.message);
-			}
-		};
-
-		handleListerStat();
-	}, [url, jwt]);
+	function formatDuration(duration:any) {
+		if (!duration || typeof duration !== "string") {
+			return "Invalid duration";
+		  } 
+		  
+		const hoursMatch = duration.match(/(\d+)h/);
+		const minutesMatch = duration.match(/(\d+)m/);
+		const secondsMatch = duration.match(/([\d.]+)s/);
+	  
+		const hours = hoursMatch ? parseInt(hoursMatch[1]) : 0;
+		const minutes = minutesMatch ? parseInt(minutesMatch[1]) : 0;
+		const seconds = secondsMatch ? parseFloat(secondsMatch[1]).toFixed(2) : 0; // Keep 2 decimal places
+	  
+		return `${hours}h ${minutes}m ${seconds}s`;
+	  }
 
 	return (
 		<>
@@ -61,15 +53,12 @@ const LeftBar: React.FC<LeftBarProps> = ({ close }) => {
 					</h3>
 					<ul className="text-sm space-y-2">
 						<li className="text-gray-500 space-x-3 flex items-center">
-							
-								<Play
-									className="w-4 h-4 cursor-pointer text-white"
-								/>
-							
+							<Play className="w-4 h-4 cursor-pointer text-white" />
+
 							<div className="text-white flex flex-col">
 								<span>Total Stream Time:</span>
 								<span className="text-[#666C6C]">
-									{listersStat?.stats.totalStreamTime}
+									{formatDuration(listersStat?.stats.totalStreamTime)}
 								</span>
 							</div>
 						</li>

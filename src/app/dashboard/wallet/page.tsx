@@ -1,16 +1,30 @@
-"use client"
-import {  Image, Radius, Wallet } from "lucide-react";
+"use client";
+import { handleListenerStat } from "@/hooks/ListenerStat";
+import { uploadProfileDetails } from "@/hooks/uploadProfileDetails";
+import { Image, Radius, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { useEffect } from "react";
 
 const WalletPage = () => {
-    const router = useRouter();
-    const TxnDetails =()=>{
-        router.push('/dashboard/transactions')
-    }
-    const AssetDetails =()=>{
-        router.push('/dashboard/assets')
-    }
+	const route = useRouter();
+	const { artistProfileDetails, isLoading } = uploadProfileDetails();
+
+	const { listersStat } = handleListenerStat();
+
+	useEffect(() => {
+		if (!isLoading && !artistProfileDetails) {
+			route.push("/dashboard/profile");
+		}
+	}, [artistProfileDetails, isLoading, route]);
+
+	const TxnDetails = () => {
+		// route.push("/dashboard/transactions");
+	};
+
+	const AssetDetails = () => {
+		// route.push("/dashboard/assets");
+	};
+
 	return (
 		<>
 			<div className="font-roboto min-h-screen mt-5 text-[#A4A4A4]">
@@ -32,7 +46,9 @@ const WalletPage = () => {
 						</div>
 						<div>
 							<p className="text-xs">Balance</p>
-							<p className="text-lg font-semibold">0</p>
+							<p className="text-lg font-semibold">
+								{listersStat?.stats.rewardPoints ? parseFloat(listersStat?.stats.rewardPoints.toFixed(7)): 0} SP
+							</p>
 						</div>
 					</div>
 					<div className="bg-[#100D0F] p-4 flex items-center space-x-4 rounded-lg">
@@ -41,7 +57,9 @@ const WalletPage = () => {
 						</div>
 						<div>
 							<p className="text-xs">Streaming Point</p>
-							<p className="text-lg font-semibold">0 SP</p>
+							<p className="text-lg font-semibold">
+								{listersStat?.stats.totalStreams} Point
+							</p>
 						</div>
 					</div>
 					<div className="bg-[#100D0F] p-4 flex items-center space-x-4 rounded-lg">
@@ -59,7 +77,10 @@ const WalletPage = () => {
 					<div className="flex justify-between border-b pb-1 border-[#151515] text-white mb-4 items-center">
 						<h1 className="text-lg font-bold text-[#A4A4A4]">My Assets</h1>
 
-						<button onClick={AssetDetails} className="text-[#666C6C]  text-xs uppercase font-semibold px-3  py-1 rounded-full">
+						<button
+							onClick={AssetDetails}
+							className="text-[#666C6C]  text-xs uppercase font-semibold px-3  py-1 rounded-full"
+						>
 							SEE DETAIL
 						</button>
 					</div>
@@ -67,9 +88,14 @@ const WalletPage = () => {
 
 				<div>
 					<div className="flex justify-between border-b pb-1 border-[#151515] text-white mb-4 items-center">
-						<h1 className="text-lg font-bold text-[#A4A4A4]">Transactions History</h1>
+						<h1 className="text-lg font-bold text-[#A4A4A4]">
+							Transactions History
+						</h1>
 
-						<button onClick={TxnDetails} className="text-[#666C6C]  text-xs uppercase font-semibold px-3  py-1 rounded-full">
+						<button
+							onClick={TxnDetails}
+							className="text-[#666C6C]  text-xs uppercase font-semibold px-3  py-1 rounded-full"
+						>
 							SEE DETAIL
 						</button>
 					</div>
