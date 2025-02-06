@@ -20,25 +20,25 @@ export default function Home() {
 	const { isConnected } = useAccount();
 	const token = Cookies.get("audioblocks_jwt");
 
-	const getStarted = async() => {
-			try {
-				if (token && token.trim() !== "") {
-					const redirectPath = artistProfileDetails ? "/dashboard" : "/dashboard/profile";
-					// router.push(redirectPath);
-					window.open(redirectPath, "_blank");
-				} else {
-					// Handle missing wallet connection or token
-					if (!isConnected) {
-						toast.error("Please connect your wallet");
-					} else if(isConnected && !token){
-						toast.error("Please sign the Authentication message");
-					}
+	const getStarted = async () => {
+		try {
+			if (token && token.trim() !== "") {
+				const redirectPath = artistProfileDetails ? "/dashboard" : "/dashboard/profile";
+				// router.push(redirectPath);
+				window.open(redirectPath, "_blank");
+			} else {
+				// Handle missing wallet connection or token
+				if (!isConnected) {
+					toast.error("Please connect your wallet");
+				} else if (isConnected && !token) {
+					toast.error("Please sign the Authentication message");
 				}
-			} catch (error:any) {
-				toast.error(error);
 			}
-			
-		};
+		} catch (error: any) {
+			toast.error(error);
+		}
+
+	};
 
 
 	return (
@@ -47,10 +47,10 @@ export default function Home() {
 			<Hero />
 			<AudioBoxFeatures />
 
-			<MusicScene/>
+			<MusicScene />
 			<AudioCardItem />
-	
-			<Faq/>
+
+			<Faq />
 			<div className="bg-gradient-to-r border m-auto w-11/12 rounded-xl mb-9 border-[#1B1B1B] text-white py-6">
 
 				<div className="grid w-11/12 m-auto items-center md:grid-cols-5 grid-cols-12 gap-6">
