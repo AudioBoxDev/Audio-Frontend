@@ -39,7 +39,7 @@ const LeftBar: React.FC<LeftBarProps> = ({ close }) => {
 
 	return (
 		<>
-			<div className="bg-[#0E070C] z-30 space-y-2 mt-2 p-6 rounded-3xl">
+			<div className="bg-[#0E070C] z-30 space-y-2 mt-5 p-6 rounded-3xl">
 				<ArrowRightToLine
 					className="md:hidden block text-white"
 					onClick={close}
