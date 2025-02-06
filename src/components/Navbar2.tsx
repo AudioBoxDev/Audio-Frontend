@@ -6,10 +6,38 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import AvatarDropdown from "./Dropdown";
+import EmailVerificationModal from "./VerificationModal";
+import Image from 'next/image';
 
 const url = "https://theaudiobox-backend.onrender.com";
 
 const Navbar2 = () => {
+
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [email, setEmail] = useState("");
+	const [isOpen, setIsOpen] = useState(false);
+	const url = "https://theaudiobox-backend.onrender.com";
+
+
+	const JoinWaitlist = () => {
+		setIsModalOpen(true);
+	};
+
+	const verifyEmail = async () => {
+		setLoading(true);
+		try {
+			const response = await axios.post(`${url}/waitlist/join`, { email });
+			toast.success(response.data.message || "Your email has been Added!");
+		} catch (error: any) {
+			toast.error(
+				error?.response.data.message ||
+				"There was an error joining the waitlist. Please try again.",
+			);
+		} finally {
+			setLoading(false);
+		}
+	};
 	// const { address, isConnected } = useAccount();
 	// const { signMessageAsync } = useSignMessage();
 
@@ -59,6 +87,9 @@ const Navbar2 = () => {
 	// 		console.error("Authentication failed:", error);
 	// 	}
 	// };
+
+	const [showModal, setShowModal] = useState(false);
+
 	return (
 		<>
 			<nav className="items-center font-roboto w-11/12 m-auto text-white py-7 flex justify-between">
@@ -70,21 +101,47 @@ const Navbar2 = () => {
 							AudioBlocks
 						</h1>
 					</Link>
-		
-				</div>
-				<div className=" ">
-					<ul className="flex items-center font-semibold text-gray-400 gap-5">
-						{/* <Link href="/" className="hover:text-white md:block hidden">
-							Support
-						</Link>
-						<Link href="/" className="hover:text-white md:block hidden">
-							Download
-						</Link> */}
-						<div><ConnectBtn /></div>
-					</ul>
+					</div>
+
+				{/* Mobile Menu Button */}
+				<button
+					onClick={() => setIsOpen(!isOpen)}
+					className="md:hidden text-white focus:outline-none"
+					aria-label="Toggle menu"
+				>
+					{isOpen ? '✖' : '☰'}
+				</button>
+
+				{/* Navigation Links */}
+				<div
+					className={`absolute md:static top-16 left-0 w-full md:w-auto bg-black md:bg-transparent flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 p-4 md:p-0 ${isOpen ? 'block' : 'hidden md:flex'
+						} md:ml-auto`}
+				>
+					{/* Join Waitlist Button */}
+					<button
+						className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+						onClick={JoinWaitlist}
+					>
+						Join Waitlist
+					</button>
+
+					{/* Connect Button */}
+					<div>
+						<ConnectBtn />
+					</div>
 				</div>
 			</nav>
-		</>
+
+			{/* Email Verification Modal */}
+			<EmailVerificationModal
+				isOpen={isModalOpen}
+				onClose={() => setIsModalOpen(false)}
+				onVerify={verifyEmail}
+				loading={loading}
+				email={email}
+				setEmail={setEmail}
+			/>
+	</>
 	);
 };
 
