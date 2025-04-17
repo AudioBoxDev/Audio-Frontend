@@ -1,28 +1,23 @@
 import Link from "next/link";
 import { useAccount, useDisconnect, useSignMessage } from "wagmi";
 import { useEffect, useState } from "react";
+import { Menu, CircleX } from "lucide-react";
 import { ConnectBtn } from "./ConnectBtn";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import AvatarDropdown from "./Dropdown";
 import EmailVerificationModal from "./VerificationModal";
-import Image from 'next/image';
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 const url = "https://theaudiobox-backend.onrender.com";
 
 const Navbar2 = () => {
-
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
 	const url = "https://theaudiobox-backend.onrender.com";
-
-
-	const JoinWaitlist = () => {
-		setIsModalOpen(true);
-	};
 
 	const verifyEmail = async () => {
 		setLoading(true);
@@ -32,7 +27,7 @@ const Navbar2 = () => {
 		} catch (error: any) {
 			toast.error(
 				error?.response.data.message ||
-				"There was an error joining the waitlist. Please try again.",
+					"There was an error joining the waitlist. Please try again.",
 			);
 		} finally {
 			setLoading(false);
@@ -92,56 +87,66 @@ const Navbar2 = () => {
 
 	return (
 		<>
-			<nav className="items-center font-roboto w-11/12 m-auto text-white py-7 flex justify-between">
-				<div className="space-x-10 flex items-center">
-					<Link href="/" className="flex space-x-3 items-center">
-						{/* <div className="bg-pink-500 rounded-full md:h-10 h-7 w-7 md:w-10"></div> */}
-						<img src="/images/logo1.png" height={40} width={40} alt="logo" className="rounded-full" />
-						<h1 className="md:text-2xl text-lg font-semibold text-pink-400">
-							AudioBlocks
-						</h1>
-					</Link>
-					</div>
+			<nav className="w-full text-white font-roboto z-50 relative">
+			<div className="flex items-center justify-between px-3 py-4 md:py-6 w-11/12 mx-auto">
+				{/* Logo */}
+				<Link href="/" className="flex items-center space-x-2">
+					<Image
+						src="/images/logo1.png"
+						alt="logo"
+						width={40}
+						height={40}
+						className="rounded-full"
+					/>
+					<h1 className="text-base md:text-xl font-semibold text-pink-400">
+						AudioBlocks
+					</h1>
+				</Link>
 
 				{/* Mobile Menu Button */}
 				<button
 					onClick={() => setIsOpen(!isOpen)}
-					className="md:hidden text-white focus:outline-none"
+					className="md:hidden text-2xl z-50"
 					aria-label="Toggle menu"
 				>
-					{isOpen ? '✖' : '☰'}
+					{isOpen ? <div className="-mt-20"><CircleX /> </div>: <Menu />}
 				</button>
 
-				{/* Navigation Links */}
-				<div
-					className={`absolute md:static top-16 left-0 w-full md:w-auto bg-black md:bg-transparent flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 p-4 md:p-0 ${isOpen ? 'block' : 'hidden md:flex'
-						} md:ml-auto`}
-				>
-					{/* Join Waitlist Button */}
+				{/* Desktop Links */}
+				<div className="hidden md:flex items-center space-x-6">
 					<button
-						className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
-						onClick={JoinWaitlist}
+						onClick={() =>
+							window.open("https://audioblocks-artist.vercel.app/", "_blank")
+						}
+						className="bg-black border w-64 border-pink-500 text-white font-medium py-2 px-5 rounded-full shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
 					>
-						Join Waitlist
+						Artist Hub
 					</button>
-
-					{/* Connect Button */}
-					<div>
-						<ConnectBtn />
-					</div>
+					<ConnectBtn />
 				</div>
-			</nav>
+			</div>
+
+			{/* Mobile Sidebar Menu */}
+			<motion.div
+				initial={{ x: "100%" }}
+				animate={{ x: isOpen ? "0%" : "100%" }}
+				transition={{ type: "spring", stiffness: 100 }}
+				className={`fixed top-0 right-0 h-screen w-3/4 bg-black bg-opacity-95 text-white px-6 py-20 flex flex-col space-y-6 md:hidden z-40 transition-all`}
+			>
+				<button
+					onClick={() =>
+						window.open("https://audioblocks-artist.vercel.app/", "_blank")
+					}
+					className="w-full bg-black border border-pink-500 text-white font-semibold py-2 rounded-full shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+				>
+					Artist Hub
+				</button>
+				<ConnectBtn />
+			</motion.div>
+		</nav>
 
 			{/* Email Verification Modal */}
-			<EmailVerificationModal
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-				onVerify={verifyEmail}
-				loading={loading}
-				email={email}
-				setEmail={setEmail}
-			/>
-	</>
+		</>
 	);
 };
 

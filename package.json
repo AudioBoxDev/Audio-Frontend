@@ -29,6 +29,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
+    "framer-motion": "^12.7.4",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.451.0",
     "moment": "^2.30.1",
