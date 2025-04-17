@@ -64,6 +64,7 @@ const Hero = () => {
 	return (
 		<>
 			<div className=" bg-gradient-to-br flex flex-col md:pt-36 font-roboto md:-mt-24 md:mb-0 -mb-24 from-[#1d02185c] to-transparent h-screen  justify-center items-center">
+			<div className="absolute inset-0 bg-dot-pattern bg-[length:20px_20px] opacity-10 pointer-events-none -z-10" />
 				<div className="text-center w-11/12 m-auto">
 					<h1
 						className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-[#B11993] to-[#50F3FF] text-transparent bg-clip-text"
@@ -88,12 +89,13 @@ const Hero = () => {
 
 							
 							<div className="p-[2px] bg-gradient-to-r from-[#B1198E] to-[#B81A3F] rounded-3xl w-full md:w-[196px]">
-								<button
-									onClick={() => window.open("https://audioblocks-artist.vercel.app/", "_blank")}
-									className="bg-black text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full h-auto md:h-[50px]"
-								>
-									Artist Hub
-								</button>
+							<button
+								onClick={JoinWaitlist}
+								disabled={loading}
+								className="bg-black text-white text-sm px-5 md:py-4 py-3 rounded-3xl w-full h-auto md:h-[50px]"
+							>
+								Join the Waitlist
+							</button>
 							</div>
 						</div>
 					</div>
@@ -118,7 +120,7 @@ const Hero = () => {
 						</div> */}
 					</div>
 
-					<div className="md:h-32 h-44 my-7">
+					<div className="md:h-32 h-40 md:my-7 my-12">
 						<Image
 							src={bottom}
 							alt=""

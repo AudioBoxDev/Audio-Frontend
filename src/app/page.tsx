@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 
 import Faq from "@/components/Faq";
 import MusicScene from "@/components/MusicScene";
+import GoToTopButton from "@/components/GoToTopButton";
 
 
 export default function Home() {
@@ -89,6 +90,8 @@ export default function Home() {
 					<span className="text-sm font-bold">Lisk</span>
 				</div>
 			</div>
+
+			<GoToTopButton/>
 			<Footer />
 		</>
 	);
