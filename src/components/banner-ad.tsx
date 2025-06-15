@@ -79,7 +79,7 @@ export default function ProfessionalBannerAd({ slot, size = 80 }: ProfessionalBa
   return (
     <div className="relative border-b border-gray-200 bg-black">
       <div className="text-xs text-gray-500 text-center py-1 bg-black font-medium tracking-wide">
-        SPONSORED CONTENT {slot && `(Slot: ${slot})`}
+        SPONSORED 
       </div>
 
       <div className="max-w-2xl mx-auto px-3 py-2">
@@ -145,7 +145,7 @@ export default function ProfessionalBannerAd({ slot, size = 80 }: ProfessionalBa
         </div>
 
         <div className="text-center mt-2 text-xs text-gray-400 font-medium">
-          {index + 1} of {ads.length}
+          {/* {index + 1} of {ads.length} */}
         </div>
       </div>
 
